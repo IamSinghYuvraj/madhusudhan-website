@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Mail, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
+import Contact from "@/app/assests/contact-hero.jpeg";
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,13 +29,13 @@ export default function ContactPage() {
   return (
     <>
       <section className="relative min-h-[60vh] w-full">
-        <img
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+        <Image
+          src={Contact}
           alt="Contact us"
           className="absolute inset-0 h-full w-full object-cover brightness-50"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-primary/30" />
-        <div className="container relative flex min-h-[60vh] items-center pt-20">
+        <div className="container relative flex min-h-[60vh] items-center pt-10 pl-10">
           <div className="max-w-2xl animate-slide-in">
             <h1 className="text-4xl font-bold text-white sm:text-5xl">
               Contact Us
@@ -46,7 +48,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 flex justify-center items-center">
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-3">
             <Card className="p-6 transition-transform hover:-translate-y-1">

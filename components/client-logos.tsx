@@ -61,17 +61,15 @@ export function ClientLogos() {
   }, [])
 
   return (
-    <section className="bg-muted py-16">
+    <section className="bg-muted py-16 flex justify-center items-center">
       <div className="container">
         <h2 className="text-center text-3xl font-bold">Our Trusted Clients</h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          We are proud to serve some of India's largest companies with our water treatment solutions
+          We are proud to serve some of India's largest companies with our water
+          treatment solutions
         </p>
-        
-        <div 
-          className="mt-12 overflow-hidden"
-          ref={containerRef}
-        >
+
+        <div className="mt-12 overflow-hidden" ref={containerRef}>
           <div className="flex animate-scroll gap-8">
             {[...clients, ...clients, ...clients].map((client, index) => (
               <Card
@@ -87,12 +85,14 @@ export function ClientLogos() {
                   />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">{client.name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{client.description}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {client.description}
+                </p>
               </Card>
             ))}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
