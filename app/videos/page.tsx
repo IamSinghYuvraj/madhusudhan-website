@@ -26,22 +26,105 @@ import VideoHero from "@/app/assests/video-hero.jpg"; // Update the path to your
 
 const videos = [
   {
-    title: "Water Softener Installation Guide",
-    thumbnail:
-      "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    title: "Glass Bottle Filling and Capping Machine ",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
     videoId: "dQw4w9WgXcQ",
-    description: "Step-by-step guide for installing industrial water softeners",
-    category: "Installation",
+    description: "Learn how the glass bottle filling and capping machine works and its key features.",
+    category: "Bottle Filling and Capping Solutions",
+    verified: true
   },
-  // Add 19 more videos here...
+
+  {
+    title: "Automatic Shrink Wrapping Machine ",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "BVsOviXWpto",
+    description: "Watch a demonstration of the automatic shrink wrapping machine in action.",
+    category: "Packaging and Wrapping Solutions",
+    verified: true
+  },
+
+  {
+    title: "Semi-Automatic Bottle Blowing Machine ",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "dQw4w9WgXcQ",
+    description: "Step-by-step guide to installing the semi-automatic bottle blowing machine.",
+    category: "Bottle Blowing and Forming Machines",
+    verified: true
+  },
+
+  {
+    title: "Automatic PET Bottle Blowing Machine ",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "dQw4w9WgXcQ",
+    description: "Essential maintenance tips for the automatic PET bottle blowing machine.",
+    category: "Bottle Blowing and Forming Machines",
+    verified: true
+  },
+
+  {
+    title: "Semi-Automatic Shrink Wrapping ",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "dQw4w9WgXcQ",
+    description: "Common issues and solutions for the semi-automatic shrink wrapping machine.",
+    category: "Packaging and Wrapping Solutions",
+    verified: true
+  },
+
+  {
+    title: "Automatic Rinsing, Filling, and Capping Machine",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "dQw4w9WgXcQ",
+    description: "Discover the features and benefits of the automatic rinsing, filling, and capping machine.",
+    category: "Bottle Filling and Capping Solutions",
+    verified: true
+  },
+
+  {
+    title: "Blowing Machine Safety",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "cK0qKvXtqUM",
+    description: "Important safety tips for operating the blowing machine.",
+    category: "Bottle Blowing and Forming Machines",
+    verified: true
+  },
+
+  {
+    title: "Filling Machine Operation ",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "Nt7xhoBdidI",
+    description: "Learn how to operate the filling machine efficiently.",
+    category: "Bottle Filling and Capping Solutions",
+    verified: true
+  },
+
+  {
+    title: "BOPP Machine ",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "8_EiTB6RWgg",
+    description: "Explore the features and applications of the BOPP machine.",
+    category: "Specialized Machinery",
+    verified: true
+  },
+
+  {
+    title: "Complete Mineral Water Project",
+    thumbnail: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+    videoId: "UOJRNX0Xmxs",
+    description: "Step-by-step guide to setting up a complete mineral water project.",
+    category: "Complete Water Treatment and Packaging Projects",
+    verified: true
+  },
+
+  // Add more videos here...
 ];
 
 const categories = [
   "All",
-  "Installation",
-  "Maintenance",
-  "Operation",
-  "Overview",
+  "Bottle Filling and Capping Solutions",
+  "Bottle Blowing and Forming Machines",
+  "Packaging and Wrapping Solutions",
+  "Specialized Machinery",
+  "Complete Water Treatment and Packaging Projects",
 ];
 
 export default function VideosPage() {
@@ -55,6 +138,10 @@ export default function VideosPage() {
       (video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         video.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
+
+  const handleVideoClick = (videoId: string) => {
+    window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+  };
 
   return (
     <>
@@ -118,7 +205,8 @@ export default function VideosPage() {
             {filteredVideos.map((video) => (
               <Card
                 key={video.title}
-                className="overflow-hidden transition-transform hover:scale-105"
+                className="overflow-hidden transition-transform hover:scale-105 cursor-pointer"
+                onClick={() => handleVideoClick(video.videoId)}
               >
                 <div className="relative aspect-video">
                   <Image
@@ -132,7 +220,9 @@ export default function VideosPage() {
                   </div>
                 </div>
                 <CardHeader>
-                  <CardTitle>{video.title}</CardTitle>
+                  <CardTitle>
+                    {video.title} {video.verified && <span className="text-green-500">✔️</span>}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">{video.description}</p>

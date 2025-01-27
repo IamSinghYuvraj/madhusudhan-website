@@ -68,5 +68,21 @@
     "vaul": "^0.9.9",
     "zod": "^3.23.8",
     "zustand": "^4.5.2"
-  }
+  },
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IamSinghYuvraj/madhusudhan-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IamSinghYuvraj/madhusudhan-website/issues"
+  },
+  "homepage": "https://github.com/IamSinghYuvraj/madhusudhan-website#readme",
+  "description": ""
 }

@@ -31,50 +31,58 @@ const industries = [
   {
     name: "Pharmaceutical",
     icon: Beaker,
-    image: PharmaImage, // Use the imported image
+    image: PharmaImage,
     description: "Ultra-pure water systems for pharmaceutical manufacturing",
+    gradient: "from-purple-600 to-blue-500",
   },
   {
     name: "Manufacturing",
     icon: Factory,
-    image: ManufacturingImage, // Use the imported image
+    image: ManufacturingImage,
     description: "Industrial water treatment for manufacturing processes",
+    gradient: "from-green-600 to-teal-500",
   },
   {
     name: "Food & Beverage",
     icon: Truck,
-    image: FoodBeverageImage, // Use the imported image
+    image: FoodBeverageImage,
     description: "Safe water solutions for food processing",
+    gradient: "from-orange-600 to-red-500",
   },
   {
     name: "Commercial",
     icon: Building2,
-    image: CommercialImage, // Use the imported image
+    image: CommercialImage,
     description: "Water treatment for commercial buildings",
+    gradient: "from-indigo-600 to-purple-500",
   },
   {
     name: "Power Generation",
     icon: HardHat,
-    image: PowerGenerationImage, // Use the imported image
+    image: PowerGenerationImage,
     description: "Boiler feed water and cooling systems",
+    gradient: "from-yellow-600 to-amber-500",
   },
   {
     name: "Agriculture",
     icon: Leaf,
-    image: AgricultureImage, // Use the imported image
+    image: AgricultureImage,
     description: "Irrigation and hydroponics water treatment",
+    gradient: "from-lime-600 to-green-500",
   },
   {
     name: "Construction",
     icon: Hammer,
-    image: ConstructionImage, // Use the imported image
+    image: ConstructionImage,
     description: "Water solutions for construction projects",
+    gradient: "from-gray-600 to-blue-500",
   },
   {
     name: "Warehousing",
     icon: Warehouse,
-    image: WarehousingImage, // Use the imported image
+    image: WarehousingImage,
     description: "Water management for storage facilities",
+    gradient: "from-pink-600 to-red-500",
   },
 ];
 
@@ -83,7 +91,7 @@ export default function AboutPage() {
     <>
       <section className="relative min-h-[60vh] w-full">
         <Image
-          src={AboutMachine1} // Use the imported image
+          src={AboutMachine1}
           alt="Industrial facility"
           fill
           className="object-cover brightness-50"
@@ -125,7 +133,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-[400px] animate-float">
               <Image
-                src={AboutMachine2} // Use the imported image
+                src={AboutMachine2}
                 alt="Water treatment facility"
                 fill
                 className="rounded-lg object-cover"
@@ -146,10 +154,13 @@ export default function AboutPage() {
           </p>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {industries.map((industry) => (
-              <Card key={industry.name} className="group overflow-hidden">
+              <Card
+                key={industry.name}
+                className={`group overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br ${industry.gradient}`}
+              >
                 <div className="relative h-48">
                   <Image
-                    src={industry.image} // Use the imported image
+                    src={industry.image}
                     alt={industry.name}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -163,7 +174,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <CardContent className="p-4">
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-white/80">
                     {industry.description}
                   </p>
                 </CardContent>
@@ -173,7 +184,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* New Section: Turnkey Projects and Applications */}
       <section className="py-16 flex justify-center items-center">
         <div className="container">
           <h2 className="text-center text-3xl font-bold">
@@ -184,80 +194,80 @@ export default function AboutPage() {
             of industries and applications
           </p>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-blue-600 to-indigo-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Industries / Plants / Manufacturing Units
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Customized water treatment solutions for industrial and
                   manufacturing needs.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-green-600 to-teal-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Packaged Mineral Water Manufacturers
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Advanced purification systems for mineral water production.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-orange-600 to-red-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Builders / Real Estate Developers
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Water treatment solutions for residential and commercial
                   projects.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-purple-600 to-pink-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Housing Societies / Complexes / Townships
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Reliable water treatment for large residential communities.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-yellow-600 to-amber-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Municipality / Government Water / Waste Water / Sewage
                   Management Departments
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Comprehensive solutions for public water and sewage
                   management.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-gray-600 to-blue-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Hotels / Retail / Laundries / Swimming Pools / Parks /
                   Hospitals / Commercial / Corporates / Service Sector /
                   Airports / Stadiums / Educational Institutions
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Tailored water treatment systems for diverse commercial and
                   public sectors.
                 </p>
@@ -267,7 +277,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* New Section: Applications for Water Treatment Plants */}
       <section className="bg-muted py-16 flex justify-center items-center">
         <div className="container">
           <h2 className="text-center text-3xl font-bold">
@@ -277,75 +286,75 @@ export default function AboutPage() {
             Specialized water treatment solutions for various applications
           </p>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-cyan-600 to-blue-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Battery Water: Two Bed DM Unit
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Demineralized water systems for battery manufacturing.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-emerald-600 to-green-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Pharma Industries: Two Bed + Mixed Bed DM Unit (RO May Be
                   Required)
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Advanced water treatment for pharmaceutical production.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-rose-600 to-pink-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Pathology Lab: Two Bed + Mixed Bed DM Unit (RO)
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Pure water systems for medical and pathology labs.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-violet-600 to-purple-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Medical Dialysis: DM or RO Unit
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Water treatment for medical dialysis applications.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-amber-600 to-orange-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Mineral Water: Filtration or RO Unit
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Purification systems for mineral water production.
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-gradient-to-br from-sky-600 to-cyan-500">
               <CardHeader>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-white">
                   Cooling Tower: Softening Plant / Filter Unit
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">
+                <p className="text-white/80">
                   Water treatment for cooling tower systems.
                 </p>
               </CardContent>
