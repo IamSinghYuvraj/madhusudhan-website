@@ -1,17 +1,17 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export type Language = {
-  code: string
-  name: string
-}
+  code: string;
+  name: string;
+};
 
 type TranslationStore = {
-  currentLanguage: Language
-  translations: Record<string, Record<string, string>>
-  setLanguage: (language: Language) => void
-  t: (key: string) => string
-}
+  currentLanguage: Language;
+  translations: Record<string, Record<string, string>>;
+  setLanguage: (language: Language) => void;
+  t: (key: string) => string;
+};
 
 const translations = {
   en: {
@@ -20,11 +20,6 @@ const translations = {
     "nav.products": "Products",
     "nav.videos": "Videos",
     "nav.contact": "Contact",
-    "home.hero.title": "Pure Water, Clean Future",
-    "home.hero.subtitle": "Leading manufacturer of water treatment and purification systems",
-    "home.cta.products": "Our Products",
-    "home.cta.learnMore": "Learn More",
-    // Add more translations
   },
   zh: {
     "nav.home": "首页",
@@ -32,10 +27,6 @@ const translations = {
     "nav.products": "产品",
     "nav.videos": "视频",
     "nav.contact": "联系我们",
-    "home.hero.title": "纯净水，清洁未来",
-    "home.hero.subtitle": "领先的水处理和净化系统制造商",
-    "home.cta.products": "我们的产品",
-    "home.cta.learnMore": "了解更多",
   },
   es: {
     "nav.home": "Inicio",
@@ -43,13 +34,9 @@ const translations = {
     "nav.products": "Productos",
     "nav.videos": "Videos",
     "nav.contact": "Contacto",
-    "home.hero.title": "Agua Pura, Futuro Limpio",
-    "home.hero.subtitle": "Fabricante líder de sistemas de tratamiento y purificación de agua",
-    "home.cta.products": "Nuestros Productos",
-    "home.cta.learnMore": "Más Información",
   },
-  // Add other languages with their translations
-}
+  // Add other languages...
+};
 
 export const useTranslationStore = create<TranslationStore>()(
   persist(
@@ -58,12 +45,12 @@ export const useTranslationStore = create<TranslationStore>()(
       translations,
       setLanguage: (language) => set({ currentLanguage: language }),
       t: (key: string) => {
-        const { currentLanguage, translations } = get()
-        return translations[currentLanguage.code]?.[key] || translations.en[key] || key
+        const { currentLanguage, translations } = get();
+        return translations[currentLanguage.code]?.[key] || translations.en[key] || key; // Fallback to English or the key itself
       }
     }),
     {
       name: 'language-storage',
     }
   )
-)
+);

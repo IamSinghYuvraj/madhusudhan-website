@@ -11,9 +11,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Droplet, Globe } from "lucide-react";
+import { Globe } from "lucide-react";
 import { useTranslationStore, type Language } from "@/lib/translations";
-import Image from "next/image"; // Import the Image component
+import Image from "next/image";
 import Logo from "@/app/assests/madhu.png";
 
 const navigation = [
@@ -63,19 +63,18 @@ export function Navigation() {
     >
       <div className="container flex h-20 items-center">
         <Link href="/" className="flex items-center space-x-2">
-          {/* Use the Image component for the logo */}
           <div
             className={cn(
-              "pl-10 h-20 w-auto transition-colors", // Adjust height as needed
+              "pl-10 h-20 w-auto transition-colors",
               isScrolled ? "text-primary" : "text-white"
             )}
           >
             <Image
-              src={Logo} // Path to your logo in the public folder
+              src={Logo}
               alt="Ma Aqua Industries Logo"
-              width={200} // Adjust width to fit your logo
-              height={300} // Adjust height to fit your logo
-              className="h-full w-auto" // Ensure the logo scales properly
+              width={200}
+              height={300}
+              className="h-full w-auto"
             />
           </div>
         </Link>
@@ -95,7 +94,7 @@ export function Navigation() {
                   : "text-white/80 hover:text-white"
               )}
             >
-              {item.name}
+              {item.name} {/* Use the `t` function here */}
             </Link>
           ))}
           <DropdownMenu>
