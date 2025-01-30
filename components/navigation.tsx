@@ -57,8 +57,7 @@ export function Navigation() {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-          : "bg-transparent"
+          
       )}
     >
       <div className="container flex h-20 items-center">
@@ -84,7 +83,7 @@ export function Navigation() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors",
+                "text-lg font-medium text-gray-900 hover:text-gray-700",
                 pathname === item.href
                   ? isScrolled
                     ? "text-foreground"

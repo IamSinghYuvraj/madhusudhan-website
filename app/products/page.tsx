@@ -1,4 +1,5 @@
 "use client";
+import SearchBar from "./search";
 import Commercial_Water_Treatment_Plant from "app/assests/Commercial-Water-Treatment-Plant.jpg";
 import Water_Treatment_System from "app/assests/Water-Treatment-System.jpg";
 import Water_Demineralisation_Plant from "app/assests/Water-Demineralisation-Plant.jpg";
@@ -77,7 +78,7 @@ const products = [
     title: "Commercial Water Treatment Plant",
     category: "Treatment",
     description:
-      "We are engaged in the business of manufacturing and supplying of high quality commercial water treatment plant. We manufacture machines of this plant using premium quality of metal under the guidance of our highly skilled professionals. Its construction complies with the set industry standards to ensure its optimum performance. Industrial water treatment plant is required to remove impurities and pathogens from the water to make it safe for drinking purpose. Before its installation, we check it on different levels of quality and safety parameters. The offered industrial water treatment plant consumes less power and is highly durable in nature.",
+      "A comprehensive system designed to purify and treat water for commercial and industrial use. It typically combines various technologies like filtration, disinfection, and chemical treatment to meet specific water quality standards.",
     icon: Droplet,
     image: Commercial_Water_Treatment_Plant,
     features: [
@@ -96,7 +97,7 @@ const products = [
       title: "Water Treatment System",
       category: "Treatment",
       description:
-        "The Water Treatment System is an advanced solution designed to purify and improve water quality for residential, commercial, or industrial use. It efficiently removes impurities, contaminants, and harmful substances, ensuring safe, clean, and great-tasting water. Featuring eco-friendly technology and easy maintenance, it promotes health, sustainability, and reliable water access",
+        "",
       icon: Droplet,
       image: Water_Treatment_System,
       features: [
@@ -113,7 +114,7 @@ const products = [
       title: "Water Demineralisation Plant ",
       category: "Treatment",
       description:
-        "The Water Demineralisation Plant is an advanced solution engineered to eliminate dissolved minerals, salts, and impurities from water, delivering high-purity water for industrial, pharmaceutical, and laboratory applications. Utilizing cutting-edge technologies like ion exchange or reverse osmosis, it ensures optimal water quality. Its energy-efficient design, durability, and low maintenance make it a reliable choice for demanding processes.",
+        "",
       icon: Droplet,
       image: Water_Demineralisation_Plant,
       features: [
@@ -227,7 +228,7 @@ const products = [
       title: "Activated Carbon Water Filter",
       category: "Filtration",
       description:
-        "Nishu Enterprises is a trusted name in the field of water filter manufacturing. The company manufactures and exports Activated Carbon Water Filter, along with other filters and water plant. This water filter is used for cleaning water to make it suitable for re-use in industrial applications in textile, chemical, pharmaceutical and other industries. This easy to install and operate water filter comes with a self-cleaning cycle system. The components of activated carbon water filter are mild steel pressure vessel, mild steel/ PVC piping and valves, multi port control valve, electrical controls with all interlocks, etc. This compact filter is factory tested before shipped at client's location. The pre-assembled filter can be mounted using the offered stainless steel 304 skid. It has to be connected with electricity, drain and water supply.",
+        "A filtration system that uses activated carbon to remove impurities, chlorine, and organic compounds from water. It improves taste, odor, and overall water quality, making it ideal for both residential and commercial use.",
       icon: Droplet,
       image: Activated_Carbon_Water_Filter,
       features: [
@@ -719,13 +720,7 @@ export default function ProductsPage() {
                   ))}
                 </SelectContent>
               </Select>
-              <Command className="rounded-lg border shadow-md">
-                <CommandInput
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onValueChange={setSearchQuery}
-                />
-              </Command>
+              
             </div>
           </div>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

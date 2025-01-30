@@ -22,7 +22,7 @@ import {
   Heart,
   Clock,
   Globe,
-} from "lucide-react"; // Import additional icons
+} from "lucide-react"; // Import additional icons   
 import { ChatBot } from "@/components/chat-bot";
 import { ClientLogos } from "@/components/client-logos";
 
@@ -32,7 +32,12 @@ import Machine2 from "@/app/assests/Home-machine2.jpg";
 import Machine3 from "@/app/assests/Home-machine3.jpg";
 
 import WaterSoftener from "@/app/assests/stainless-steel-water-softeners.jpg";
-import Ro from "@/app/assests/commercial-reverse-osmosis-units.jpg"
+import Ro from "@/app/assests/commercial-reverse-osmosis-units.jpg";
+import DM  from "app/assests/DM .jpg";
+
+import FillingMachineOperation from "app/assests/Filling Machine Operation.jpg";
+import BOPPMachine from "app/assests/BOPP Machine.jpg";
+import CompleteMineralWaterProject from "app/assests/Complete Mineral Water Project.jpg";
 
 // Update the heroImages array to use imported images
 const heroImages = [
@@ -63,30 +68,30 @@ const featuredProducts = [
   },
   {
     title: "DM Plants",
-    image:
-      "https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&q=80",
+    image: DM ,
+      
     description: "Demineralization plants for pure water",
   },
 ];
 
 const featuredVideos = [
   {
-    title: "Water Softener Installation",
+    title: "Complete Mineral Water Project",
     thumbnail:
-      "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
-    description: "Step-by-step installation guide",
+    CompleteMineralWaterProject,
+    description: "Step-by-step guide to setting up a complete mineral water project",
   },
   {
-    title: "RO System Maintenance",
+    title: "BOPP Machine",
     thumbnail:
-      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&q=80",
-    description: "Maintenance best practices",
+    BOPPMachine,
+    description: "Explore the features and applications of the BOPP machine.",
   },
   {
-    title: "DM Plant Overview",
+    title: "Filling Machine Operation",
     thumbnail:
-      "https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&q=80",
-    description: "Complete system walkthrough",
+      FillingMachineOperation,
+    description: "Learn how to operate the filling machine efficiently",
   },
 ];
 
@@ -161,16 +166,16 @@ export default function Home() {
               Discover why we are the preferred choice for water treatment
               solutions
             </p>
-          </div>
+           </div>
           <div className="mt-12 grid gap-12 md:grid-cols-2 lg:grid-cols-3">
             {/* Existing Cards */}
-            <div className="group relative overflow-hidden rounded-2xl bg-primary p-8 text-white transition-transform hover:-translate-y-2">
+            <div className="group relative overflow-hidden rounded-2xl bg-primary p-8 text-black transition-transform hover:-translate-y-2">
               <div className="relative z-10">
-                <Sparkles className="h-12 w-12 text-accent" />
-                <h3 className="mt-6 text-2xl font-bold">Advanced Technology</h3>
-                <p className="mt-4 text-white/80">
+                <Sparkles className="h-12 w-12 text-white" />
+                <h3 className="mt-6 text-2xl font-bold text-black">Advanced Technology</h3>
+                <p className="mt-4 text-black/80">
                   State-of-the-art water treatment solutions using cutting-edge
-                  technology for optimal performance
+                  technology for optimal performance 
                 </p>
               </div>
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-foreground opacity-0 transition-opacity group-hover:opacity-100" />
@@ -178,8 +183,8 @@ export default function Home() {
             <div className="group relative overflow-hidden rounded-2xl bg-secondary p-8 text-white transition-transform hover:-translate-y-2">
               <div className="relative z-10">
                 <Shield className="h-12 w-12 text-accent" />
-                <h3 className="mt-6 text-2xl font-bold">Quality Assurance</h3>
-                <p className="mt-4 text-white/80">
+                <h3 className="mt-6 text-2xl font-bold text-black">Quality Assurance</h3>
+                <p className="mt-4 text-black/80">
                   Rigorous quality control and testing procedures to ensure
                   reliable and efficient water treatment
                 </p>
@@ -199,11 +204,11 @@ export default function Home() {
             </div>
 
             {/* New Cards */}
-            <div className="group relative overflow-hidden rounded-2xl bg-primary p-8 text-white transition-transform hover:-translate-y-2">
+            <div className="group relative overflow-hidden rounded-2xl bg-primary p-8 text-black transition-transform hover:-translate-y-2">
               <div className="relative z-10">
-                <Heart className="h-12 w-12 text-accent" />
-                <h3 className="mt-6 text-2xl font-bold">Customer-Centric</h3>
-                <p className="mt-4 text-white/80">
+                <Heart className="h-12 w-12 text-white" />
+                <h3 className="mt-6 text-2xl font-bold  text-black">Customer-Centric</h3>
+                <p className="mt-4 text-black/80">
                   We prioritize customer satisfaction with personalized
                   solutions and dedicated support
                 </p>
@@ -213,8 +218,8 @@ export default function Home() {
             <div className="group relative overflow-hidden rounded-2xl bg-secondary p-8 text-white transition-transform hover:-translate-y-2">
               <div className="relative z-10">
                 <Clock className="h-12 w-12 text-accent" />
-                <h3 className="mt-6 text-2xl font-bold">Timely Delivery</h3>
-                <p className="mt-4 text-white/80">
+                <h3 className="mt-6 text-2xl font-bold text-black">Timely Delivery</h3>
+                <p className="mt-4 text-black/80">
                   We ensure on-time delivery of products and services to meet
                   your project deadlines
                 </p>
