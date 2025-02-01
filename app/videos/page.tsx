@@ -159,7 +159,9 @@ export default function VideosPage() {
             </p>
           </div>
           {/* New Card for Virtual Tour */}
-          <div className="ml-8 animate-slide-in w-96"> {/* Increased card size */}
+          <div className="ml-8 animate-slide-in w-96">
+            {" "}
+            {/* Increased card size */}
             <Card
               className="cursor-pointer overflow-hidden transition-transform hover:scale-105"
               onClick={handleVirtualTourClick}
@@ -185,7 +187,7 @@ export default function VideosPage() {
       </section>
 
       {/* Video Cards Section */}
-      <section className="py-12">
+      <section className="py-12 flex justify-center items-center">
         <div className="container">
           <div className="flex flex-col items-center text-center">
             <div className="mt-8 flex w-full max-w-md gap-4">
@@ -219,7 +221,11 @@ export default function VideosPage() {
                 key={video.title}
                 className="overflow-hidden transition-transform hover:scale-105"
               >
-                <a href={video.videoId} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={video.videoId}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <div className="relative aspect-video">
                     <Image
                       src={video.thumbnail}
