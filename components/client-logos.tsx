@@ -14,14 +14,14 @@ import ACTIVE from "app/assests/ACTIVE.jpg";
 import { Card } from "@/components/ui/card";
 
 const clients = [
-  { name: "Mantra", logo: MANTRA, description: "Packaged Drinking Water" },
-  { name: "Bisleri", logo: BISLERI, description: "Packaged Drinking Water" },
-  { name: "Bailey", logo: BAILEY, description: "Packaged Drinking Water" },
-  { name: "Aquafina", logo: AQUAFINA, description: "Packaged Drinking Water" },
-  { name: "Mcdowell's", logo: MCD, description: "Beverage Brand" },
-  { name: "O2rise", logo: O2RISE, description: "Oxygenated Water" },
-  { name: "Royal Challenge", logo: ROYAL, description: "Alcoholic Beverage" },
-  { name: "Activ 02", logo: ACTIVE, description: "Oxygenated Water" },
+  {  logo: MANTRA, },
+  {  logo: BISLERI, },
+  {  logo: BAILEY,  },
+  {  logo: AQUAFINA, },
+  {  logo: MCD, },
+  {  logo: O2RISE, },
+  {  logo: ROYAL,  },
+  {  logo: ACTIVE, },
 ];
 
 export function ClientLogos() {

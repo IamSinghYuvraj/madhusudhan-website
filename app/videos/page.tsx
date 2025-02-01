@@ -32,6 +32,7 @@ import { Play, Search } from "lucide-react";
 
 // Import the static hero image
 import VideoHero from "@/app/assests/video-hero.jpg"; // Update the path to your image
+import CompanyVirtualTourImage from "@/app/assests/Mainvideo.jpg"; // Import the new image
 
 const videos = [
   {
@@ -104,6 +105,7 @@ const videos = [
     description: "Step-by-step guide to setting up a complete mineral water project.",
     category: "Complete Water Treatment and Packaging Projects",
   },
+  // ... (existing video data)
 ];
 
 const categories = [
@@ -126,13 +128,17 @@ export default function VideosPage() {
         video.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
+  const handleVirtualTourClick = () => {
+    window.open("hhttps://www.youtube.com/watch?v=UOJRNX0Xmxs&t=16s", "_blank");
+  };
+
   return (
     <>
       {/* Hero Section with Static Image */}
       <section className="relative min-h-screen w-full">
         <div className="absolute inset-0">
           <Image
-            src={VideoHero} // Use the imported static image
+            src={VideoHero}
             alt="Product videos"
             fill
             className="object-cover brightness-50"
@@ -151,6 +157,29 @@ export default function VideosPage() {
               Explore our product demonstrations, installation guides, and
               maintenance tips
             </p>
+          </div>
+          {/* New Card for Virtual Tour */}
+          <div className="ml-8 animate-slide-in w-96"> {/* Increased card size */}
+            <Card
+              className="cursor-pointer overflow-hidden transition-transform hover:scale-105"
+              onClick={handleVirtualTourClick}
+            >
+              <div className="relative aspect-video">
+                <Image
+                  src={CompanyVirtualTourImage}
+                  alt="Visit our company virtually"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity hover:opacity-100">
+                  <Play className="h-12 w-12 text-white" />
+                </div>
+                {/* Text directly on top of the image */}
+                <div className="absolute inset-0 flex items-center justify-center text-white text-5xl font-bold">
+                  Visit Our Company Virtually
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>

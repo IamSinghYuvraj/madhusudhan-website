@@ -85,36 +85,36 @@ const products = [
       "Great performance",
       "Precise construction",
       "Energy efficient",
-  
     ],
-    
     rating: 4.5, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
   },
-
-
-    {
-      title: "Water Treatment System",
-      category: "Treatment",
-      description:
-        "",
-      icon: Droplet,
-      image: Water_Treatment_System,
-      features: [
-        "Advanced Filtration Technology",
-        "Eco-Friendly Design",
-        "User-Friendly Interface",
-        "Customizable Solutions",
-      ],
-      rating: 4.6, // Rating out of 5
+  {
+    title: "Water Treatment System",
+    category: "Treatment",
+    description:
+      "A comprehensive setup that purifies water for specific end-uses. It may include various processes like filtration, disinfection, and chemical treatment to meet required water quality standards.",
+    icon: Droplet,
+    image: Water_Treatment_System,
+    features: [
+      "Advanced Filtration Technology",
+      "Eco-Friendly Design",
+      "User-Friendly Interface",
+      "Customizable Solutions",
+    ],
+    rating: 4.6, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "2-year warranty with 24/7 customer support.",
+    energyEfficiency: "Energy-efficient design reduces operational costs by 20%.",
+  },
   
-    },
     {
       title: "Water Demineralisation Plant ",
       category: "Treatment",
       description:
-        "",
+        "A facility that removes mineral salts from water through ion exchange processes. It produces high-purity water essential for various industrial applications, including power generation and electronics manufacturing.",
       icon: Droplet,
       image: Water_Demineralisation_Plant,
       features: [
@@ -125,12 +125,14 @@ const products = [
       ],
       rating: 4.0, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Deionisation Plant",
       category: "Treatment",
       description:
-        "Being a trusted entity, we are consistently engaged in providing optimum quality industrial Deionisation Plant in several specifications. At our highly advanced production set-up, the offered plant is manufactured using supreme grade components and pioneering techniques. Widely used for deionisation of water for several commercial as well as industrial applications, the offered plant is much cherished in the market. In addition to this, our clients can avail this durable Deionisation Plant at reasonable prices from us",
+        "A water treatment facility that removes ions from water using ion exchange resins. It produces ultra-pure water for industries like pharmaceuticals, electronics, and laboratories where high-purity water is crucial.",
       icon: Droplet,
       image: Deionisation_Plant,
       features: [
@@ -141,13 +143,15 @@ const products = [
       ],
       rating: 4.1, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
       
     },
     {
       title: "Chemical Dosing System",
       category: "Treatment",
       description:
-        "Since our inception in 1996, we have been engaged in manufacturing, exporting and supplying a wide range of durable Chemical Dosing Systems in standard specifications. The offered systems are manufactured at our highly advanced production set-up with the use of top-notch grade components as per international quality standards. Widely used in disinfection, pH adjustment as well as flocculation, the provided systems find its importance in water treatment. In addition to this, our clients can purchase these Chemical Dosing Systems at reasonable prices from us.",
+        "A precision equipment that accurately measures and injects chemicals into water treatment processes. It ensures proper water quality by controlling pH levels, disinfection, and other chemical treatments in various industrial and municipal applications.",
       icon: Droplet,
       image: Chemical_Dosing_System,
       features: [
@@ -158,13 +162,15 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
       
     },
     {
       title: "Water Chlorination Plant",
       category: "Treatment",
       description:
-        "The Water Chlorination Plant is a reliable system designed to disinfect water by effectively eliminating bacteria, viruses, and other harmful microorganisms through controlled chlorine dosing. Ideal for municipal, industrial, and residential water treatment, it ensures safe, clean, and potable water. Featuring automated controls, durable construction, and minimal maintenance, it offers a cost-effective solution for water sanitation needs",
+        "A system that adds chlorine to water for disinfection purposes. It's commonly used in municipal water treatment to kill harmful bacteria and microorganisms, ensuring safe drinking water.",
       icon: Droplet,
       image: Water_Chlorination_Plant,
       features: [
@@ -175,12 +181,14 @@ const products = [
       ],
       rating: 4.6, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Water Softening Plant",
       category: "Treatment",
       description:
-        "The Water Softening Plant is designed to remove hardness-causing minerals like calcium and magnesium from water through ion exchange technology. It prevents scale buildup in pipelines, appliances, and industrial equipment, enhancing efficiency and durability. Ideal for residential, commercial, and industrial use, it ensures soft, high-quality water, reduces maintenance costs, and improves overall water system performance.",
+        "A system designed to remove calcium and magnesium ions from hard water. It improves water quality for domestic and industrial use, preventing scale buildup in pipes and appliances.",
       icon: Droplet,
       image: Water_Softening_Plant,
       features: [
@@ -191,13 +199,15 @@ const products = [
       ],
       rating: 4.3, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
 
     },
     {
       title: "Packaged Drinking Water Plant",
       category: "Treatment",
       description:
-        "Nishu Enterprises is a name to trust when it comes to selecting the best packaged drinking water plant. This plant can be installed and used for water purification, purified water filling in bottles/ pouches, sealing bottles/ pouches for selling. The tap water is usually not suitable for human consumption, as it contains mineral salts and other contaminants. This water is made suitable for drinking by removing all contaminants, suspended solids and microorganisms. The disinfected water is then safely packaged and sold for consumption. Based on the modern technology, this plant matches up with the specified water purification requirements. This highly efficient packaged drinking water plant supplies purified water as per approved norms. Apart from water purification, this plant also carries out process, like filling, rinsing and capping",
+        "A comprehensive system for bottling and packaging mineral water. It includes filling, capping, labeling, and packaging equipment, designed to meet the specific needs of mineral water producers.",
       icon: Droplet,
       image: Packaged_Drinking_Water_Plant,
       features: [
@@ -208,12 +218,14 @@ const products = [
       ],
       rating: 4., // Rating out of 5
       price: 1000000, // Price in INR
+      warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Water Ultrafiltration System",
       category: "Filtration",
       description:
-        "We are known as one of the prominent and premier manufacturers and suppliers of an extensive range of durable Water Ultrafiltration System. This system is ideal for treating municipal, well and surface water. We manufacture this system under the firm guidance of expert supervisors using high quality materials and components. Clients can avail our industrial Water Ultrafiltration System in different technical specifications from us. Also, we offer this system at market leading price.",
+        "A membrane filtration process that removes suspended solids, bacteria, and some viruses from water. It's effective in producing high-quality water for industrial processes and as a pre-treatment for reverse osmosis systems.",
       icon: Droplet,
       image: Water_Ultrafiltration_System,
       features: [
@@ -223,6 +235,8 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
       price: 120000, // Price in INR
+      warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Activated Carbon Water Filter",
@@ -239,12 +253,14 @@ const products = [
       ],
       rating: 4.3, // Rating out of 5
     price: 100, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Sand Water Filter",
       category: "Filtration",
       description:
-        "Backed by sharp business wisdom and profound industrial knowledge, we have emerged as a leading manufacturer and supplier of durable Sand Water Filter. This filter effectively removes the suspended substance from water.  The filter is used in food and chemical industry. To manufacture this filter, our expert workforce uses optimum quality materials and components. Highly demanded in the market, this Sand Water Filter is available in different specifications. We offer this filter at cost effective price.",
+        "A filtration system that uses layers of sand and gravel to remove suspended particles from water. It's effective in removing turbidity and is often used as a pre-treatment step in larger water treatment systems.",
       icon: Droplet,
       image: Sand_Water_Filter,
       features: [
@@ -254,6 +270,8 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     
     
@@ -262,7 +280,7 @@ const products = [
       title: "Mixed Bed DM Plant",
       category: "Industrial",
       description:
-        "We are a trustworthy manufacturer, exporter and supplier of a quality tested array of Mixed Bed DM Plant in several specifications. The provided plant is manufactured under the supervision of our talented professionals with the use of optimum quality components and sophisticated techniques. Known for efficient functionality, the offered plant is suitable for demineralization of water to make it fit for several industrial, commercial as well as household applications. Apart from this, our patrons can avail this Mixed Bed DM Plant at highly competitive prices from us.",
+        "A water treatment plant that uses a mixture of cation and anion exchange resins in a single bed. It produces ultra-pure water by removing almost all ionic impurities, crucial for industries requiring high-purity water.",
       icon: Droplet,
       image: Mixed_Bed_DM_Plant,
       features: [
@@ -273,12 +291,14 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "FRP RO Plant",
       category: "Industrial",
       description:
-        "We are one of the leading manufacturer and supplier of durable FRP RO Plant. It has been manufactured using premium quality of Fiber Reinforced Plastic by our highly skilled engineers. This reverse osmosis plant offered by us ensures high quality safe drinking water. It is used to remove all the contained impurities and hardness from the water. FRP Reverse Osmosis Plant provided by us assures optimum performance and is being tested on different quality parameters to conform the predefined industry norms. We offer this plant at competitive prices.",
+        "A Reverse Osmosis plant constructed with Fiber Reinforced Plastic, offering corrosion resistance and durability. It purifies water by removing contaminants and dissolved solids, suitable for various industrial and commercial applications.",
       icon: Droplet,
       image: FRP_RO_Plant,
       features: [
@@ -288,12 +308,14 @@ const products = [
       ],
       rating: 4.4, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "FRP De Gasification Systems",
       category: "Industrial",
       description:
-        "The FRP De-Gasification System is designed to efficiently remove dissolved gases like oxygen and carbon dioxide from water or liquids in industrial processes. Constructed with fiberglass-reinforced plastic (FRP), it offers corrosion resistance and durability. Ideal for water treatment, chemical processing, and power plants, this system ensures optimal water quality, enhancing system efficiency while minimizing operational costs.",
+        "Fiber Reinforced Plastic systems designed to remove dissolved gases from water or other liquids. They are corrosion-resistant and efficient, commonly used in industries where gas content in liquids needs to be controlled.",
       icon: Droplet,
       image: FRP_De_Gasification_Systems,
       features: [
@@ -304,12 +326,14 @@ const products = [
       ],
       rating: 4.8, // Rating out of 5
       price: 100000, // Price in INR
+      warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Rapid Flow Two Bed DM Plants",
       category: "Industrial",
       description:
-        "IThe Rapid Flow Two Bed DM (Demineralization) Plant is designed to provide high-quality demineralized water for industrial applications. It uses a two-bed ion exchange process, consisting of a cation and anion resin bed, to effectively remove dissolved salts and minerals. The system ensures rapid flow rates, high purity, and low maintenance, making it ideal for power plants, pharmaceuticals, and chemical industries",
+        "High-capacity demineralization plants with two separate beds for cation and anion exchange. They offer fast processing of large volumes of water, suitable for industries requiring significant amounts of demineralized water.",
       icon: Droplet,
       image: Rapid_Flow_Two_Bed_DM_Plants,
       features: [
@@ -320,12 +344,14 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Mild Steel Rubber Lined Two Bed DM Water Plants",
       category: "Industrial",
       description:
-        "The Mild Steel Rubber Lined Two Bed DM Water Plant is designed for efficient demineralization of water in industrial applications. Constructed with mild steel and lined with durable rubber, it offers enhanced corrosion resistance and longevity. The two-bed ion exchange system effectively removes dissolved salts and minerals, providing high-purity water. Ideal for power plants, pharmaceuticals, and chemical industries, it ensures reliable, low-maintenance performance.",
+        "A demineralization plant with mild steel construction and rubber lining for corrosion protection. It uses two beds for efficient ion exchange, producing high-quality demineralized water for industrial use.",
       icon: Droplet,
       image: Mild_Steel_Rubber_Lined_Two_Bed_DM_Water_Plants,
       features: [
@@ -336,12 +362,14 @@ const products = [
       ],
       rating: 4.7, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Auto FRP Two Bed DM Water Plants",
       category: "Industrial",
       description:
-        "The Auto FRP Two Bed DM Water Plant is an advanced water treatment system designed to deliver high-quality demineralized water. Constructed with fiberglass-reinforced plastic (FRP), it ensures durability and corrosion resistance. Featuring an automated two-bed ion exchange process, it efficiently removes dissolved salts and minerals, providing high-purity water with minimal manual intervention. Ideal for industrial applications, it offers low maintenance and reliable performance.",
+        "An automated water treatment system using Fiber Reinforced Plastic (FRP) construction with two demineralization beds. It efficiently removes dissolved solids and minerals from water, producing high-purity demineralized water for industrial applications.",
       icon: Droplet,
       image: Auto_FRP_Two_Bed_DM_Water_Plants,
       features: [
@@ -351,13 +379,15 @@ const products = [
       ],
       rating: 4.4, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
    
     {
       title: "FRP Mixed Bed DM Plants",
       category: "Industrial",
       description:
-        "The Mixed Bed FRP DM Plant is a high-efficiency water treatment system designed to produce ultra-pure demineralized water. It combines both cation and anion resins in a single vessel for optimal removal of dissolved salts, minerals, and impurities. Constructed with durable fiberglass-reinforced plastic (FRP), it offers corrosion resistance, longevity, and low maintenance, making it ideal for industries requiring high-quality water.",
+        "Fiber Reinforced Plastic systems designed to remove dissolved gases from water or other liquids. They are corrosion-resistant and efficient, commonly used in industries where gas content in liquids needs to be controlled",
       icon: Droplet,
       image: FRP_Mixed_Bed_DM_Plants,
       features: [
@@ -368,13 +398,15 @@ const products = [
       ],
       rating: 3.9, // Rating out of 5
     price: 110000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
    
     {
       title: "DM Water Plants",
       category: "Purification",
       description:
-        "Nishu Enterprises, a 1996 established company manufactures and exports DM Water Plant of best grade category. As the name of the plant suggests, it demineralizes the water and make the water suitable for drinking, cooking and other purposes. It follows an ion exchange process to separate dissolved mineral salts as well as other contaminants from water. The compact demineralization water plant is pre-assembled and supplied to client's site for installation with ease. This plant must be connected to electricity, water and drain supply. This minimal maintenance plant filters water through resin media. It is possible to monitor the quality of water through several sampling points. The operating person can also calculate pressure from pressure gauges.",
+        "Demineralization water plants that remove mineral ions from water through ion exchange processes. They are essential in industries requiring high-purity water, such as power plants and chemical manufacturing..",
       icon: Droplet,
       image: DM_Water_Plants,
       features: [
@@ -385,12 +417,14 @@ const products = [
       ],
       rating: 3.8, // Rating out of 5
     price: 50000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Mineral Water Plants",
       category: "Purification",
       description:
-        "We are persistently striving to sustain our high credibility in the market by manufacturing and supplying an extensive range of stainless steel Mineral Water Plant. This plant is used for filling bottles with drinking water. At our sophisticated production unit, we manufacture this plant using high quality materials. This plant can perform washing, filling and capping automatically. We check this industrial Mineral Water Treatment Plant on defined quality parameters to provide a flawless range to clients.",
+        "Complete facilities for processing and bottling mineral water. These plants include various stages of water treatment, purification, and packaging to produce bottled mineral water for consumer use.",
       icon: Droplet,
       image: Mineral_Water_Plants,
       features: [
@@ -400,12 +434,14 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
     price: 50000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Commercial Reverse Osmosis Plant",
       category: "Treatment",
       description:
-        "Leveraging on our immense understanding and skills in this domain, we are reckoned as a valuable manufacturer and supplier of durable Commercial Reverse Osmosis Plant. This system is used to purify saline and impure water in commercial establishments. Our diligent workforce uses high quality materials and components to manufacture this system. To provide a defect free range, we check this durable Commercial RO Plant on varied functioning parameters. We offer this system at pocket friendly price.",
+        "A large-scale water purification system that uses semi-permeable membranes to remove contaminants, salts, and impurities from water. It's widely used in industries, hotels, and other commercial establishments to produce high-quality purified water.",
       icon: Droplet,
       image: Commercial_Reverse_Osmosis_Plant,
       features: [
@@ -415,12 +451,14 @@ const products = [
       ],
       rating: 4.8, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Ultraviolet Water Systems",
       category: "Purification",
       description:
-        "For our immense knowledge in this domain, we are counted amongst the most profound manufacturers and suppliers of Ultraviolet Water Systems. These systems are used in food industry, swimming pool, hospitals and laboratory. In order to comply with set industrial norms, we use optimum quality materials to manufacture these systems. We check these UV Water System on defined quality parameters to provide the best range to clients. Also, we offer these systems at reasonable prices.",
+        "For our immense knowledge in this domain, we are counted amongst the most profound manufacturers and suppliers of Ultraviolet Water Systems. These systems are used in food industry, swimming pool, hospitals and laboratory.",
       icon: Droplet,
       image: Ultraviolet_Water_Systems,
       features: [
@@ -430,12 +468,14 @@ const products = [
       ],
       rating: 4.3, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Reverse Osmosis Plant",
       category: "Purification",
       description:
-        "The Reverse Osmosis Plant is a water treatment system that uses membrane filtration technology to remove dissolved salts, minerals, and impurities from water. It provides high-purity water suitable for industrial, commercial, and residential applications. The system ensures efficient filtration, reduces contaminants, and enhances water quality. With minimal maintenance and energy-efficient operation, it is a reliable solution for clean water needs",
+        "The Reverse Osmosis Plant is a water treatment system that uses membrane filtration technology to remove dissolved salts, minerals, and impurities from water. It provides high-purity water suitable for industrial, commercial, and residential applications.",
       icon: Droplet,
       image: Reverse_Osmosis_Plant,
       features: [
@@ -446,12 +486,14 @@ const products = [
       ],
       rating: 4.7, // Rating out of 5
     price: 100000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Water Bottle Filling Machines",
       category: "Filling and Bottling Equipment",
       description:
-        "With an aim to achieve clients' satisfaction, we manufacture, supply and export quality assured durable Bottle Filling Machines. The offered machines are widely used in water packaging sector to fill purified water into the bottles of different quantities and for sealing the water containing bottles for further marketing purpose. Backed by our immense knowledge about primary market, we source best grade raw materials from accredited vendors for manufacturing these machines. At our well equipped production facility, we make these machines under valuable guidance of our experts and in accordance with the set industry standards for quality assurance. We make these industrial bottle filling machines available to our clients at highly affordable rates",
+        "Automated equipment designed specifically for filling water bottles of various sizes. These machines ensure accurate filling, maintain hygiene, and can handle high-speed operations in water bottling plants.",
       icon: Droplet,
       image: Water_Bottle_Filling_Machines,
       features: [
@@ -461,13 +503,15 @@ const products = [
       ],
       rating: 4.9, // Rating out of 5
     price: 500000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     
     {
       title: "Mineral Water Filling Machines",
       category: "Filling and Bottling Equipment",
       description:
-        "With the combination of our sturdy infrastructure and the skills of our technical personnel, we are engaged in manufacturing and exporting Mineral Water Filling Machines. These machines are highly utilized in beverage industry for filling bottles with drinking water and juice. To manufacture these machines, our diligent workforce uses optimum grade materials. We check these Mineral Water Filling Machines on construction and efficiency parameters to provide a flawless range to clients",
+        "Specialized equipment designed for filling bottles with mineral water. These machines ensure accurate filling volumes and maintain the purity of the water during the bottling process.",
       icon: Droplet,
       image: Mineral_Water_Filling_Machines,
       features: [
@@ -477,12 +521,14 @@ const products = [
       ],
       rating: 4.6, // Rating out of 5
     price: 600000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Water Bottle Washing Machine",
       category: "Filling and Bottling Equipmentt",
       description:
-        "We have set up a state of the art manufacturing plant, which enables us to manufacture and supply a quality approved Water Bottle Washing Machine. this machine is manufactured in compliance with latest technology using high quality materials and components. In beverage industry, this machine is used for washing and filling bottles with liquid. We make this Water Bottle Washing Machine available for clients in different specifications as per their requirements.",
+        "Specialized equipment for cleaning and sanitizing water bottles before filling. It ensures hygienic conditions in the bottling process, crucial for maintaining water quality and safety standards.",
       icon: Droplet,
       image: Water_Bottle_Washing_Machine,
       features: [
@@ -492,13 +538,15 @@ const products = [
       ],
       rating: 4.3, // Rating out of 5
     price: 600000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     
     {
       title: "Mineral Water Jar Filling Machine",
       category: "Filling and Bottling Equipmentt",
       description:
-        "We have marked a unique place in the market by manufacturing and supplying an extensive range of Mineral Water Jar Filling Machine. This machine in beverage industry for filling bottles with drinking water. We manufacture this machine under the strict inspection of expert professionals using high quality materials and components. Available in different specifications, our Mineral Water Jar Filling Machine is highly demanded in the market. We offer this machine at cost effective price to clients.",
+        "A dedicated machine for filling large water jars or containers with mineral water. It's designed for efficiency and hygiene, often used in water bottling plants and distribution centers.",
       icon: Droplet,
       image: Mineral_Water_Jar_Filling_Machine,
       features: [
@@ -508,12 +556,14 @@ const products = [
       ],
       rating: 4.3, // Rating out of 5
     price: 600000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Fully Auto Pet Bottle Rinsing Filling and Capping Machine",
       category: "Filling and Bottling Equipment",
       description:
-        "The Fully Auto Pet Bottle Rinsing, Filling, and Capping Machine is a high-efficiency system designed for the complete automation of the bottling process. It rinses, fills, and caps PET bottles with high-speed precision. Ideal for industries like beverages and bottled water, it ensures hygienic filling, consistent quality, and maximizes production output while minimizing human intervention and operational costs.",
+        "An automated machine that performs multiple functions in bottling processes. It rinses, fills, and caps jars or bottles in a single, efficient operation, ideal for beverage and food packaging industries.",
       icon: Droplet,
       image: Fully_Auto_Pet_Capping_Machine,
       features: [
@@ -524,12 +574,14 @@ const products = [
       ],
       rating: 4.6, // Rating out of 5
     price: 130000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Blowing Machine",
       category: "Filling and Bottling Equipment",
       description:
-        "Nishu Enterprises has years of experience in manufacturing blowing machine, along with other machinery and plant. This machine is meant for the production of different shapes of the PET bottle. This semi-automatic, portable machine requires a professional operator for operating it. Different types of bottles can be produced using this machine for different uses. Companies can use the machine for making oil bottles, milk bottles, juice bottles, mineral water bottles, cosmetic bottles and many other bottles. Each blowing machine fabricated in-house is tested on different quality and safety parameters, so that once installed for real operations can operate & perform at its best. When using this machine, the owner can be assured of the uniform bottle quality, energy efficiency, shorter changeover times and safe operations.",
+        "A versatile manufacturing equipment used to produce hollow plastic products such as bottles and containers. It melts plastic and uses compressed air to shape it into desired forms, essential for packaging industries",
       icon: Droplet,
       image: Blowing_Machine,
       features: [
@@ -540,12 +592,14 @@ const products = [
       ],
       rating: 4.9, // Rating out of 5
     price: 300000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Water Bottling Packaging Solution",
       category: "Filling and Bottling Equipment",
       description:
-        "The Water Bottling Packaging Solution is a comprehensive system designed for the efficient bottling, labeling, and packaging of bottled water. It integrates automatic rinsing, filling, capping, and labeling, ensuring consistent quality and high production speeds. Ideal for commercial use, it minimizes manual intervention, reduces operational costs, and maintains hygienic standards, making it a reliable choice for high-volume water bottling operations",
+        "Specialized equipment for cleaning and sanitizing water bottles before filling. It ensures hygienic conditions in the bottling process, crucial for maintaining water quality and safety standards",
       icon: Droplet,
       image: Water_Bottling_Packaging_Solution,
       features: [
@@ -556,6 +610,8 @@ const products = [
       ],
       rating: 4.4, // Rating out of 5
     price: 160000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     
     
@@ -563,7 +619,7 @@ const products = [
       title: "Semi Auto Blow Molding Machine",
       category: "Filling and Bottling Equipment",
       description:
-        "The Semi Auto Blow Molding Machine is a versatile system designed for producing plastic bottles and containers with semi-automated controls. It uses a combination of manual and automated processes for shaping, cooling, and ejecting bottles, offering a balance of efficiency and flexibility. Ideal for small to medium-scale production, it delivers consistent quality, precision, and cost-effective performance in industries like beverages and packaging.",
+        "A machine used for manufacturing hollow plastic products like bottles. It's semi-automated, requiring some manual intervention, and is suitable for smaller-scale production or specialized plastic products.",
       icon: Droplet,
       image: Semi_Auto_Blow_Molding_Machine,
       features: [
@@ -574,13 +630,15 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
    
     {
       title: "Semi Auto Jar Rinsing Filling Capping Machine",
       category: "Filling and Bottling Equipment",
       description:
-        "The Semi Auto Jar Rinsing Filling Capping Machine is a semi-automated system designed for efficient jar packaging. It combines manual and automated processes to rinse, fill, and cap jars with high precision. Ideal for small to medium-scale production, it ensures consistent filling, secure capping, and maintains hygiene standards, offering a cost-effective solution for industries like food, beverages, and pharmaceuticals.",
+        "A machine that partially automates the process of rinsing, filling, and capping jars or bottles. It requires some manual operation, making it suitable for small to medium-scale production in food and beverage industries.",
       icon: Droplet,
       image: Semi_Auto_Jar_Rinsing_Filling_Capping_Machine,
       features: [
@@ -591,12 +649,14 @@ const products = [
       ],
       rating: 4.5, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Pouches Filling Machine ",
       category: "Filling and Bottling Equipment",
       description:
-        "The Pouches Filling Machine is an automated system designed for the efficient filling of liquid, semi-liquid, or powdered products into pouches. It ensures precise filling, high-speed operation, and minimal product wastage. Ideal for industries like food, beverages, and chemicals, it streamlines the packaging process, offering hygienic, accurate, and cost-effective solutions for high-volume pouch filling.",
+        "An automated machine designed to fill and seal flexible pouches with liquids or semi-liquids. It's widely used in the packaging of water, beverages, and other liquid products in pouch format.",
       icon: Droplet,
       image: Pouches_Filling_Machine,
       features: [
@@ -605,14 +665,17 @@ const products = [
         "Minimal maintenance",
         "Custom sizes available",
       ],
+     
       rating: 4.7, // Rating out of 5
     price: 120000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
     {
       title: "Linear Auto Cup Rinsing Filling and Sealing",
       category: "Filling and Bottling Equipment",
       description:
-        "The Linear Auto Cup Rinsing, Filling, and Sealing Machine is an automated system designed for efficient cup packaging. It performs rinsing, filling, and sealing in a linear format, ensuring consistent quality and high-speed production. Ideal for industries such as dairy, beverages, and food, it minimizes manual labor, reduces operational costs, and maintains high hygiene standards during the entire packaging process.",
+        "A high-speed automated machine for cup packaging. It rinses, fills, and seals cups in a linear process, suitable for packaging beverages, dairy products, and other liquid foods.",
       icon: Droplet,
       image:Linear_Auto_Cup_Rinsing_Filling_and_Sealing,
       features: [
@@ -623,10 +686,12 @@ const products = [
       ],
       rating: 4.8, // Rating out of 5
     price: 150000, // Price in INR
+    warranty: "3-year warranty with annual maintenance included.",
+    energyEfficiency: "Energy-saving mode reduces power consumption by 25%.",
     },
-    // Add 19 more products here...
-  ]; // Your product data here...
 
+  // Add the rest of your products here with the new fields (warranty and energyEfficiency)...
+];
 
 const categories = [
   "All",
@@ -720,7 +785,6 @@ export default function ProductsPage() {
                   ))}
                 </SelectContent>
               </Select>
-              
             </div>
           </div>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -820,28 +884,8 @@ export default function ProductsPage() {
             <table className="w-full">
               <tbody>
                 <tr>
-                  <td className="py-2 font-semibold">Description</td>
-                  <td className="py-2">{selectedProduct.description}</td>
-                </tr>
-                <tr>
-                  <td className="py-2 font-semibold">Features</td>
-                  <td className="py-2">
-                    <ul className="list-disc list-inside">
-                      {selectedProduct.features.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-2 font-semibold">Models</td>
-                  <td className="py-2">
-                    <ul className="list-disc list-inside">
-                      {selectedProduct?.models?.map((model, index) => (
-                        <li key={index}>{model}</li>
-                      ))}
-                    </ul>
-                  </td>
+                  <td className="py-2 font-semibold">Price</td>
+                  <td className="py-2">₹{selectedProduct.price || 1000}</td>
                 </tr>
                 <tr>
                   <td className="py-2 font-semibold">Rating</td>
@@ -859,8 +903,22 @@ export default function ProductsPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-2 font-semibold">Price</td>
-                  <td className="py-2">₹{selectedProduct.price || 1000}</td>
+                  <td className="py-2 font-semibold">Features</td>
+                  <td className="py-2">
+                    <ul className="list-disc list-inside">
+                      {selectedProduct.features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-2 font-semibold">Warranty/Service</td>
+                  <td className="py-2">{selectedProduct.warranty || "1-year warranty with free maintenance for the first 6 months."}</td>
+                </tr>
+                <tr>
+                  <td className="py-2 font-semibold">Energy Efficiency</td>
+                  <td className="py-2">{selectedProduct.energyEfficiency || "Energy-efficient design reduces power consumption by 20%."}</td>
                 </tr>
               </tbody>
             </table>

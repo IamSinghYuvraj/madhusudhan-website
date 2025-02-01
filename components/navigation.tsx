@@ -55,9 +55,8 @@ export function Navigation() {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
-        isScrolled
-          
+        "fixed top-0 z-50 w-full transition-all duration-400 bg-black", // Black background
+        isScrolled ? "bg-black/90" : "bg-black" // Adjust opacity on scroll
       )}
     >
       <div className="container flex h-20 items-center">
@@ -83,17 +82,17 @@ export function Navigation() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-lg font-medium text-gray-900 hover:text-gray-700",
+                "text-lg font-medium transition-colors", // Added transition-colors for smooth hover effect
                 pathname === item.href
                   ? isScrolled
-                    ? "text-foreground"
-                    : "text-white"
+                    ? "text-blue-500 hover:text-white" // Blue when scrolled, white on hover
+                    : "text-blue-500 hover:text-white" // Blue at rest, white on hover
                   : isScrolled
-                  ? "text-foreground/60 hover:text-primary"
-                  : "text-white/80 hover:text-white"
+                  ? "text-blue-500 hover:text-white" // Blue when scrolled, white on hover
+                  : "text-blue-500 hover:text-white" // Blue at rest, white on hover
               )}
             >
-              {item.name} {/* Use the `t` function here */}
+              {item.name}
             </Link>
           ))}
           <DropdownMenu>
@@ -102,10 +101,10 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "transition-colors",
+                  "transition-colors text-blue-500 hover:text-white", // Blue at rest, white on hover
                   isScrolled
-                    ? "text-foreground hover:bg-accent/10"
-                    : "text-white hover:bg-white/10"
+                    ? "hover:bg-accent/10"
+                    : "hover:bg-white/10"
                 )}
               >
                 <Globe className="h-5 w-5" />
@@ -129,5 +128,37 @@ export function Navigation() {
         </nav>
       </div>
     </header>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <div className="relative min-h-screen flex items-center justify-center">
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-black/50" /> {/* Overlay for better text visibility */}
+
+      {/* Hero Content - Centered */}
+      <div className="container relative z-10 text-white text-center">
+        <h1 className="text-5xl font-bold mb-4">
+          Pure Water, <br />
+          Clean Future
+        </h1>
+        <p className="text-lg mb-8 max-w-2xl mx-auto">
+          Leading manufacturer of water treatment and purification systems, serving industries across India with innovative solutions.
+        </p>
+        <div className="flex justify-center space-x-4">
+          <Link href="/products">
+            <Button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 text-lg">
+              Our Products
+            </Button>
+          </Link>
+          <Link href="/contact">
+            <Button className="bg-transparent border border-white hover:bg-white hover:text-black px-8 py-4 text-lg">
+              Contact Us
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
