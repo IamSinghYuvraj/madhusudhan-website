@@ -32,49 +32,54 @@ import { Play, Search } from "lucide-react";
 
 // Import the static hero image
 import VideoHero from "@/app/assests/video-hero.jpg"; // Update the path to your image
-import CompanyVirtualTourImage from "@/app/assests/Mainvideo.jpg"; // Import the new image
 
 const videos = [
   {
     title: "Glass Bottle Filling and Capping Machine ",
     thumbnail: GlassBottleFillingandCappingMachine,
     videoId: "https://www.youtube.com/shorts/0GwRKmlieXY",
-    description: "Learn how the glass bottle filling and capping machine works and its key features.",
+    description:
+      "Learn how the glass bottle filling and capping machine works and its key features.",
     category: "Bottle Filling and Capping Solutions",
   },
   {
     title: "Automatic Shrink Wrapping Machine ",
     thumbnail: AutomaticShrinkWrappingMachine,
     videoId: "https://www.youtube.com/shorts/-Op7OLsNni8",
-    description: "Watch a demonstration of the automatic shrink wrapping machine in action.",
+    description:
+      "Watch a demonstration of the automatic shrink wrapping machine in action.",
     category: "Packaging and Wrapping Solutions",
   },
   {
     title: "Semi-Automatic Bottle Blowing Machine ",
     thumbnail: SemiAutomaticBottleBlowingMachine,
     videoId: "https://www.youtube.com/shorts/PS-JoQ8ZIu8",
-    description: "Step-by-step guide to installing the semi-automatic bottle blowing machine.",
+    description:
+      "Step-by-step guide to installing the semi-automatic bottle blowing machine.",
     category: "Bottle Blowing and Forming Machines",
   },
   {
     title: "Automatic PET Bottle Blowing Machine ",
     thumbnail: AutomaticPETBottleBlowingMachine,
     videoId: "https://www.youtube.com/shorts/J30c-WKndwQ",
-    description: "Essential maintenance tips for the automatic PET bottle blowing machine.",
+    description:
+      "Essential maintenance tips for the automatic PET bottle blowing machine.",
     category: "Bottle Blowing and Forming Machines",
   },
   {
     title: "Semi-Automatic Shrink Wrapping ",
     thumbnail: SemiAutomaticShrinkWrapping,
     videoId: "https://www.youtube.com/watch?v=BVsOviXWpto",
-    description: "Common issues and solutions for the semi-automatic shrink wrapping machine.",
+    description:
+      "Common issues and solutions for the semi-automatic shrink wrapping machine.",
     category: "Packaging and Wrapping Solutions",
   },
   {
     title: "Automatic Rinsing, Filling, and Capping Machine",
     thumbnail: AutomaticRinsingFillingandCappingMachine,
     videoId: "https://youtube.com/shorts/VKIVqHZXqnE?si=9OSwsVnF4wBDjrY3",
-    description: "Discover the features and benefits of the automatic rinsing, filling, and capping machine.",
+    description:
+      "Discover the features and benefits of the automatic rinsing, filling, and capping machine.",
     category: "Bottle Filling and Capping Solutions",
   },
   {
@@ -102,7 +107,8 @@ const videos = [
     title: "Complete Mineral Water Project",
     thumbnail: CompleteMineralWaterProject,
     videoId: "https://www.youtube.com/watch?v=UOJRNX0Xmxs&t=16s",
-    description: "Step-by-step guide to setting up a complete mineral water project.",
+    description:
+      "Step-by-step guide to setting up a complete mineral water project.",
     category: "Complete Water Treatment and Packaging Projects",
   },
   // ... (existing video data)
@@ -158,63 +164,13 @@ export default function VideosPage() {
               maintenance tips
             </p>
           </div>
-          {/* New Card for Virtual Tour */}
-          <div className="ml-8 animate-slide-in w-96">
-            {" "}
-            {/* Increased card size */}
-            <Card
-              className="cursor-pointer overflow-hidden transition-transform hover:scale-105"
-              onClick={handleVirtualTourClick}
-            >
-              <div className="relative aspect-video">
-                <Image
-                  src={CompanyVirtualTourImage}
-                  alt="Visit our company virtually"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity hover:opacity-100">
-                  <Play className="h-12 w-12 text-white" />
-                </div>
-                {/* Text directly on top of the image */}
-                <div className="absolute inset-0 flex items-center justify-center text-white text-5xl font-bold">
-                  Visit Our Company Virtually
-                </div>
-              </div>
-            </Card>
-          </div>
         </div>
       </section>
 
       {/* Video Cards Section */}
       <section className="py-12 flex justify-center items-center">
         <div className="container">
-          <div className="flex flex-col items-center text-center">
-            <div className="mt-8 flex w-full max-w-md gap-4">
-              <Select
-                value={selectedCategory}
-                onValueChange={setSelectedCategory}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Command className="rounded-lg border shadow-md">
-                <CommandInput
-                  placeholder="Search videos..."
-                  value={searchQuery}
-                  onValueChange={setSearchQuery}
-                />
-              </Command>
-            </div>
-          </div>
+          <div className="flex flex-col items-center text-center"></div>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {filteredVideos.map((video) => (
               <Card

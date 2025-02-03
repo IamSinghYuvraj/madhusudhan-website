@@ -148,7 +148,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* New Section: 6 Reasons to Choose Us */}
+      {/* New Section: 6 Reasons to Choose Us*/}
       <section className="py-24 flex justify-center items-center">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
@@ -157,16 +157,18 @@ export default function Home() {
               Discover why we are the preferred choice for water treatment
               solutions
             </p>
-           </div>
+          </div>
           <div className="mt-12 grid gap-12 md:grid-cols-2 lg:grid-cols-3">
             {/* Existing Cards */}
             <div className="group relative overflow-hidden rounded-2xl bg-primary p-8 text-black transition-transform hover:-translate-y-2">
               <div className="relative z-10">
                 <Sparkles className="h-12 w-12 text-white" />
-                <h3 className="mt-6 text-2xl font-bold text-black">Advanced Technology</h3>
+                <h3 className="mt-6 text-2xl font-bold text-black">
+                  Advanced Technology
+                </h3>
                 <p className="mt-4 text-black/80">
                   State-of-the-art water treatment solutions using cutting-edge
-                  technology for optimal performance 
+                  technology for optimal performance
                 </p>
               </div>
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-foreground opacity-0 transition-opacity group-hover:opacity-100" />
@@ -174,7 +176,9 @@ export default function Home() {
             <div className="group relative overflow-hidden rounded-2xl bg-secondary p-8 text-white transition-transform hover:-translate-y-2">
               <div className="relative z-10">
                 <Shield className="h-12 w-12 text-accent" />
-                <h3 className="mt-6 text-2xl font-bold text-black">Quality Assurance</h3>
+                <h3 className="mt-6 text-2xl font-bold text-black">
+                  Quality Assurance
+                </h3>
                 <p className="mt-4 text-black/80">
                   Rigorous quality control and testing procedures to ensure
                   reliable and efficient water treatment
@@ -198,7 +202,9 @@ export default function Home() {
             <div className="group relative overflow-hidden rounded-2xl bg-primary p-8 text-black transition-transform hover:-translate-y-2">
               <div className="relative z-10">
                 <Heart className="h-12 w-12 text-white" />
-                <h3 className="mt-6 text-2xl font-bold  text-black">Customer-Centric</h3>
+                <h3 className="mt-6 text-2xl font-bold  text-black">
+                  Customer-Centric
+                </h3>
                 <p className="mt-4 text-black/80">
                   We prioritize customer satisfaction with personalized
                   solutions and dedicated support
@@ -209,7 +215,9 @@ export default function Home() {
             <div className="group relative overflow-hidden rounded-2xl bg-secondary p-8 text-white transition-transform hover:-translate-y-2">
               <div className="relative z-10">
                 <Clock className="h-12 w-12 text-accent" />
-                <h3 className="mt-6 text-2xl font-bold text-black">Timely Delivery</h3>
+                <h3 className="mt-6 text-2xl font-bold text-black">
+                  Timely Delivery
+                </h3>
                 <p className="mt-4 text-black/80">
                   We ensure on-time delivery of products and services to meet
                   your project deadlines
