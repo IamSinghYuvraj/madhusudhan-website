@@ -127,17 +127,22 @@ export function Footer() {
       <div className="container px-4 py-12 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo and Company Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Image
-                src={Logo}
-                alt="Madhusudan Aqua Industries Logo"
-                width={240}
-                height={240}
-                className="rounded-full"
-              />
+          <div className="space-y-4 relative">
+            <div className="flex items-center justify-center md:justify-start relative">
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD9B,#C2F0B1,#2FD8FE)] blur-2xl rounded-full" />
+              {/* Logo */}
+              <div className="relative">
+                <Image
+                  src={Logo || "/placeholder.svg"}
+                  alt="Madhusudan Aqua Industries Logo"
+                  width={240}
+                  height={240}
+                  className="rounded-full"
+                />
+              </div>
             </div>
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-white/70 relative z-10">
               Leading provider of aqua solutions, committed to quality and
               innovation.
             </p>
@@ -233,3 +238,4 @@ export function Footer() {
     </footer>
   );
 }
+
