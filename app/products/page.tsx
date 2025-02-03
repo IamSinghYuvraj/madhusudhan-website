@@ -73,7 +73,20 @@ import { cn } from "@/lib/utils";
 // Import the static hero image
 import ProductHero from "@/app/assests/product-hero.jpg"; // Update the path to your image
 
-const products = [
+interface Product {
+  title: string;
+  category: string;
+  description: string;
+  icon: React.ElementType;
+  image: string;
+  features: string[];
+  rating: number;
+  price: number;
+  warranty: string;
+  energyEfficiency: string;
+}
+
+const products: Product[] = [
   {
     title: "Commercial Water Treatment Plant",
     category: "Treatment",
@@ -696,35 +709,32 @@ const categories = [
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [isDialogOpen, setIsDialogOpen] = useState(false); // State for Send Inquiry dialog
-  const [isLearnMoreDialogOpen, setIsLearnMoreDialogOpen] = useState(false); // State for Learn More dialog
-  const [selectedProduct, setSelectedProduct] = useState(null); // State to store the selected product
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLearnMoreDialogOpen, setIsLearnMoreDialogOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const filteredProducts = products.filter(
     (product) =>
       (selectedCategory === "All" || product.category === selectedCategory) &&
-      (product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.models?.some((model) =>
-          model.toLowerCase().includes(searchQuery.toLowerCase())
-        ))
+      product.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSendInquiry = () => {
-    setIsDialogOpen(true); // Open the Send Inquiry dialog
+    setIsDialogOpen(true);
   };
 
   const closeDialog = () => {
-    setIsDialogOpen(false); // Close the Send Inquiry dialog
+    setIsDialogOpen(false);
   };
 
-  const handleLearnMore = (product) => {
-    setSelectedProduct(product); // Set the selected product
-    setIsLearnMoreDialogOpen(true); // Open the Learn More dialog
+  const handleLearnMore = (product: Product) => {
+    setSelectedProduct(product);
+    setIsLearnMoreDialogOpen(true);
   };
 
   const closeLearnMoreDialog = () => {
-    setIsLearnMoreDialogOpen(false); // Close the Learn More dialog
-    setSelectedProduct(null); // Clear the selected product
+    setIsLearnMoreDialogOpen(false);
+    setSelectedProduct(null);
   };
 
   return (
@@ -733,7 +743,7 @@ export default function ProductsPage() {
       <section className="relative min-h-screen w-full">
         <div className="absolute inset-0">
           <Image
-            src={ProductHero} // Use the imported static image
+            src={ProductHero}
             alt="Water treatment products"
             fill
             className="object-cover brightness-50"
@@ -814,7 +824,7 @@ export default function ProductsPage() {
                   {/* Send Inquiry Button */}
                   <Button
                     onClick={handleSendInquiry}
-                    className="bg-red-500 hover:bg-red-600" // Red color for the button
+                    className="bg-red-500 hover:bg-red-600"
                   >
                     Send Inquiry
                   </Button>
@@ -837,18 +847,18 @@ export default function ProductsPage() {
               quantity, usage, special requests if any in your inquiry.
             </p>
             <textarea
-              className="w-full p-2 border rounded mb-4 bg-white" // White background
+              className="w-full p-2 border rounded mb-4 bg-white"
               placeholder="Please fill in this field."
               rows={4}
             />
             <input
               type="email"
-              className="w-full p-2 border rounded mb-2 bg-white" // White background
+              className="w-full p-2 border rounded mb-2 bg-white"
               placeholder="Email Id"
             />
             <input
               type="tel"
-              className="w-full p-2 border rounded mb-2 bg-white" // White background
+              className="w-full p-2 border rounded mb-2 bg-white"
               placeholder="+91 Mobile number"
             />
             <div className="flex justify-end">
@@ -878,7 +888,7 @@ export default function ProductsPage() {
               <tbody>
                 <tr>
                   <td className="py-2 font-semibold">Price</td>
-                  <td className="py-2">₹{selectedProduct.price || 1000}</td>
+                  <td className="py-2">₹{selectedProduct.price}</td>
                 </tr>
                 <tr>
                   <td className="py-2 font-semibold">Rating</td>
@@ -887,7 +897,7 @@ export default function ProductsPage() {
                       <span
                         key={i}
                         className={`text-2xl ${
-                          i < (selectedProduct.rating || 4)
+                          i < selectedProduct.rating
                             ? "text-yellow-500"
                             : "text-gray-300"
                         }`}
@@ -909,17 +919,11 @@ export default function ProductsPage() {
                 </tr>
                 <tr>
                   <td className="py-2 font-semibold">Warranty/Service</td>
-                  <td className="py-2">
-                    {selectedProduct.warranty ||
-                      "1-year warranty with free maintenance for the first 6 months."}
-                  </td>
+                  <td className="py-2">{selectedProduct.warranty}</td>
                 </tr>
                 <tr>
                   <td className="py-2 font-semibold">Energy Efficiency</td>
-                  <td className="py-2">
-                    {selectedProduct.energyEfficiency ||
-                      "Energy-efficient design reduces power consumption by 20%."}
-                  </td>
+                  <td className="py-2">{selectedProduct.energyEfficiency}</td>
                 </tr>
               </tbody>
             </table>
