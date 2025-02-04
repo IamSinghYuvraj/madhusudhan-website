@@ -13,7 +13,7 @@ import {
   Heart,
   Clock,
   Globe,
-} from "lucide-react"; // Import additional icons   
+} from "lucide-react"; // Import additional icons
 import { ChatBot } from "@/components/chat-bot";
 import { ClientLogos } from "@/components/client-logos";
 
@@ -24,11 +24,12 @@ import Machine3 from "@/app/assests/Home-machine3.jpg";
 
 import WaterSoftener from "@/app/assests/stainless-steel-water-softeners.jpg";
 import Ro from "@/app/assests/commercial-reverse-osmosis-units.jpg";
-import DM  from "app/assests/DM .jpg";
+import DM from "@/app/assests/DM .jpg";
 
-import FillingMachineOperation from "app/assests/Filling Machine Operation.jpg";
-import BOPPMachine from "app/assests/BOPP Machine.jpg";
-import CompleteMineralWaterProject from "app/assests/Complete Mineral Water Project.jpg";
+// Corrected import paths
+import FillingMachineOperation from "@/app/assests/Filling Machine Operation.jpg";
+import BOPPMachine from "@/app/assests/BOPP Machine.jpg";
+import CompleteMineralWaterProject from "@/app/assests/Complete Mineral Water Project.jpg";
 
 // Update the heroImages array to use imported images
 const heroImages = [
@@ -59,8 +60,7 @@ const featuredProducts = [
   },
   {
     title: "DM Plants",
-    image: DM ,
-      
+    image: DM,
     description: "Demineralization plants for pure water",
   },
 ];
@@ -68,20 +68,18 @@ const featuredProducts = [
 const featuredVideos = [
   {
     title: "Complete Mineral Water Project",
-    thumbnail:
-    CompleteMineralWaterProject,
-    description: "Step-by-step guide to setting up a complete mineral water project",
+    thumbnail: CompleteMineralWaterProject,
+    description:
+      "Step-by-step guide to setting up a complete mineral water project",
   },
   {
     title: "BOPP Machine",
-    thumbnail:
-    BOPPMachine,
+    thumbnail: BOPPMachine,
     description: "Explore the features and applications of the BOPP machine.",
   },
   {
     title: "Filling Machine Operation",
-    thumbnail:
-      FillingMachineOperation,
+    thumbnail: FillingMachineOperation,
     description: "Learn how to operate the filling machine efficiently",
   },
 ];
