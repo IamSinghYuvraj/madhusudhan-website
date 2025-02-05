@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -56,17 +54,17 @@ export function ChatBot() {
   return (
     <>
       <Button
-        className="fixed bottom-4 right-4 h-12 w-12 rounded-full shadow-lg"
+        className="fixed bottom-4 right-4 h-12 w-12 rounded-full shadow-lg z-50"
         onClick={() => {
-          setIsOpen(!isOpen)
-          setShowPopup(false)
+          setIsOpen(!isOpen);
+          setShowPopup(false);
         }}
       >
         <MessageCircle className="h-6 w-6" />
       </Button>
 
       {showPopup && !isOpen && (
-        <div className="fixed bottom-20 right-4 animate-bounce">
+        <div className="fixed bottom-20 right-4 animate-bounce z-50">
           <Card className="relative p-4">
             <Button
               variant="ghost"
@@ -84,7 +82,7 @@ export function ChatBot() {
       )}
 
       {isOpen && (
-        <Card className="fixed bottom-20 right-4 w-[350px] shadow-lg">
+        <Card className="fixed bottom-20 right-4 w-[350px] max-w-[90vw] shadow-lg z-50">
           <div className="flex h-[500px] flex-col">
             <div className="border-b p-4">
               <h2 className="font-semibold">Chat with Us</h2>
@@ -92,7 +90,7 @@ export function ChatBot() {
                 Ask us anything about our products
               </p>
             </div>
-            
+
             <ScrollArea className="flex-1 p-4">
               <div className="space-y-4">
                 {messages.map((message, index) => (
@@ -109,7 +107,7 @@ export function ChatBot() {
                           : "bg-muted"
                       } max-w-[80%]`}
                     >
-                      <p className="text-sm">{message.content}</p>
+                      <p className="text-sm break-words">{message.content}</p>
                     </div>
                   </div>
                 ))}
