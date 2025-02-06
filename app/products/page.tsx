@@ -955,13 +955,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { ArrowRight } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import ProductHero from "@/app/assests/product-hero.jpg";
