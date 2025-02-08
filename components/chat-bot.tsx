@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { MessageCircle, Send, X } from "lucide-react"
+=======
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -6,6 +14,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageCircle, Send, X } from "lucide-react";
+>>>>>>> a9eb06b9c2c54e8c85a96d7fdb0fd2b3f4809384
 
 interface Message {
   type: "user" | "bot" | "typing";
@@ -225,7 +234,7 @@ export function ChatBot() {
   return (
     <>
       <Button
-        className="fixed bottom-4 right-4 h-12 w-12 rounded-full shadow-lg"
+        className="fixed bottom-4 right-4 h-12 w-12 rounded-full shadow-lg z-50"
         onClick={() => {
           setIsOpen(!isOpen);
           setShowPopup(false);
@@ -235,7 +244,7 @@ export function ChatBot() {
       </Button>
 
       {showPopup && !isOpen && (
-        <div className="fixed bottom-20 right-4 animate-bounce">
+        <div className="fixed bottom-20 right-4 animate-bounce z-50">
           <Card className="relative p-4">
             <Button
               variant="ghost"
@@ -253,7 +262,7 @@ export function ChatBot() {
       )}
 
       {isOpen && (
-        <Card className="fixed bottom-20 right-4 w-[350px] shadow-lg">
+        <Card className="fixed bottom-20 right-4 w-[350px] max-w-[90vw] shadow-lg z-50">
           <div className="flex h-[500px] flex-col">
             <div className="border-b p-4 flex justify-between items-center">
               <h2 className="font-semibold">Chat with Us</h2>
@@ -278,7 +287,7 @@ export function ChatBot() {
                           : "text-muted"
                       } max-w-[80%]`}
                     >
-                      <p className="text-sm">{message.content}</p>
+                      <p className="text-sm break-words">{message.content}</p>
                     </div>
                   </div>
                 ))}
