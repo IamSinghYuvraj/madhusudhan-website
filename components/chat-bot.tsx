@@ -1,6 +1,5 @@
+// chatbot.tsx
 "use client";
-
-import type React from "react";
 
 import { useState, useEffect, useRef } from "react";
 import { Bot, Send, X, Maximize2, Minimize2 } from "lucide-react";
@@ -38,16 +37,17 @@ export function ChatBot() {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
+    // Add the user's message to the chat
     const userMessage: Message = { role: "user", content: input.trim() };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
     setError(null);
 
-    // Save user message to Supabase (non-blocking)
+    // Save the user's message to Supabase (non-blocking)
     saveInteraction(sessionId, "user", input.trim());
 
-    // Add a loading message
+    // Add a loading message for the assistant
     setMessages((prev) => [
       ...prev,
       { role: "assistant", content: "", isLoading: true },
@@ -56,7 +56,7 @@ export function ChatBot() {
     try {
       console.log("Sending message to API...");
 
-      // Log the request payload for debugging
+      // Prepare the payload for the API request
       const payload = {
         input_value: input.trim(),
         output_type: "chat",
@@ -77,7 +77,7 @@ export function ChatBot() {
       };
       console.log("Request payload:", payload);
 
-      // Make the API call via the proxy
+      // Make the API call to the proxy endpoint
       const response = await fetch("/api/proxy", {
         method: "POST",
         headers: {
@@ -88,6 +88,7 @@ export function ChatBot() {
 
       console.log("Response status:", response.status);
 
+      // Handle non-OK responses
       if (!response.ok) {
         let errorMessage = `Request failed with status ${response.status}`;
         try {
@@ -110,14 +111,13 @@ export function ChatBot() {
       const data = await response.json();
       console.log("API response:", data);
 
-      // Extract the assistant's message from the nested API response
-      // Add optional chaining to handle unexpected response structure
+      // Extract the assistant's message from the response
       const assistantMessage =
         data?.outputs?.[0]?.outputs?.[0]?.artifacts?.message ||
         "No response from the assistant.";
       console.log("Assistant message:", assistantMessage);
 
-      // Remove the loading message and add the real response
+      // Remove the loading message and add the assistant's response
       setMessages((prev) =>
         prev
           .filter((msg) => !msg.isLoading)
@@ -127,11 +127,12 @@ export function ChatBot() {
           })
       );
 
-      // Save assistant message to Supabase (non-blocking)
+      // Save the assistant's message to Supabase (non-blocking)
       saveInteraction(sessionId, "assistant", assistantMessage);
     } catch (error) {
       console.error("Chat error:", error);
       setError((error as Error).message);
+
       // Remove the loading message and add an error message
       setMessages((prev) =>
         prev
@@ -146,13 +147,14 @@ export function ChatBot() {
     }
   };
 
+  // Scroll to the bottom of the chat when new messages are added
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
 
-  // Focus input when chat opens
+  // Focus the input field when the chat is opened
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
@@ -170,24 +172,18 @@ export function ChatBot() {
   if (!isOpen) {
     return (
       <div className="fixed bottom-6 left-6 z-50">
-        {/* Floating text positioned to the right of the button */}
         <div className="absolute -top-12 left-10">
           <span className="block text-center text-sm font-medium text-white bg-indigo-900 px-4 py-2 rounded-full animate-bounce opacity-90 whitespace-nowrap">
             Ask me anything
           </span>
         </div>
-
-        {/* Chat button with pulse animation */}
         <button
           onClick={toggleChatbot}
           className="group relative p-4 rounded-full shadow-lg bg-indigo-900 hover:bg-indigo-800 text-white transition-all duration-300 flex items-center justify-center"
           aria-label="Open chat"
         >
-          {/* Pulse animation */}
           <span className="absolute inset-0 rounded-full bg-indigo-600 opacity-0 group-hover:opacity-30 animate-ping"></span>
           <span className="absolute inset-0 rounded-full border-4 border-indigo-400 opacity-0 group-hover:opacity-100 animate-pulse"></span>
-
-          {/* Bot icon */}
           <Bot className="h-6 w-6" />
         </button>
       </div>
@@ -202,10 +198,7 @@ export function ChatBot() {
           : "w-[90vw] h-[500px] md:w-[400px] md:h-[500px]"
       } rounded-lg shadow-xl overflow-hidden transition-all duration-300 z-50 flex flex-col`}
     >
-      {/* Solid background with no transparency */}
       <div className="absolute inset-0 bg-white dark:bg-gray-900 opacity-95 backdrop-blur-lg z-0"></div>
-
-      {/* Header */}
       <div className="relative z-10 p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-indigo-900 text-white">
         <div className="flex items-center gap-2">
           <Bot className="h-5 w-5" />
@@ -232,8 +225,6 @@ export function ChatBot() {
           </button>
         </div>
       </div>
-
-      {/* Messages area */}
       <div className="relative z-10 flex-1 p-4 overflow-y-auto bg-white dark:bg-gray-900">
         <div className="space-y-4">
           {messages.map((message, index) => (
@@ -278,8 +269,6 @@ export function ChatBot() {
           <div ref={messagesEndRef} />
         </div>
       </div>
-
-      {/* Input area */}
       <form
         onSubmit={handleSendMessage}
         className="relative z-10 p-4 border-t border-gray-200 dark:border-gray-700 flex gap-2 bg-gray-50 dark:bg-gray-800"
