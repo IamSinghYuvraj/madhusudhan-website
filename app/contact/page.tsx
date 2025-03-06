@@ -92,6 +92,19 @@ export default function ContactPage() {
         throw error;
       }
 
+      // Send email
+      const response = await fetch("/api/sendMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
       setNotification({
         type: "success",
         message: "Message sent successfully! We'll get back to you soon.",
@@ -115,7 +128,7 @@ export default function ContactPage() {
         message: false,
       });
     } catch (error) {
-      console.error("Error saving to Supabase:", error);
+      console.error("Error sending message:", error);
       setNotification({
         type: "error",
         message: "Failed to send message. Please try again.",
@@ -144,7 +157,7 @@ export default function ContactPage() {
       {notification.show && (
         <div
           className={`
-            fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg flex items-center 
+            fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg flex items-center
             ${
               notification.type === "success"
                 ? "bg-green-500 text-white"

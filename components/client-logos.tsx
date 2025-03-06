@@ -14,14 +14,14 @@ import ACTIVE from "@/app/assests/ACTIVE.jpg";
 import { Card } from "@/components/ui/card";
 
 const clients = [
-  {  logo: MANTRA, },
-  {  logo: BISLERI, },
-  {  logo: BAILEY,  },
-  {  logo: AQUAFINA, },
-  {  logo: MCD, },
-  {  logo: O2RISE, },
-  {  logo: ROYAL,  },
-  {  logo: ACTIVE, },
+  { logo: MANTRA },
+  { logo: BISLERI },
+  { logo: BAILEY },
+  { logo: AQUAFINA },
+  { logo: MCD },
+  { logo: O2RISE },
+  { logo: ROYAL },
+  { logo: ACTIVE },
 ];
 
 export function ClientLogos() {
@@ -52,32 +52,26 @@ export function ClientLogos() {
       <div className="container">
         <h2 className="text-center text-3xl font-bold">Our Trusted Clients</h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          We are proud to serve some of India's largest companies with our water treatment solutions
+          We are proud to serve some of India's largest companies with our water
+          treatment solutions
         </p>
 
         <div className="mt-12 overflow-hidden" ref={containerRef}>
           <div className="flex animate-scroll gap-8">
             {[...clients, ...clients, ...clients].map((client, index) => (
               <Card
-                key={`${client.name}-${index}`}
+                key={`${index}`} // Use index as the key since there's no unique identifier
                 className="min-w-[300px] h-[300px] flex-shrink-0 flex flex-col items-center text-center overflow-hidden relative"
               >
                 {/* Fullscreen logo */}
                 <div className="absolute inset-0">
                   <Image
                     src={client.logo}
-                    alt={client.name}
+                    alt="Client Logo" // Use a generic alt text since there's no name
                     layout="fill"
                     objectFit="cover"
                     className="opacity-90"
                   />
-                </div>
-                {/* Text overlay */}
-                <div className="relative z-10">
-                  <h3 className="text-lg font-semibold">{client.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {client.description}
-                  </p>
                 </div>
               </Card>
             ))}
