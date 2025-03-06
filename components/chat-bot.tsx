@@ -89,22 +89,31 @@ export function ChatBot() {
       console.log("Response status:", response.status);
 
       if (!response.ok) {
-        // Log the full response for debugging
-        const errorData = await response.json().catch(() => response.text());
-        console.error("API error response:", errorData);
-        throw new Error(
-          typeof errorData === "string"
-            ? errorData
-            : errorData.message || "Failed to get response"
-        );
+        let errorMessage = `Request failed with status ${response.status}`;
+        try {
+          // Try to parse the error as JSON first
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch {
+          // If parsing JSON fails, try to get the text
+          try {
+            const errorText = await response.text();
+            if (errorText) errorMessage = errorText;
+          } catch (e) {
+            console.error("Could not read error response:", e);
+          }
+        }
+        throw new Error(errorMessage);
       }
 
+      // Parse the JSON response
       const data = await response.json();
       console.log("API response:", data);
 
       // Extract the assistant's message from the nested API response
+      // Add optional chaining to handle unexpected response structure
       const assistantMessage =
-        data.outputs[0].outputs[0].artifacts.message ||
+        data?.outputs?.[0]?.outputs?.[0]?.artifacts?.message ||
         "No response from the assistant.";
       console.log("Assistant message:", assistantMessage);
 
