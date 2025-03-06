@@ -78,7 +78,7 @@ export function ChatBot() {
       console.log("Request payload:", payload);
 
       // Make the API call to the proxy endpoint
-      const response = await fetch("/api/proxy", {
+      const response = await fetch("/api/proxy/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
