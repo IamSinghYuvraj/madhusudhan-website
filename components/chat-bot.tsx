@@ -33,93 +33,119 @@ export function ChatBot() {
     ]);
   }, []);
 
-const handleSendMessage = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!input.trim() || isLoading) return;
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
 
-  console.log("Sending message to API...");
+    // Add the user's message to the chat
+    const userMessage: Message = { role: "user", content: input.trim() };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
+    setError(null);
 
-  try {
-    const payload = {
-      input_value: input.trim(),
-      output_type: "chat",
-      input_type: "chat",
-      tweaks: {
-        "ChatInput-9zguD": {},
-        "ParseData-lMHmZ": {},
-        "Prompt-2U6mC": {},
-        "SplitText-LuLzO": {},
-        "ChatOutput-eN6uf": {},
-        "OpenAIEmbeddings-Iy7Z4": {},
-        "OpenAIEmbeddings-b8kaf": {},
-        "File-GCZvw": {},
-        "OpenAIModel-jfaj1": {},
-        "AstraDB-Y1UtY": {},
-        "AstraDB-ySAeC": {},
-      },
-    };
-    console.log("Request payload:", payload);
+    // Save the user's message to Supabase (non-blocking)
+    saveInteraction(sessionId, "user", input.trim());
 
-    const response = await fetch("/api/proxy", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    // Add a loading message for the assistant
+    setMessages((prev) => [
+      ...prev,
+      { role: "assistant", content: "", isLoading: true },
+    ]);
 
-    console.log("Response status:", response.status);
+    try {
+      console.log("Sending message to API...");
 
-    if (!response.ok) {
-      let errorMessage = `Request failed with status ${response.status}`;
-      try {
-        const errorData = await response.json();
-        errorMessage = errorData.error || errorData.message || errorMessage;
-      } catch {
+      // Prepare the payload for the API request
+      const payload = {
+        input_value: input.trim(),
+        output_type: "chat",
+        input_type: "chat",
+        tweaks: {
+          "ChatInput-9zguD": {},
+          "ParseData-lMHmZ": {},
+          "Prompt-2U6mC": {},
+          "SplitText-LuLzO": {},
+          "ChatOutput-eN6uf": {},
+          "OpenAIEmbeddings-Iy7Z4": {},
+          "OpenAIEmbeddings-b8kaf": {},
+          "File-GCZvw": {},
+          "OpenAIModel-jfaj1": {},
+          "AstraDB-Y1UtY": {},
+          "AstraDB-ySAeC": {},
+        },
+      };
+      console.log("Request payload:", payload);
+
+      // Make the API call to the proxy endpoint
+      const response = await fetch("/api/proxy/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      console.log("Response status:", response.status);
+
+      // Handle non-OK responses
+      if (!response.ok) {
+        let errorMessage = `Request failed with status ${response.status}`;
         try {
-          const errorText = await response.text();
-          if (errorText) errorMessage = errorText;
-        } catch (e) {
-          console.error("Could not read error response:", e);
+          // Try to parse the error as JSON first
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorData.message || errorMessage;
+        } catch {
+          // If parsing JSON fails, try to get the text
+          try {
+            const errorText = await response.text();
+            if (errorText) errorMessage = errorText;
+          } catch (e) {
+            console.error("Could not read error response:", e);
+          }
         }
+        throw new Error(errorMessage);
       }
-      throw new Error(errorMessage);
+
+      // Parse the JSON response
+      const data = await response.json();
+      console.log("API response:", data);
+
+      // Extract the assistant's message from the response
+      const assistantMessage =
+        data?.outputs?.[0]?.outputs?.[0]?.artifacts?.message ||
+        "No response from the assistant.";
+      console.log("Assistant message:", assistantMessage);
+
+      // Remove the loading message and add the assistant's response
+      setMessages((prev) =>
+        prev
+          .filter((msg) => !msg.isLoading)
+          .concat({
+            role: "assistant",
+            content: assistantMessage,
+          })
+      );
+
+      // Save the assistant's message to Supabase (non-blocking)
+      saveInteraction(sessionId, "assistant", assistantMessage);
+    } catch (error) {
+      console.error("Chat error:", error);
+      setError((error as Error).message);
+
+      // Remove the loading message and add an error message
+      setMessages((prev) =>
+        prev
+          .filter((msg) => !msg.isLoading)
+          .concat({
+            role: "assistant",
+            content: `Error: ${(error as Error).message}. Please try again.`,
+          })
+      );
+    } finally {
+      setIsLoading(false);
     }
-
-    const data = await response.json();
-    console.log("API response:", data);
-
-    const assistantMessage =
-      data?.outputs?.[0]?.outputs?.[0]?.artifacts?.message ||
-      "No response from the assistant.";
-    console.log("Assistant message:", assistantMessage);
-
-    setMessages((prev) =>
-      prev
-        .filter((msg) => !msg.isLoading)
-        .concat({
-          role: "assistant",
-          content: assistantMessage,
-        })
-    );
-
-    saveInteraction(sessionId, "assistant", assistantMessage);
-  } catch (error) {
-    console.error("Chat error:", error);
-    setError((error as Error).message);
-
-    setMessages((prev) =>
-      prev
-        .filter((msg) => !msg.isLoading)
-        .concat({
-          role: "assistant",
-          content: `Error: ${(error as Error).message}. Please try again.`,
-        })
-    );
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
   // Scroll to the bottom of the chat when new messages are added
   useEffect(() => {
