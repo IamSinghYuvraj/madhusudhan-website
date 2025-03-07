@@ -2,7 +2,6 @@
 import { NextResponse } from "next/server";
 
 export async function OPTIONS() {
-  // Set CORS headers for preflight requests
   const headers = new Headers();
   headers.set("Access-Control-Allow-Origin", "*");
   headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -13,44 +12,40 @@ export async function OPTIONS() {
 
 export async function POST(req) {
   try {
-    // Parse the incoming request payload
     const payload = await req.json();
-
-    // Log the request payload for debugging
     console.log("Request payload:", payload);
 
-    // Forward the request to the external API
-    const apiResponse = await fetch(process.env.NEXT_PUBLIC_DATASTAX_API, {
+    const apiUrl = process.env.NEXT_PUBLIC_DATASTAX_API;
+    const apiToken = process.env.NEXT_PUBLIC_DATASTAX_TOKEN;
+
+    if (!apiUrl || !apiToken) {
+      throw new Error("Missing API URL or token in environment variables.");
+    }
+
+    const apiResponse = await fetch(apiUrl, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_DATASTAX_TOKEN}`,
+        Authorization: `Bearer ${apiToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
 
-    // Handle non-OK responses from the external API
     if (!apiResponse.ok) {
-      const errorData = await apiResponse.text();
-      throw new Error(errorData || "Failed to fetch data from the API");
+      const errorText = await apiResponse.text();
+      console.error("API Error:", errorText);
+      return NextResponse.json(
+        { error: errorText || "Failed to fetch data from the API" },
+        { status: apiResponse.status }
+      );
     }
 
-    // Parse the response from the external API
     const data = await apiResponse.json();
-
-    // Log the API response for debugging
     console.log("API response:", data);
 
-    // Return the response to the client
     return NextResponse.json(data);
   } catch (error) {
-    // Log any errors that occur during the process
-    console.error("Proxy error:", error);
-
-    // Return a 500 error response to the client
-    return NextResponse.json(
-      { error: error.message || "Internal Server Error" },
-      { status: 500 }
-    );
+    console.error("Proxy error:", error.message);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
