@@ -78,13 +78,16 @@ export function ChatBot() {
       console.log("Request payload:", payload);
 
       // Make the API call to the proxy endpoint
-      const response = await fetch("/app/api/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://madhusudanaquaindustries.netlify.app/app/api/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       console.log("Response status:", response.status);
 
