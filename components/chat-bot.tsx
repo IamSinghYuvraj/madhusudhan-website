@@ -79,7 +79,7 @@ export function ChatBot() {
 
       // Make the API call to the proxy endpoint
       const response = await fetch(
-        "https://madhusudanaquaindustries.netlify.app/api/",
+        "https://madhusudanaquaindustries.netlify.app/api/proxy/",
         {
           method: "POST",
           headers: {
