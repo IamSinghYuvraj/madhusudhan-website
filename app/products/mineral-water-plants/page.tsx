@@ -9,9 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
-import MineralWaterPlant1 from "@/app/assests/Mineral-Water-Plants.jpg";
-import MineralWaterPlant2 from "@/app/assests/Packaged-Drinking-Water-Plant.jpg";
-import MineralWaterPlant3 from "@/app/assests/Complete Mineral Water Project.jpg";
+import MineralWaterPlant1 from "@/assests/Mineral-Water-Plants.jpg";
+import MineralWaterPlant2 from "@/assests/Packaged-Drinking-Water-Plant.jpg";
+import MineralWaterPlant3 from "@/assests/Complete Mineral Water Project.jpg";
 
 const productMedia = [
   {

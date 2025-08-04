@@ -9,9 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
-import FillingMachine1 from "@/app/assests/Mineral-Water-Filling-Machines.jpg";
-import FillingMachine2 from "@/app/assests/Water-Bottle-Filling-Machines.jpg";
-import FillingMachine3 from "@/app/assests/Fully-Auto-Pet-Bottle-Rinsing-Filling-Capping-Machine.jpg";
+import FillingMachine1 from "@/assests/Mineral-Water-Filling-Machines.jpg";
+import FillingMachine2 from "@/assests/Water-Bottle-Filling-Machines.jpg";
+import FillingMachine3 from "@/assests/Fully-Auto-Pet-Bottle-Rinsing-Filling-Capping-Machine.jpg";
 
 const productMedia = [
   {

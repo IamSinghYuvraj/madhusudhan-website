@@ -28,15 +28,15 @@ import ContactUs from "@/components/contactus";
 import AnimatedSectionPage from "@/components/animation";
 
 // Import images from the assets folder
-import Machine1 from "@/app/assests/Home-machine1.jpg";
-import Machine2 from "@/app/assests/Home-machine2.jpg";
-import Machine3 from "@/app/assests/Home-machine3.jpg";
-import WaterSoftener from "@/app/assests/stainless-steel-water-softeners.jpg";
-import Ro from "@/app/assests/commercial-reverse-osmosis-units.jpg";
-import DM from "@/app/assests/DM .jpg";
-import FillingMachineOperation from "@/app/assests/Filling Machine Operation.jpg";
-import BOPPMachine from "@/app/assests/BOPP Machine.jpg";
-import CompleteMineralWaterProject from "@/app/assests/Complete Mineral Water Project.jpg";
+import Machine1 from "@/assests/Home-machine1.jpg";
+import Machine2 from "@/assests/Home-machine2.jpg";
+import Machine3 from "@/assests/Home-machine3.jpg";
+import WaterSoftener from "@/assests/stainless-steel-water-softeners.jpg";
+import Ro from "@/assests/commercial-reverse-osmosis-units.jpg";
+import DM from "@/assests/DM .jpg";
+import FillingMachineOperation from "@/assests/Filling Machine Operation.jpg";
+import BOPPMachine from "@/assests/BOPP Machine.jpg";
+import CompleteMineralWaterProject from "@/assests/Complete Mineral Water Project.jpg";
 
 // Define types for the data structures
 interface HeroImage {

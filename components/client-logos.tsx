@@ -2,14 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import MANTRA from "@/app/assests/MANTRA.jpg";
-import BISLERI from "@/app/assests/BISLERI.jpg";
-import BAILEY from "@/app/assests/BAILEY.jpg";
-import AQUAFINA from "@/app/assests/AQUAFINA.jpg";
-import MCD from "@/app/assests/MCD.jpg";
-import O2RISE from "@/app/assests/O2RISE.jpg";
-import ROYAL from "@/app/assests/ROYAL.jpg";
-import ACTIVE from "@/app/assests/ACTIVE.jpg";
+import MANTRA from "@/assests/MANTRA.jpg";
+import BISLERI from "@/assests/BISLERI.jpg";
+import BAILEY from "@/assests/BAILEY.jpg";
+import AQUAFINA from "@/assests/AQUAFINA.jpg";
+import MCD from "@/assests/MCD.jpg";
+import O2RISE from "@/assests/O2RISE.jpg";
+import ROYAL from "@/assests/ROYAL.jpg";
+import ACTIVE from "@/assests/ACTIVE.jpg";
 
 import { Card } from "@/components/ui/card";
 

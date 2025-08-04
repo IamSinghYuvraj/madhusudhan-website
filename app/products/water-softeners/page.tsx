@@ -9,9 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
-import WaterSoftener1 from "@/app/assests/stainless-steel-water-softeners.jpg";
-import WaterSoftener2 from "@/app/assests/Water-Softening-Plant.jpg";
-import WaterSoftener3 from "@/app/assests/Water-Treatment-System.jpg";
+import WaterSoftener1 from "@/assests/stainless-steel-water-softeners.jpg";
+import WaterSoftener2 from "@/assests/Water-Softening-Plant.jpg";
+import WaterSoftener3 from "@/assests/Water-Treatment-System.jpg";
 
 const productMedia = [
   {

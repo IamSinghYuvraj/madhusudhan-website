@@ -17,16 +17,16 @@ import AnimatedSection from "@/components/animation";
 import ContactUs from "@/components/contactus";
 
 // Import images from the assets folder
-import AboutMachine1 from "@/app/assests/About-Machine1.jpg";
-import AboutMachine2 from "@/app/assests/About-Machine2.jpg";
-import PharmaImage from "@/app/assests/pharma-industry.jpg";
-import ManufacturingImage from "@/app/assests/manufacturing-industry.jpeg";
-import FoodBeverageImage from "@/app/assests/food-beverage-industry.jpeg";
-import CommercialImage from "@/app/assests/commercial-industry.jpeg";
-import PowerGenerationImage from "@/app/assests/power-generation-industry.jpg";
-import AgricultureImage from "@/app/assests/agriculture-industry.jpeg";
-import ConstructionImage from "@/app/assests/construction-industry.jpeg";
-import WarehousingImage from "@/app/assests/warehousing-industry.jpeg";
+import AboutMachine1 from "@/assests/About-Machine1.jpg";
+import AboutMachine2 from "@/assests/About-Machine2.jpg";
+import PharmaImage from "@/assests/pharma-industry.jpg";
+import ManufacturingImage from "@/assests/manufacturing-industry.jpeg";
+import FoodBeverageImage from "@/assests/food-beverage-industry.jpeg";
+import CommercialImage from "@/assests/commercial-industry.jpeg";
+import PowerGenerationImage from "@/assests/power-generation-industry.jpg";
+import AgricultureImage from "@/assests/agriculture-industry.jpeg";
+import ConstructionImage from "@/assests/construction-industry.jpeg";
+import WarehousingImage from "@/assests/warehousing-industry.jpeg";
 
 const industries = [
   {

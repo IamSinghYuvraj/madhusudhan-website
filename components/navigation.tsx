@@ -186,7 +186,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu, ChevronDown } from "lucide-react";
 import Image from "next/image";
-import Logo from "@/app/assests/madhu.png";
+import Logo from "@/assests/madhu.png";
 import { motion } from "framer-motion";
 
 const navigation = [

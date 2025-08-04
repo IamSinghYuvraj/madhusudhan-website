@@ -119,7 +119,7 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "@/app/assests/madhu.png";
+import Logo from "@/assests/madhu.png";
 
 export function Footer() {
   return (

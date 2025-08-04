@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import VideoHero from "@/app/assests/video-hero.jpg";
+import VideoHero from "@/assests/video-hero.jpg";
 
 interface Video {
   id: string;

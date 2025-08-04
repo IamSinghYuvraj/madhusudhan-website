@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle, X } from "lucide-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
-import Contact from "@/app/assests/contact-hero.jpeg";
+import Contact from "@/assests/contact-hero.jpeg";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

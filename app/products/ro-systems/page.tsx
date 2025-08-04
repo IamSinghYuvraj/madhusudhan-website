@@ -9,9 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
-import ROSystem1 from "@/app/assests/Reverse-Osmosis-Plant.jpg";
-import ROSystem2 from "@/app/assests/Commercial-Reverse-Osmosis-Plant.jpg";
-import ROSystem3 from "@/app/assests/FRP-RO-Plant.jpg";
+import ROSystem1 from "@/assests/Reverse-Osmosis-Plant.jpg";
+import ROSystem2 from "@/assests/Commercial-Reverse-Osmosis-Plant.jpg";
+import ROSystem3 from "@/assests/FRP-RO-Plant.jpg";
 
 const productMedia = [
   {
