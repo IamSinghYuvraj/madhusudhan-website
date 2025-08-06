@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Play, ChevronLeft, ChevronRight, Shield, Zap, Wrench, Clock } from "lucide-react";
@@ -13,7 +14,14 @@ import WaterSoftener1 from "@/assests/stainless-steel-water-softeners.jpg";
 import WaterSoftener2 from "@/assests/Water-Softening-Plant.jpg";
 import WaterSoftener3 from "@/assests/Water-Treatment-System.jpg";
 
-const productMedia = [
+interface MediaItem {
+  type: "image" | "video";
+  src: string | StaticImageData;
+  alt: string;
+  thumbnail?: StaticImageData;
+}
+
+const productMedia: MediaItem[] = [
   {
     type: "image",
     src: WaterSoftener1,
@@ -120,7 +128,7 @@ export default function WaterSoftenersPage() {
                   {!isVideoPlaying ? (
                     <>
                       <Image
-                        src={currentMedia.thumbnail}
+                        src={currentMedia.thumbnail || currentMedia.src}
                         alt={currentMedia.alt}
                         fill
                         className="object-cover"
@@ -138,7 +146,7 @@ export default function WaterSoftenersPage() {
                     </>
                   ) : (
                     <iframe
-                      src={currentMedia.src}
+                      src={typeof currentMedia.src === 'string' ? currentMedia.src : ''}
                       className="w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen

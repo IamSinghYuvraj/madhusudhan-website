@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Play, Pause, ChevronLeft, ChevronRight, Star, Award, Shield, Zap } from "lucide-react";
@@ -13,7 +14,14 @@ import MineralWaterPlant1 from "@/assests/Mineral-Water-Plants.jpg";
 import MineralWaterPlant2 from "@/assests/Packaged-Drinking-Water-Plant.jpg";
 import MineralWaterPlant3 from "@/assests/Complete Mineral Water Project.jpg";
 
-const productMedia = [
+interface MediaItem {
+  type: "image" | "video";
+  src: string | StaticImageData;
+  alt: string;
+  thumbnail?: StaticImageData;
+}
+
+const productMedia: MediaItem[] = [
   {
     type: "image",
     src: MineralWaterPlant1,
@@ -120,7 +128,7 @@ export default function MineralWaterPlantsPage() {
                   {!isVideoPlaying ? (
                     <>
                       <Image
-                        src={currentMedia.thumbnail}
+                        src={currentMedia.thumbnail || currentMedia.src}
                         alt={currentMedia.alt}
                         fill
                         className="object-cover"
@@ -138,7 +146,7 @@ export default function MineralWaterPlantsPage() {
                     </>
                   ) : (
                     <iframe
-                      src={currentMedia.src}
+                      src={typeof currentMedia.src === 'string' ? currentMedia.src : ''}
                       className="w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
