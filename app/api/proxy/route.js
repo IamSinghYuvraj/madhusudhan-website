@@ -1,5 +1,4 @@
 // app/api/proxy/route.js
-"use server"
 import { NextResponse } from "next/server";
 
 export async function OPTIONS() {
