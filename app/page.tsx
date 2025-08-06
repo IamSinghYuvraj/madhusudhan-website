@@ -21,7 +21,6 @@ import {
   Users,
   ChevronRight,
 } from "lucide-react";
-import { ChatBot } from "@/components/chat-bot";
 import { ClientLogos } from "@/components/client-logos";
 import GlobalPresence from "@/components/globalpresence";
 import ContactUs from "@/components/contactus";
@@ -506,7 +505,6 @@ Today, we continue to push boundaries, developing cutting-edge solutions that ad
       {/* Get a Quote Section */}
       <ContactUs />
 
-      <ChatBot />
     </>
   );
 };
