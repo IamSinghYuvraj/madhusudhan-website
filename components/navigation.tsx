@@ -40,6 +40,7 @@ export function Navigation() {
   const [showDropdown, setShowDropdown] = React.useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [activeItemHref, setActiveItemHref] = React.useState<string>("");
   const [capsuleStyle, setCapsuleStyle] = React.useState({
     width: 0,
     left: 0,
@@ -59,16 +60,19 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Initialize capsule position for active item
+  // Set active item based on current pathname
   React.useEffect(() => {
     const activeItem = navigation.find(item => 
       item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
     );
     
-    if (activeItem && navRefs.current[activeItem.href]) {
-      updateCapsulePosition(activeItem.href);
+    if (activeItem) {
+      setActiveItemHref(activeItem.href);
+      if (navRefs.current[activeItem.href] && !hoveredItem) {
+        updateCapsulePosition(activeItem.href);
+      }
     }
-  }, [pathname]);
+  }, [pathname, hoveredItem]);
 
   const updateCapsulePosition = (href: string) => {
     const element = navRefs.current[href];
@@ -100,49 +104,51 @@ export function Navigation() {
   };
 
   const handleMouseLeave = () => {
-  // Longer delay to allow cursor movement to dropdown
-  dropdownTimeoutRef.current = setTimeout(() => {
-    const activeItem = navigation.find(item => 
-      item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
-    );
+    // Clear the hovered item and return to active position
+    setHoveredItem(null);
     
-    if (activeItem) {
-      updateCapsulePosition(activeItem.href);
-      setHoveredItem(null);
+    // Return capsule to active item position
+    if (activeItemHref && navRefs.current[activeItemHref]) {
+      updateCapsulePosition(activeItemHref);
     } else {
-      setHoveredItem(null);
       setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
     }
-    setShowDropdown(false);
-  }, 300); // Increased delay
-};
+    
+    // Handle dropdown closing
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setShowDropdown(false);
+    }, 300);
+  };
 
   const handleDropdownMouseEnter = () => {
-  if (dropdownTimeoutRef.current) {
-    clearTimeout(dropdownTimeoutRef.current);
-  }
-  setShowDropdown(true);
-  // Keep the Products item highlighted when in dropdown
-  setHoveredItem('/products');
-  updateCapsulePosition('/products');
-};
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setShowDropdown(true);
+    // Keep the Products item highlighted when in dropdown
+    setHoveredItem('/products');
+    updateCapsulePosition('/products');
+  };
 
   const handleDropdownMouseLeave = () => {
-  dropdownTimeoutRef.current = setTimeout(() => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setShowDropdown(false);
+      // Return to active position when leaving dropdown
+      setHoveredItem(null);
+      if (activeItemHref && navRefs.current[activeItemHref]) {
+        updateCapsulePosition(activeItemHref);
+      } else {
+        setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
+      }
+    }, 300);
+  };
+
+  const handleNavClick = (href: string) => {
+    // Update the active position when a nav item is clicked
+    setActiveItemHref(href);
     setShowDropdown(false);
-    const activeItem = navigation.find(item => 
-      item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
-    );
-    
-    if (activeItem) {
-      updateCapsulePosition(activeItem.href);
-      setHoveredItem(null);
-    } else {
-      setHoveredItem(null);
-      setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
-    }
-  }, 300);
-};
+    setHoveredItem(null);
+  };
 
   const toggleMobileProducts = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -170,7 +176,11 @@ export function Navigation() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center justify-center flex-1">
               <div className="flex items-center bg-white/95 backdrop-blur-md rounded-full border border-gray-200/80 shadow-lg px-8 py-3 space-x-8 relative">
-                <Link href="/" className="flex items-center relative z-10">
+                <Link 
+                  href="/" 
+                  className="flex items-center relative z-10"
+                  onClick={() => handleNavClick("/")}
+                >
                   <div className="h-12 w-auto">
                     <Image
                       src={Logo || "/placeholder.svg"}
@@ -214,6 +224,7 @@ export function Navigation() {
                                 ? "text-blue-600"
                                 : "text-gray-700 hover:text-blue-600"
                             )}
+                            onClick={() => handleNavClick(item.href)}
                           >
                             {item.name}
                             <ChevronDown 
@@ -236,7 +247,10 @@ export function Navigation() {
                                   key={dropdownItem.href}
                                   href={dropdownItem.href}
                                   className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 mx-2 rounded-lg relative"
-                                  onClick={() => setShowDropdown(false)}
+                                  onClick={() => {
+                                    handleNavClick(item.href); // Keep Products as active when clicking sub-items
+                                    setShowDropdown(false);
+                                  }}
                                   onMouseEnter={() => {
                                     // Keep dropdown open and maintain Products highlight
                                     setHoveredItem('/products');
@@ -259,6 +273,7 @@ export function Navigation() {
                               ? "text-blue-600"
                               : "text-gray-700 hover:text-blue-600"
                           )}
+                          onClick={() => handleNavClick(item.href)}
                         >
                           {item.name}
                         </Link>
