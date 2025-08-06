@@ -9,9 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
-import DMPlant1 from "@/app/assests/DM .jpg";
-import DMPlant2 from "@/app/assests/DM-Water-Plants.jpg";
-import DMPlant3 from "@/app/assests/Mixed-Bed-DM-Plant.jpg";
+import DMPlant1 from "@/assests/DM .jpg";
+import DMPlant2 from "@/assests/DM-Water-Plants.jpg";
+import DMPlant3 from "@/assests/Mixed-Bed-DM-Plant.jpg";
 
 const productMedia = [
   {
