@@ -153,18 +153,19 @@ export default function ContactPage() {
   };
 
   return (
-    <>
+      <section className="py-16 flex justify-center items-center bg-gradient-to-b from-background to-muted/20">
+      {/* Notification */}
       {notification.show && (
         <div
           className={`
-      fixed top-4 right-4 z-50 p-4 rounded-lg shadow-2xl flex items-center max-w-md
-      animate-in slide-in-from-right-4 duration-500
-      ${
-        notification.type === "success"
-          ? "bg-green-500 text-white shadow-green-500/30"
-          : "bg-red-500 text-white shadow-red-500/30"
-      }
-    `}
+            fixed top-4 right-4 z-50 p-4 rounded-lg shadow-2xl flex items-center max-w-md
+            animate-in slide-in-from-right-4 duration-500
+            ${
+              notification.type === "success"
+                ? "bg-green-500 text-white shadow-green-500/30"
+                : "bg-red-500 text-white shadow-red-500/30"
+            }
+          `}
         >
           {notification.type === "success" ? (
             <CheckCircle className="mr-3 h-5 w-5 animate-bounce" />
@@ -181,28 +182,6 @@ export default function ContactPage() {
         </div>
       )}
 
-      <section className="relative min-h-[60vh] w-full overflow-hidden">
-        <Image
-          src={Contact}
-          alt="Contact us"
-          width={1200}
-          height={600}
-          className="absolute inset-0 h-full w-full object-cover brightness-50 transition-transform duration-1000 hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-primary/30" />
-        <div className="container relative flex min-h-[60vh] items-center pt-10 pl-10">
-          <div className="max-w-2xl animate-in slide-in-from-left-8 duration-1000">
-            <h1 className="text-4xl font-bold text-white sm:text-5xl mb-4 hover:animate-pulse transition-all cursor-default">
-              Contact Us
-            </h1>
-            <p className="text-lg text-white/90 leading-relaxed animate-in slide-in-from-left-8 duration-1000 delay-200">
-              Get in touch with us for any inquiries about our products and services
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 flex justify-center items-center bg-gradient-to-b from-background to-muted/20">
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-3">
   <Card className="group p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 border-0 shadow-lg bg-white/80 backdrop-blur-sm animate-in slide-in-from-bottom-4 duration-700 delay-100">

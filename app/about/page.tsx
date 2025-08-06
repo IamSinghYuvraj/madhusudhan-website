@@ -208,30 +208,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <section className="relative min-h-[60vh] w-full">
-        <Image
-          src={AboutMachine1 || "/placeholder.svg"}
-          alt="Industrial facility"
-          fill
-          className="object-cover brightness-50"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-cyan-700/30" />
-        <div className="container relative flex min-h-[60vh] items-center pt-20">
-          <AnimatedSection>
-            <div className="max-w-2xl animate-slide-in pl-5">
-              <h1 className="text-4xl font-bold text-white sm:text-5xl">
-                About Maia Aqua Industries
-              </h1>
-              <p className="mt-4 text-lg text-white/80">
-                A leading manufacturer of water treatment and purification
-                systems, serving industries across India.
-              </p>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
       <section className="py-16 bg-gradient-to-b from-cyan-50 via-white to-cyan-50 flex justify-center items-center">
         <div className="container">
           <div className="grid gap-16 md:grid-cols-2 items-center">

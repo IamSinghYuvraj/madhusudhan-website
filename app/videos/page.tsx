@@ -253,6 +253,30 @@ export default function VideosPage() {
         </div>
       )}
 
+      {notification.show && (
+        <div
+          className={`
+            fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg flex items-center
+            ${
+              notification.type === "success"
+                ? "bg-green-500 text-white"
+                : "bg-red-500 text-white"
+            }
+          `}
+        >
+          {notification.type === "success" ? (
+            <CheckCircle className="mr-2 h-5 w-5" />
+          ) : null}
+          <span className="flex-grow">{notification.message}</span>
+          <button
+            onClick={closeNotification}
+            className="ml-4 hover:bg-white/20 rounded-full p-1"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
+
       <section className="relative min-h-[60vh] w-full">
         <div className="absolute inset-0">
           <Image

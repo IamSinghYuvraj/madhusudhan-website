@@ -322,32 +322,6 @@ export default function ProductsPage() {
         </div>
       )}
 
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] w-full">
-        <div className="absolute inset-0">
-          <Image
-            src={ProductHero || "/placeholder.svg"}
-            alt="Water treatment products"
-            fill
-            className="object-cover brightness-50"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-primary/30" />
-        <div className="container relative flex min-h-[60vh] items-center pt-20">
-          <div className="max-w-2xl animate-slide-in pl-5">
-            <h1 className="text-4xl font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Explore Our
-              <br />
-              <span className="text-accent">Products</span>
-            </h1>
-            <p className="mt-6 text-lg text-gray-200">
-              Discover our comprehensive range of water treatment solutions
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Filters Section */}
       <section className="container py-8">
         <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col sm:flex-row gap-4">
