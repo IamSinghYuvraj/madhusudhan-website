@@ -1,270 +1,4 @@
-
-// "use client"
-
-// import * as React from "react"
-// import Link from "next/link"
-// import { usePathname } from "next/navigation"
-// import { cn } from "@/lib/utils"
-// import { Button } from "@/components/ui/button"
-// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-// import { Menu, ChevronDown } from "lucide-react"
-// import Image from "next/image"
-// import Logo from "@/assests/madhu.png"
-// import { motion } from "framer-motion"
-
-// const navigation = [
-//   { name: "Home", href: "/" },
-//   { name: "About", href: "/about" },
-//   {
-//     name: "Products",
-//     href: "/products",
-//     hasDropdown: true,
-//     dropdownItems: [
-//       { name: "Mineral Water Plants", href: "/products/mineral-water-plants" },
-//       { name: "RO Systems", href: "/products/ro-systems" },
-//       { name: "Water Softeners", href: "/products/water-softeners" },
-//       { name: "DM Plants", href: "/products/dm-plants" },
-//       { name: "Filling Machines", href: "/products/filling-machines" },
-//     ],
-//   },
-//   { name: "Videos", href: "/videos" },
-//   { name: "Contact", href: "/contact" },
-// ]
-
-// export function Navigation() {
-//   const pathname = usePathname()
-//   const [isScrolled, setIsScrolled] = React.useState(false)
-//   const [openDropdown, setOpenDropdown] = React.useState<string | null>(null)
-//   const [borderStyle, setBorderStyle] = React.useState({ width: 0, left: 0, opacity: 0 })
-//   const navRefs = React.useRef<{ [key: string]: HTMLElement | null }>({})
-//   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
-
-//   React.useEffect(() => {
-//     const handleScroll = () => {
-//       setIsScrolled(window.scrollY > 20)
-//     }
-//     window.addEventListener("scroll", handleScroll)
-//     return () => window.removeEventListener("scroll", handleScroll)
-//   }, [])
-
-//   // Update border position for current page
-//   React.useEffect(() => {
-//     const currentNavItem = navigation.find(item => 
-//       item.href === pathname || (item.hasDropdown && pathname.startsWith("/products"))
-//     )
-//     if (currentNavItem) {
-//       updateBorderPosition(currentNavItem.href)
-//     }
-//   }, [pathname])
-
-//   const updateBorderPosition = (href: string) => {
-//     const element = navRefs.current[href]
-//     if (element) {
-//       const rect = element.getBoundingClientRect()
-//       const parentRect = element.parentElement?.getBoundingClientRect() || { left: 0 }
-//       setBorderStyle({
-//         width: rect.width,
-//         left: rect.left - parentRect.left,
-//         opacity: 1,
-//       })
-//     }
-//   }
-
-//   return (
-//     <motion.header
-//       className={cn(
-//         "fixed top-0 z-50 w-full transition-all duration-300",
-//         isScrolled 
-//           ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200" 
-//           : "bg-white/90 backdrop-blur-sm"
-//       )}
-//       initial={{ y: -100 }}
-//       animate={{ y: 0 }}
-//       transition={{ duration: 0.5, ease: "easeOut" }}
-//     >
-//       <div className="container mx-auto px-4 md:px-6">
-//         <div className="flex h-20 items-center justify-between">
-          
-//           {/* Logo */}
-//           <Link href="/" className="flex items-center">
-//             <motion.div
-//               whileHover={{ scale: 1.05 }}
-//               whileTap={{ scale: 0.95 }}
-//               transition={{ duration: 0.2 }}
-//             >
-//               <Image
-//                 src={Logo || "/placeholder.svg?height=80&width=160"}
-//                 alt="Ma Aqua Industries Logo"
-//                 width={160}
-//                 height={80}
-//                 className="h-16 w-auto"
-//               />
-//             </motion.div>
-//           </Link>
-
-//           {/* Desktop Navigation */}
-//           <nav className="hidden md:flex items-center space-x-10 relative">
-//             {/* Animated Border */}
-//             <motion.div
-//               className="absolute bottom-0 h-0.5 bg-blue-600 rounded-full"
-//               style={{
-//                 width: `${borderStyle.width}px`,
-//                 left: `${borderStyle.left}px`,
-//               }}
-//               animate={{
-//                 opacity: borderStyle.opacity,
-//                 width: borderStyle.width,
-//                 left: borderStyle.left,
-//               }}
-//               transition={{
-//                 type: "spring",
-//                 stiffness: 300,
-//                 damping: 30,
-//               }}
-//             />
-
-//             {navigation.map((item) => (
-//               <div
-//                 key={item.href}
-//                 className="relative"
-//                 onMouseEnter={() => {
-//                   if (timeoutRef.current) clearTimeout(timeoutRef.current)
-//                   updateBorderPosition(item.href)
-//                   if (item.hasDropdown) setOpenDropdown(item.name)
-//                 }}
-//                 onMouseLeave={() => {
-//                   // Return border to current page
-//                   const currentNavItem = navigation.find(navItem => 
-//                     navItem.href === pathname || (navItem.hasDropdown && pathname.startsWith("/products"))
-//                   )
-//                   if (currentNavItem) {
-//                     updateBorderPosition(currentNavItem.href)
-//                   }
-                  
-//                   if (item.hasDropdown) {
-//                     timeoutRef.current = setTimeout(() => setOpenDropdown(null), 150)
-//                   }
-//                 }}
-//               >
-//                 {item.hasDropdown ? (
-//                   <DropdownMenu open={openDropdown === item.name}>
-//                     <DropdownMenuTrigger asChild>
-//                       <motion.button
-//                         ref={(el) => (navRefs.current[item.href] = el)}
-//                         className={cn(
-//                           "flex items-center gap-1 px-4 py-3 text-base font-medium rounded-lg transition-colors relative",
-//                           pathname.startsWith("/products") 
-//                             ? "text-blue-600 bg-blue-50" 
-//                             : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-//                         )}
-//                         whileHover={{ y: -1 }}
-//                         transition={{ duration: 0.2 }}
-//                       >
-//                         {item.name}
-//                         <motion.div
-//                           animate={{ rotate: openDropdown === item.name ? 180 : 0 }}
-//                           transition={{ duration: 0.2 }}
-//                         >
-//                           <ChevronDown className="h-5 w-5" />
-//                         </motion.div>
-//                       </motion.button>
-//                     </DropdownMenuTrigger>
-                    
-//                     <DropdownMenuContent
-//                       className="w-64 mt-2 bg-white border shadow-lg rounded-lg"
-//                       onMouseEnter={() => {
-//                         if (timeoutRef.current) clearTimeout(timeoutRef.current)
-//                         setOpenDropdown(item.name)
-//                       }}
-//                       onMouseLeave={() => {
-//                         timeoutRef.current = setTimeout(() => setOpenDropdown(null), 150)
-//                       }}
-//                     >
-//                       {item.dropdownItems?.map((dropdownItem) => (
-//                         <DropdownMenuItem key={dropdownItem.href} asChild>
-//                           <Link
-//                             href={dropdownItem.href}
-//                             className="block px-5 py-3 text-base text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-//                             onClick={() => setOpenDropdown(null)}
-//                           >
-//                             {dropdownItem.name}
-//                           </Link>
-//                         </DropdownMenuItem>
-//                       ))}
-//                     </DropdownMenuContent>
-//                   </DropdownMenu>
-//                 ) : (
-//                   <Link href={item.href}>
-//                     <motion.div
-//                       ref={(el) => (navRefs.current[item.href] = el)}
-//                       className={cn(
-//                         "px-4 py-3 text-base font-medium rounded-lg transition-colors relative",
-//                         pathname === item.href 
-//                           ? "text-blue-600 bg-blue-50" 
-//                           : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-//                       )}
-//                       whileHover={{ y: -1 }}
-//                       transition={{ duration: 0.2 }}
-//                     >
-//                       {item.name}
-//                     </motion.div>
-//                   </Link>
-//                 )}
-//               </div>
-//             ))}
-//           </nav>
-
-//           {/* Mobile Menu */}
-//           <DropdownMenu>
-//             <DropdownMenuTrigger asChild>
-//               <Button
-//                 variant="ghost"
-//                 size="lg"
-//                 className="md:hidden"
-//               >
-//                 <Menu className="h-6 w-6" />
-//               </Button>
-//             </DropdownMenuTrigger>
-//             <DropdownMenuContent 
-//               className="w-64 bg-white border shadow-lg rounded-lg"
-//               align="end"
-//             >
-//               {navigation.map((item) => (
-//                 <React.Fragment key={item.href}>
-//                   {item.hasDropdown ? (
-//                     item.dropdownItems?.map((dropdownItem) => (
-//                       <DropdownMenuItem key={dropdownItem.href} asChild>
-//                         <Link
-//                           href={dropdownItem.href}
-//                           className="block px-5 py-3 text-base text-gray-700 hover:bg-blue-50 hover:text-blue-600"
-//                         >
-//                           {dropdownItem.name}
-//                         </Link>
-//                       </DropdownMenuItem>
-//                     ))
-//                   ) : (
-//                     <DropdownMenuItem asChild>
-//                       <Link
-//                         href={item.href}
-//                         className="block px-5 py-3 text-base text-gray-700 hover:bg-blue-50 hover:text-blue-600"
-//                       >
-//                         {item.name}
-//                       </Link>
-//                     </DropdownMenuItem>
-//                   )}
-//                 </React.Fragment>
-//               ))}
-//             </DropdownMenuContent>
-//           </DropdownMenu>
-//         </div>
-//       </div>
-//     </motion.header>
-//   )
-// }
-
-
 "use client";
-
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -276,14 +10,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
 import Image from "next/image";
 import Logo from "@/assests/madhu.png";
 
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Products", href: "/products" },
+  {
+    name: "Products",
+    href: "/products",
+    hasDropdown: true,
+    dropdownItems: [
+      { name: "Mineral Water Plants", href: "/products/mineral-water-plants" },
+      { name: "RO Systems", href: "/products/ro-systems" },
+      { name: "Water Softeners", href: "/products/water-softeners" },
+      { name: "DM Plants", href: "/products/dm-plants" },
+      { name: "Filling Machines", href: "/products/filling-machines" },
+    ],
+  },
   { name: "Videos", href: "/videos" },
   { name: "Contact", href: "/contact" },
 ];
@@ -292,30 +37,50 @@ export function Navigation() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
+  const [showDropdown, setShowDropdown] = React.useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [capsuleStyle, setCapsuleStyle] = React.useState({
     width: 0,
     left: 0,
     opacity: 0,
   });
-  const navRefs = React.useRef<{ [key: string]: HTMLElement | null }>({});
+
+  const navContainerRef = React.useRef<HTMLDivElement>(null);
+  const navRefs = React.useRef<{ [key: string]: HTMLAnchorElement | null }>({});
+  const dropdownTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Initialize capsule position for active item
+  React.useEffect(() => {
+    const activeItem = navigation.find(item => 
+      item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
+    );
+    
+    if (activeItem && navRefs.current[activeItem.href]) {
+      updateCapsulePosition(activeItem.href);
+    }
+  }, [pathname]);
+
   const updateCapsulePosition = (href: string) => {
     const element = navRefs.current[href];
-    if (element) {
-      const rect = element.getBoundingClientRect();
+    const container = navContainerRef.current;
+    
+    if (element && container) {
+      const elementRect = element.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
       setCapsuleStyle({
-        width: rect.width,
-        left:
-          rect.left -
-          (element.parentElement?.getBoundingClientRect().left || 0),
+        width: elementRect.width + 16,
+        left: elementRect.left - containerRect.left - 8,
         opacity: 1,
       });
     }
@@ -324,114 +89,291 @@ export function Navigation() {
   const handleMouseEnter = (href: string) => {
     setHoveredItem(href);
     updateCapsulePosition(href);
+    
+    const item = navigation.find(nav => nav.href === href);
+    if (item?.hasDropdown) {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+      setShowDropdown(true);
+    }
   };
 
   const handleMouseLeave = () => {
-    setHoveredItem(null);
-    setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
+    const activeItem = navigation.find(item => 
+      item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
+    );
+    
+    if (activeItem) {
+      updateCapsulePosition(activeItem.href);
+      setHoveredItem(null);
+    } else {
+      setHoveredItem(null);
+      setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
+    }
+    
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setShowDropdown(false);
+    }, 200);
+  };
+
+  const handleDropdownMouseEnter = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setShowDropdown(true);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setShowDropdown(false);
+    }, 200);
+  };
+
+  const toggleMobileProducts = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMobileProductsOpen(!mobileProductsOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileProductsOpen(false);
   };
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-500",
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
-      )}
-    >
-      <div className="container flex h-20 items-center justify-between px-4 md:px-10">
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="h-16 w-auto">
-            <Image
-              src={Logo}
-              alt="Ma Aqua Industries Logo"
-              width={200}
-              height={300}
-              className="h-full w-auto object-contain"
-            />
-          </div>
-        </Link>
-        <nav className="hidden md:flex flex-1 items-center justify-end space-x-6 relative">
-          {/* Animated Capsule Background */}
-          <div
-            className="absolute h-10 bg-gradient-to-r from-blue-800/50 via-blue-600/50 to-blue-800/50 rounded-full transition-all duration-300 ease-out"
-            style={{
-              width: `${capsuleStyle.width}px`,
-              left: `${capsuleStyle.left}px`,
-              opacity: capsuleStyle.opacity,
-            }}
-          />
-
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              ref={(el) => (navRefs.current[item.href] = el)}
-              onMouseEnter={() => handleMouseEnter(item.href)}
-              onMouseLeave={handleMouseLeave}
-              className={cn(
-                "px-6 py-2 text-lg font-medium transition-all duration-300 rounded-full relative",
-                pathname === item.href
-                  ? "text-blue-600"
-                  : "text-black hover:text-blue-600"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="md:hidden text-black hover:text-blue-600"
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 bg-white text-black shadow-lg rounded-lg">
-            {navigation.map((item) => (
-              <DropdownMenuItem key={item.href} asChild>
-                <Link
-                  href={item.href}
-                  className="block px-4 py-2 text-sm hover:bg-blue-100 hover:text-blue-600 transition-colors"
-                >
-                  {item.name}
+    <>
+      <header
+        className={cn(
+          "fixed top-0 z-50 w-full transition-all duration-500",
+          isScrolled 
+            ? "bg-transparent backdrop-blur-md" 
+            : "bg-transparent"
+        )}
+      >
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex h-20 items-center justify-between">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center justify-center flex-1">
+              <div className="flex items-center bg-white/95 backdrop-blur-md rounded-full border border-gray-200/80 shadow-lg px-8 py-3 space-x-8 relative">
+                <Link href="/" className="flex items-center relative z-10">
+                  <div className="h-12 w-auto">
+                    <Image
+                      src={Logo || "/placeholder.svg"}
+                      alt="Ma Aqua Industries Logo"
+                      width={150}
+                      height={200}
+                      className="h-full w-auto object-contain"
+                    />
+                  </div>
                 </Link>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </header>
+
+                <nav 
+                  ref={navContainerRef}
+                  className="flex items-center space-x-2 relative"
+                >
+                  <div
+                    className="absolute h-10 bg-gradient-to-r from-blue-600/20 via-blue-500/30 to-blue-600/20 rounded-full transition-all duration-300 ease-out border border-blue-300/30 shadow-sm pointer-events-none"
+                    style={{
+                      width: `${capsuleStyle.width}px`,
+                      left: `${capsuleStyle.left}px`,
+                      opacity: capsuleStyle.opacity,
+                      transform: 'translateZ(0)',
+                    }}
+                  />
+                  
+                  {navigation.map((item) => (
+                    <div
+                      key={item.href}
+                      className="relative"
+                      onMouseEnter={() => handleMouseEnter(item.href)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      {item.hasDropdown ? (
+                        <>
+                          <Link
+                            href={item.href}
+                            ref={(el) => (navRefs.current[item.href] = el)}
+                            className={cn(
+                              "flex items-center gap-1 px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full relative z-10",
+                              pathname.startsWith("/products")
+                                ? "text-blue-600"
+                                : "text-gray-700 hover:text-blue-600"
+                            )}
+                          >
+                            {item.name}
+                            <ChevronDown 
+                              className={cn(
+                                "h-4 w-4 transition-transform duration-200",
+                                showDropdown && hoveredItem === item.href ? "rotate-180" : ""
+                              )}
+                            />
+                          </Link>
+                          
+                          {showDropdown && hoveredItem === item.href && (
+                            <div
+                              className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                              onMouseEnter={handleDropdownMouseEnter}
+                              onMouseLeave={handleMouseLeave}
+                            >
+                              <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white border-l border-t border-gray-200 rotate-45"></div>
+                              {item.dropdownItems?.map((dropdownItem) => (
+                                <Link
+                                  key={dropdownItem.href}
+                                  href={dropdownItem.href}
+                                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 mx-2 rounded-lg"
+                                  onClick={() => setShowDropdown(false)}
+                                >
+                                  {dropdownItem.name}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          ref={(el) => (navRefs.current[item.href] = el)}
+                          className={cn(
+                            "px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full relative z-10",
+                            pathname === item.href
+                              ? "text-blue-600"
+                              : "text-gray-700 hover:text-blue-600"
+                          )}
+                        >
+                          {item.name}
+                        </Link>
+                      )}
+                    </div>
+                  ))}
+                </nav>
+              </div>
+            </div>
+
+            {/* Mobile Logo */}
+            <Link href="/" className="flex md:hidden items-center">
+              <div className="h-12 w-auto">
+                <Image
+                  src={Logo || "/placeholder.svg"}
+                  alt="Ma Aqua Industries Logo"
+                  width={120}
+                  height={150}
+                  className="h-full w-auto object-contain"
+                />
+              </div>
+            </Link>
+
+            {/* Mobile Menu with Click-based Products Dropdown */}
+            <div className="relative md:hidden">
+              <DropdownMenu open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="text-gray-700 hover:text-blue-600 border-gray-300 hover:border-blue-300"
+                  >
+                    <Menu className="h-6 w-6" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent 
+                  className="w-64 bg-white shadow-xl rounded-lg border border-gray-200 max-h-96 overflow-y-auto"
+                  align="end"
+                  side="bottom"
+                >
+                  {navigation.map((item) => (
+                    <div key={item.href}>
+                      {item.hasDropdown ? (
+                        <>
+                          {/* Products Main Item - Click to toggle dropdown */}
+                          <DropdownMenuItem asChild>
+                            <button
+                              className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-gray-900 hover:bg-blue-50 hover:text-blue-600 transition-colors text-left"
+                              onClick={toggleMobileProducts}
+                            >
+                              {item.name}
+                              <ChevronDown 
+                                className={cn(
+                                  "h-4 w-4 transition-transform duration-200",
+                                  mobileProductsOpen ? "rotate-180" : ""
+                                )}
+                              />
+                            </button>
+                          </DropdownMenuItem>
+                          
+                          {/* Products Submenu */}
+                          {mobileProductsOpen && (
+                            <div className="bg-gray-50 border-l-2 border-blue-200 ml-4">
+                              {/* Main Products Page Link */}
+                              <DropdownMenuItem asChild>
+                                <Link
+                                  href={item.href}
+                                  className="block px-4 py-3 text-sm font-medium text-blue-600 hover:bg-blue-50 transition-colors"
+                                  onClick={closeMobileMenu}
+                                >
+                                  All Products
+                                </Link>
+                              </DropdownMenuItem>
+                              {/* Individual Product Categories */}
+                              {item.dropdownItems?.map((dropdownItem) => (
+                                <DropdownMenuItem key={dropdownItem.href} asChild>
+                                  <Link
+                                    href={dropdownItem.href}
+                                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                                    onClick={closeMobileMenu}
+                                  >
+                                    {dropdownItem.name}
+                                  </Link>
+                                </DropdownMenuItem>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href={item.href}
+                            className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors w-full"
+                            onClick={closeMobileMenu}
+                          >
+                            {item.name}
+                          </Link>
+                        </DropdownMenuItem>
+                      )}
+                    </div>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
   );
 }
 
 export default function HomePage() {
   return (
     <div className="relative min-h-screen">
-      {/* Navigation Bar */}
       <Navigation />
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60" />
-        <div className="container relative z-10 text-white text-center">
-          <h1 className="text-5xl font-bold mb-4">
+      
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40" />
+        <div className="container relative z-10 text-white text-center px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
             Pure Water, <br />
             Clean Future
           </h1>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed opacity-90">
             Leading manufacturer of water treatment and purification systems,
             serving industries across India with innovative solutions.
           </p>
-          <div className="flex justify-center space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/products">
-              <Button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 text-lg transition-all duration-300 hover:scale-105 rounded-full">
+              <Button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 text-lg transition-all duration-300 hover:scale-105 rounded-full shadow-lg hover:shadow-xl">
                 Our Products
               </Button>
             </Link>
             <Link href="/contact">
-              <Button className="bg-transparent border border-white hover:bg-white hover:text-black px-8 py-4 text-lg transition-all duration-300 hover:scale-105 rounded-full">
+              <Button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-800 px-8 py-4 text-lg transition-all duration-300 hover:scale-105 rounded-full">
                 Contact Us
               </Button>
             </Link>
