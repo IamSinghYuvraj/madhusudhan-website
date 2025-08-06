@@ -100,6 +100,8 @@ export function Navigation() {
   };
 
   const handleMouseLeave = () => {
+  // Longer delay to allow cursor movement to dropdown
+  dropdownTimeoutRef.current = setTimeout(() => {
     const activeItem = navigation.find(item => 
       item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
     );
@@ -111,24 +113,36 @@ export function Navigation() {
       setHoveredItem(null);
       setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
     }
-    
-    dropdownTimeoutRef.current = setTimeout(() => {
-      setShowDropdown(false);
-    }, 200);
-  };
+    setShowDropdown(false);
+  }, 300); // Increased delay
+};
 
   const handleDropdownMouseEnter = () => {
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current);
-    }
-    setShowDropdown(true);
-  };
+  if (dropdownTimeoutRef.current) {
+    clearTimeout(dropdownTimeoutRef.current);
+  }
+  setShowDropdown(true);
+  // Keep the Products item highlighted when in dropdown
+  setHoveredItem('/products');
+  updateCapsulePosition('/products');
+};
 
   const handleDropdownMouseLeave = () => {
-    dropdownTimeoutRef.current = setTimeout(() => {
-      setShowDropdown(false);
-    }, 200);
-  };
+  dropdownTimeoutRef.current = setTimeout(() => {
+    setShowDropdown(false);
+    const activeItem = navigation.find(item => 
+      item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
+    );
+    
+    if (activeItem) {
+      updateCapsulePosition(activeItem.href);
+      setHoveredItem(null);
+    } else {
+      setHoveredItem(null);
+      setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
+    }
+  }, 300);
+};
 
   const toggleMobileProducts = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -212,17 +226,22 @@ export function Navigation() {
                           
                           {showDropdown && hoveredItem === item.href && (
                             <div
-                              className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
+                              className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 w-64 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50"
                               onMouseEnter={handleDropdownMouseEnter}
-                              onMouseLeave={handleMouseLeave}
+                              onMouseLeave={handleDropdownMouseLeave}
                             >
                               <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white border-l border-t border-gray-200 rotate-45"></div>
                               {item.dropdownItems?.map((dropdownItem) => (
                                 <Link
                                   key={dropdownItem.href}
                                   href={dropdownItem.href}
-                                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 mx-2 rounded-lg"
+                                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 mx-2 rounded-lg relative"
                                   onClick={() => setShowDropdown(false)}
+                                  onMouseEnter={() => {
+                                    // Keep dropdown open and maintain Products highlight
+                                    setHoveredItem('/products');
+                                    updateCapsulePosition('/products');
+                                  }}
                                 >
                                   {dropdownItem.name}
                                 </Link>
