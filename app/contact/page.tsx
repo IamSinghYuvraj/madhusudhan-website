@@ -153,34 +153,35 @@ export default function ContactPage() {
   };
 
   return (
+    <>
       <section className="py-16 flex justify-center items-center bg-gradient-to-b from-background to-muted/20">
-      {/* Notification */}
-      {notification.show && (
-        <div
-          className={`
-            fixed top-4 right-4 z-50 p-4 rounded-lg shadow-2xl flex items-center max-w-md
-            animate-in slide-in-from-right-4 duration-500
-            ${
-              notification.type === "success"
-                ? "bg-green-500 text-white shadow-green-500/30"
-                : "bg-red-500 text-white shadow-red-500/30"
-            }
-          `}
-        >
-          {notification.type === "success" ? (
-            <CheckCircle className="mr-3 h-5 w-5 animate-bounce" />
-          ) : (
-            <X className="mr-3 h-5 w-5 animate-pulse" />
-          )}
-          <span className="flex-grow text-sm font-medium">{notification.message}</span>
-          <button
-            onClick={closeNotification}
-            className="ml-4 hover:bg-white/20 rounded-full p-1 transition-all duration-200 hover:scale-110 hover:rotate-90"
+        {/* Notification */}
+        {notification.show && (
+          <div
+            className={`
+              fixed top-4 right-4 z-50 p-4 rounded-lg shadow-2xl flex items-center max-w-md
+              animate-in slide-in-from-right-4 duration-500
+              ${
+                notification.type === "success"
+                  ? "bg-green-500 text-white shadow-green-500/30"
+                  : "bg-red-500 text-white shadow-red-500/30"
+              }
+            `}
           >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-      )}
+            {notification.type === "success" ? (
+              <CheckCircle className="mr-3 h-5 w-5 animate-bounce" />
+            ) : (
+              <X className="mr-3 h-5 w-5 animate-pulse" />
+            )}
+            <span className="flex-grow text-sm font-medium">{notification.message}</span>
+            <button
+              onClick={closeNotification}
+              className="ml-4 hover:bg-white/20 rounded-full p-1 transition-all duration-200 hover:scale-110 hover:rotate-90"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        )}
 
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-3">
@@ -246,7 +247,7 @@ export default function ContactPage() {
     <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
       Send us a message
     </h2>
-    <p className="text-muted-foreground mb-8">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+    <p className="text-muted-foreground mb-8">We&#39;d love to hear from you. Send us a message and we&#39;ll respond as soon as possible.</p>
     
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid gap-6 sm:grid-cols-2">
