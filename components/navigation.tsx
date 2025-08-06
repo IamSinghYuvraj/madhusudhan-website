@@ -50,48 +50,62 @@ export function Navigation() {
   const navContainerRef = React.useRef<HTMLDivElement>(null);
   const navRefs = React.useRef<{ [key: string]: HTMLAnchorElement | null }>({});
   const dropdownTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const positionTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Set active item based on current pathname
   React.useEffect(() => {
-    const activeItem = navigation.find(item => 
+    const activeItem = navigation.find(item =>
       item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
     );
     
     if (activeItem) {
       setActiveItemHref(activeItem.href);
-      if (navRefs.current[activeItem.href] && !hoveredItem) {
-        updateCapsulePosition(activeItem.href);
+      // Only update position if not currently hovering
+      if (!hoveredItem) {
+        // Use a small delay to ensure DOM is ready
+        setTimeout(() => {
+          updateCapsulePosition(activeItem.href);
+        }, 50);
       }
     }
   }, [pathname, hoveredItem]);
 
-  const updateCapsulePosition = (href: string) => {
+  const updateCapsulePosition = React.useCallback((href: string) => {
     const element = navRefs.current[href];
     const container = navContainerRef.current;
     
     if (element && container) {
-      const elementRect = element.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-      
-      setCapsuleStyle({
-        width: elementRect.width + 16,
-        left: elementRect.left - containerRect.left - 8,
-        opacity: 1,
+      // Use requestAnimationFrame for smooth animation
+      requestAnimationFrame(() => {
+        const elementRect = element.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        setCapsuleStyle({
+          width: elementRect.width + 16,
+          left: elementRect.left - containerRect.left - 8,
+          opacity: 1,
+        });
       });
     }
-  };
+  }, []);
 
-  const handleMouseEnter = (href: string) => {
+  const handleMouseEnter = React.useCallback((href: string) => {
+    // Clear any pending position updates
+    if (positionTimeoutRef.current) {
+      clearTimeout(positionTimeoutRef.current);
+    }
+    
     setHoveredItem(href);
+    
+    // Update position immediately for responsive feel
     updateCapsulePosition(href);
     
     const item = navigation.find(nav => nav.href === href);
@@ -101,54 +115,78 @@ export function Navigation() {
       }
       setShowDropdown(true);
     }
-  };
+  }, [updateCapsulePosition]);
 
-  const handleMouseLeave = () => {
-    // Clear the hovered item and return to active position
-    setHoveredItem(null);
+  const handleMouseLeave = React.useCallback(() => {
+    // Don't immediately clear hover state, use a small delay
+    positionTimeoutRef.current = setTimeout(() => {
+      setHoveredItem(null);
+      
+      // Return capsule to active item position
+      if (activeItemHref && navRefs.current[activeItemHref]) {
+        updateCapsulePosition(activeItemHref);
+      } else {
+        setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
+      }
+    }, 50);
     
-    // Return capsule to active item position
-    if (activeItemHref && navRefs.current[activeItemHref]) {
-      updateCapsulePosition(activeItemHref);
-    } else {
-      setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
-    }
-    
-    // Handle dropdown closing
+    // Handle dropdown closing with longer delay
     dropdownTimeoutRef.current = setTimeout(() => {
       setShowDropdown(false);
     }, 300);
-  };
+  }, [activeItemHref, updateCapsulePosition]);
 
-  const handleDropdownMouseEnter = () => {
+  const handleNavContainerMouseLeave = React.useCallback(() => {
+    // Only trigger leave if we're actually leaving the nav container
+    positionTimeoutRef.current = setTimeout(() => {
+      setHoveredItem(null);
+      
+      if (activeItemHref && navRefs.current[activeItemHref]) {
+        updateCapsulePosition(activeItemHref);
+      } else {
+        setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
+      }
+    }, 100);
+  }, [activeItemHref, updateCapsulePosition]);
+
+  const handleNavContainerMouseEnter = React.useCallback(() => {
+    // Cancel any pending leave actions when re-entering
+    if (positionTimeoutRef.current) {
+      clearTimeout(positionTimeoutRef.current);
+    }
+  }, []);
+
+  const handleDropdownMouseEnter = React.useCallback(() => {
     if (dropdownTimeoutRef.current) {
       clearTimeout(dropdownTimeoutRef.current);
     }
+    if (positionTimeoutRef.current) {
+      clearTimeout(positionTimeoutRef.current);
+    }
+    
     setShowDropdown(true);
-    // Keep the Products item highlighted when in dropdown
     setHoveredItem('/products');
     updateCapsulePosition('/products');
-  };
+  }, [updateCapsulePosition]);
 
-  const handleDropdownMouseLeave = () => {
+  const handleDropdownMouseLeave = React.useCallback(() => {
     dropdownTimeoutRef.current = setTimeout(() => {
       setShowDropdown(false);
-      // Return to active position when leaving dropdown
       setHoveredItem(null);
+      
       if (activeItemHref && navRefs.current[activeItemHref]) {
         updateCapsulePosition(activeItemHref);
       } else {
         setCapsuleStyle((prev) => ({ ...prev, opacity: 0 }));
       }
     }, 300);
-  };
+  }, [activeItemHref, updateCapsulePosition]);
 
-  const handleNavClick = (href: string) => {
-    // Update the active position when a nav item is clicked
+  const handleNavClick = React.useCallback((href: string) => {
     setActiveItemHref(href);
     setShowDropdown(false);
     setHoveredItem(null);
-  };
+  }, []);
 
   const toggleMobileProducts = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -161,13 +199,25 @@ export function Navigation() {
     setMobileProductsOpen(false);
   };
 
+  // Cleanup timeouts on unmount
+  React.useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+      if (positionTimeoutRef.current) {
+        clearTimeout(positionTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <header
         className={cn(
           "fixed top-0 z-50 w-full transition-all duration-500",
           isScrolled 
-            ? "bg-transparent backdrop-blur-md" 
+            ? "bg-transparent backdrop-blur-md"
             : "bg-transparent"
         )}
       >
@@ -177,7 +227,7 @@ export function Navigation() {
             <div className="hidden md:flex items-center justify-center flex-1">
               <div className="flex items-center bg-white/95 backdrop-blur-md rounded-full border border-gray-200/80 shadow-lg px-8 py-3 space-x-8 relative">
                 <Link 
-                  href="/" 
+                  href="/"
                   className="flex items-center relative z-10"
                   onClick={() => handleNavClick("/")}
                 >
@@ -195,7 +245,10 @@ export function Navigation() {
                 <nav 
                   ref={navContainerRef}
                   className="flex items-center space-x-2 relative"
+                  onMouseEnter={handleNavContainerMouseEnter}
+                  onMouseLeave={handleNavContainerMouseLeave}
                 >
+                  {/* Animated Capsule */}
                   <div
                     className="absolute h-10 bg-gradient-to-r from-blue-600/20 via-blue-500/30 to-blue-600/20 rounded-full transition-all duration-300 ease-out border border-blue-300/30 shadow-sm pointer-events-none"
                     style={{
@@ -203,6 +256,7 @@ export function Navigation() {
                       left: `${capsuleStyle.left}px`,
                       opacity: capsuleStyle.opacity,
                       transform: 'translateZ(0)',
+                      willChange: 'transform, width, left, opacity',
                     }}
                   />
                   
@@ -211,7 +265,6 @@ export function Navigation() {
                       key={item.href}
                       className="relative"
                       onMouseEnter={() => handleMouseEnter(item.href)}
-                      onMouseLeave={handleMouseLeave}
                     >
                       {item.hasDropdown ? (
                         <>
@@ -248,13 +301,8 @@ export function Navigation() {
                                   href={dropdownItem.href}
                                   className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 mx-2 rounded-lg relative"
                                   onClick={() => {
-                                    handleNavClick(item.href); // Keep Products as active when clicking sub-items
+                                    handleNavClick(item.href);
                                     setShowDropdown(false);
-                                  }}
-                                  onMouseEnter={() => {
-                                    // Keep dropdown open and maintain Products highlight
-                                    setHoveredItem('/products');
-                                    updateCapsulePosition('/products');
                                   }}
                                 >
                                   {dropdownItem.name}
@@ -297,7 +345,7 @@ export function Navigation() {
               </div>
             </Link>
 
-            {/* Mobile Menu with Click-based Products Dropdown */}
+            {/* Mobile Menu */}
             <div className="relative md:hidden">
               <DropdownMenu open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <DropdownMenuTrigger asChild>
@@ -317,7 +365,6 @@ export function Navigation() {
                     <div key={item.href}>
                       {item.hasDropdown ? (
                         <>
-                          {/* Products Main Item - Click to toggle dropdown */}
                           <DropdownMenuItem asChild>
                             <button
                               className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-gray-900 hover:bg-blue-50 hover:text-blue-600 transition-colors text-left"
@@ -333,10 +380,8 @@ export function Navigation() {
                             </button>
                           </DropdownMenuItem>
                           
-                          {/* Products Submenu */}
                           {mobileProductsOpen && (
                             <div className="bg-gray-50 border-l-2 border-blue-200 ml-4">
-                              {/* Main Products Page Link */}
                               <DropdownMenuItem asChild>
                                 <Link
                                   href={item.href}
@@ -346,7 +391,6 @@ export function Navigation() {
                                   All Products
                                 </Link>
                               </DropdownMenuItem>
-                              {/* Individual Product Categories */}
                               {item.dropdownItems?.map((dropdownItem) => (
                                 <DropdownMenuItem key={dropdownItem.href} asChild>
                                   <Link

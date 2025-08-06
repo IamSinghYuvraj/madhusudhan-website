@@ -52,7 +52,7 @@ export function ClientLogos() {
       <div className="container">
         <h2 className="text-center text-3xl font-bold">Our Trusted Clients</h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          We are proud to serve some of India's largest companies with our water
+          We are proud to serve some of India&apos;s largest companies with our water
           treatment solutions
         </p>
 
