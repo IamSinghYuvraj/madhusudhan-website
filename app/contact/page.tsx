@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CheckCircle, X, Loader2, Mail, MapPin, Phone } from "lucide-react";
+import { CheckCircle, X, Loader2, Mail, MapPin, Phone, AlertCircle } from "lucide-react";
 
 interface FormData {
   name: string;
@@ -24,7 +24,7 @@ interface TouchedState {
 }
 
 interface Notification {
-  type: "success" | "error";
+  type: "success" | "error" | "warning";
   message: string;
   show: boolean;
 }
@@ -72,42 +72,56 @@ export default function ContactPage() {
 
   const validateForm = (): boolean => {
     const { name, email, phone, message } = formData;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
     return (
       name.trim() !== "" &&
-      email.trim() !== "" &&
+      emailRegex.test(email.trim()) &&
       phone.length === 10 &&
       message.trim() !== ""
     );
   };
 
+  const showNotification = (type: "success" | "error" | "warning", message: string) => {
+    setNotification({ type, message, show: true });
+    setTimeout(() => {
+      setNotification((prev) => ({ ...prev, show: false }));
+    }, 5000);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     
+    // Mark all fields as touched for validation display
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+      message: true,
+    });
+
     if (!validateForm()) {
-      setNotification({
-        type: "error",
-        message: "Please fill in all required fields correctly.",
-        show: true,
-      });
-      setTimeout(() => {
-        setNotification((prev) => ({ ...prev, show: false }));
-      }, 3000);
+      showNotification("error", "Please fill in all required fields correctly.");
       return;
     }
 
     setIsSubmitting(true);
+    
     try {
-      await submitContactForm(formData);
-      setNotification({
-        type: "success",
-        message: "Message sent successfully! We'll get back to you soon.",
-        show: true,
-      });
-      setTimeout(() => {
-        setNotification((prev) => ({ ...prev, show: false }));
-      }, 3000);
+      const result = await submitContactForm(formData);
       
-      // Reset form
+      // If result is a boolean, show a default message; if it's an object with message, use that
+      const successMessage =
+        typeof result === "object" && result !== null && "message" in result
+          ? (result as { message: string }).message
+          : "Message sent successfully! We'll get back to you soon.";
+
+      showNotification(
+        "success", 
+        successMessage
+      );
+      
+      // Reset form on success
       setFormData({
         name: "",
         email: "",
@@ -122,14 +136,12 @@ export default function ContactPage() {
       });
     } catch (error) {
       console.error("Error sending message:", error);
-      setNotification({
-        type: "error",
-        message: "Failed to send message. Please try again.",
-        show: true,
-      });
-      setTimeout(() => {
-        setNotification((prev) => ({ ...prev, show: false }));
-      }, 3000);
+      
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : "Failed to send message. Please try again or contact us directly.";
+      
+      showNotification("error", errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -138,11 +150,20 @@ export default function ContactPage() {
   const getInputClassName = (field: keyof FormData): string => {
     const baseClass = "transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:border-primary focus:scale-[1.02] hover:border-primary/50 focus:shadow-lg focus:shadow-primary/10";
     const isFieldTouched = touched[field];
-    const isFieldInvalid = 
-      (field === "phone" && formData.phone.length !== 10) ||
-      (field !== "phone" && !formData[field].trim());
+    let isFieldInvalid = false;
+
+    if (isFieldTouched) {
+      if (field === "phone") {
+        isFieldInvalid = formData.phone.length !== 10;
+      } else if (field === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        isFieldInvalid = !emailRegex.test(formData.email.trim());
+      } else {
+        isFieldInvalid = !formData[field].trim();
+      }
+    }
     
-    const errorClass = isFieldTouched && isFieldInvalid ? "border-red-500 animate-pulse" : "";
+    const errorClass = isFieldInvalid ? "border-red-500 ring-red-500/20" : "";
     
     return `${baseClass} ${errorClass}`;
   };
@@ -151,26 +172,40 @@ export default function ContactPage() {
     setNotification((prev) => ({ ...prev, show: false }));
   };
 
+  const getNotificationIcon = () => {
+    switch (notification.type) {
+      case "success":
+        return <CheckCircle className="mr-3 h-5 w-5 animate-bounce" />;
+      case "warning":
+        return <AlertCircle className="mr-3 h-5 w-5 animate-pulse" />;
+      default:
+        return <X className="mr-3 h-5 w-5 animate-pulse" />;
+    }
+  };
+
+  const getNotificationColors = () => {
+    switch (notification.type) {
+      case "success":
+        return "bg-green-500 text-white shadow-green-500/30";
+      case "warning":
+        return "bg-yellow-500 text-white shadow-yellow-500/30";
+      default:
+        return "bg-red-500 text-white shadow-red-500/30";
+    }
+  };
+
   return (
     <section className="py-16 flex justify-center items-center bg-gradient-to-b from-background to-muted/20">
-      {/* Notification */}
+      {/* Enhanced Notification */}
       {notification.show && (
         <div
           className={`
             fixed top-4 right-4 z-50 p-4 rounded-lg shadow-2xl flex items-center max-w-md
             animate-in slide-in-from-right-4 duration-500
-            ${
-              notification.type === "success"
-                ? "bg-green-500 text-white shadow-green-500/30"
-                : "bg-red-500 text-white shadow-red-500/30"
-            }
+            ${getNotificationColors()}
           `}
         >
-          {notification.type === "success" ? (
-            <CheckCircle className="mr-3 h-5 w-5 animate-bounce" />
-          ) : (
-            <X className="mr-3 h-5 w-5 animate-pulse" />
-          )}
+          {getNotificationIcon()}
           <span className="flex-grow text-sm font-medium">{notification.message}</span>
           <button
             onClick={closeNotification}
@@ -268,7 +303,7 @@ export default function ContactPage() {
                       required
                       className={getInputClassName("name")}
                       placeholder="Your full name"
-                      aria-describedby="name-error"
+                      disabled={isSubmitting}
                     />
                   </div>
                   
@@ -285,7 +320,7 @@ export default function ContactPage() {
                       required
                       className={getInputClassName("email")}
                       placeholder="your.email@example.com"
-                      aria-describedby="email-error"
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -305,7 +340,7 @@ export default function ContactPage() {
                     className={getInputClassName("phone")}
                     maxLength={10}
                     pattern="[0-9]{10}"
-                    aria-describedby="phone-error"
+                    disabled={isSubmitting}
                   />
                 </div>
                 
@@ -321,14 +356,14 @@ export default function ContactPage() {
                     required
                     className={`min-h-[150px] resize-none ${getInputClassName("message")}`}
                     placeholder="Tell us about your inquiry..."
-                    aria-describedby="message-error"
+                    disabled={isSubmitting}
                   />
                 </div>
                 
                 <Button
                   type="submit"
                   className="w-full h-12 text-base font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/30 disabled:opacity-50 disabled:cursor-not-allowed group"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !validateForm()}
                 >
                   {isSubmitting ? (
                     <>
@@ -357,6 +392,16 @@ export default function ContactPage() {
                 title="Madhusudan Aqua Industries Location"
               />
             </div>
+          </div>
+        </div>
+
+        {/* Emergency Contact Info */}
+        <div className="mt-12 text-center">
+          <div className="inline-flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
+            <Phone className="h-4 w-4 text-primary" />
+            <span className="text-sm text-primary font-medium">
+              For urgent inquiries: <a href="tel:+919820142424" className="underline hover:no-underline">+91 9820142424</a>
+            </span>
           </div>
         </div>
       </div>
