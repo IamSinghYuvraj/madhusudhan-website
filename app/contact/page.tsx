@@ -1,4 +1,4 @@
-// app/contact/page.tsx - Enhanced with WhatsApp handling
+// app/contact/page.tsx - Clean contact form without WhatsApp mentions
 "use client";
 
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CheckCircle, X, Loader2, Mail, MapPin, Phone, AlertCircle, MessageCircle } from "lucide-react";
+import { CheckCircle, X, Loader2, Mail, MapPin, Phone, AlertCircle, Send } from "lucide-react";
 
 interface FormData {
   name: string;
@@ -30,11 +30,6 @@ interface Notification {
   show: boolean;
 }
 
-interface WhatsAppURL {
-  phone: string;
-  url: string;
-}
-
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [notification, setNotification] = useState<Notification>({
@@ -42,8 +37,6 @@ export default function ContactPage() {
     message: "",
     show: false,
   });
-  const [whatsappURLs, setWhatsappURLs] = useState<WhatsAppURL[]>([]);
-  const [showWhatsAppOptions, setShowWhatsAppOptions] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -93,25 +86,7 @@ export default function ContactPage() {
     setNotification({ type, message, show: true });
     setTimeout(() => {
       setNotification((prev) => ({ ...prev, show: false }));
-    }, 8000); // Longer timeout for WhatsApp messages
-  };
-
-  // Function to open WhatsApp URLs
-  const openWhatsAppURL = (url: string, phone: string) => {
-    window.open(url, '_blank');
-    showNotification("success", `Opening WhatsApp for business number ${phone.slice(-4)}...`);
-  };
-
-  // Function to open all WhatsApp URLs at once
-  const openAllWhatsAppURLs = () => {
-    whatsappURLs.forEach(({ url, phone }, index) => {
-      setTimeout(() => {
-        window.open(url, '_blank');
-      }, index * 1000); // 1 second delay between each
-    });
-    
-    showNotification("success", `Opening WhatsApp for all ${whatsappURLs.length} business numbers...`);
-    setShowWhatsAppOptions(false);
+    }, 8000);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -130,56 +105,49 @@ export default function ContactPage() {
     }
 
     setIsSubmitting(true);
-    setWhatsappURLs([]);
-    setShowWhatsAppOptions(false);
     
     try {
       const result = await submitContactForm(formData);
       
-      // Handle WhatsApp URLs if returned
-      if (result && typeof result === "object" && "whatsappURLs" in result) {
-        const urls = result.whatsappURLs as WhatsAppURL[];
-        if (urls && urls.length > 0) {
-          setWhatsappURLs(urls);
-          setShowWhatsAppOptions(true);
+      let notificationType: "success" | "warning" | "error" = "success";
+      let message = "Thank you for your message! We'll get back to you soon.";
+
+      // Handle different response scenarios
+      if (result && typeof result === "object") {
+        if ("success" in result) {
+          if (result.success) {
+            message = "Your query has been sent successfully! We'll contact you shortly.";
+          } else {
+            message = "Message received! We'll get back to you as soon as possible.";
+            notificationType = "warning";
+          }
         }
       }
 
-      const successMessage =
-        typeof result === "object" && result !== null && "message" in result
-          ? (result as { message: string }).message
-          : "Message sent successfully! We'll get back to you soon.";
-
-      showNotification("success", successMessage);
+      showNotification(notificationType, message);
       
       // Reset form on success
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-      setTouched({
-        name: false,
-        email: false,
-        phone: false,
-        message: false,
-      });
-      
-      // Auto-open WhatsApp URLs after a short delay
-      if (whatsappURLs.length > 0) {
-        setTimeout(() => {
-          showNotification("success", "Opening WhatsApp to notify our team...");
-          openAllWhatsAppURLs();
-        }, 2000);
+      if (notificationType !== "error") {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+        setTouched({
+          name: false,
+          email: false,
+          phone: false,
+          message: false,
+        });
       }
       
     } catch (error) {
       console.error("Error sending message:", error);
       
       const errorMessage = error instanceof Error 
-        ? error.message 
-        : "Failed to send message. Please try again or contact us directly.";
+        ? "Failed to send your message. Please try again or contact us directly."
+        : "An error occurred. Please try again or contact us directly.";
       
       showNotification("error", errorMessage);
     } finally {
@@ -257,53 +225,6 @@ export default function ContactPage() {
         </div>
       )}
 
-      {/* WhatsApp Options Modal */}
-      {showWhatsAppOptions && whatsappURLs.length > 0 && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-md p-6 bg-white animate-in zoom-in-95 duration-300">
-            <div className="text-center mb-6">
-              <MessageCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
-              <h3 className="text-lg font-semibold mb-2">WhatsApp Notifications</h3>
-              <p className="text-sm text-muted-foreground">
-                Your message will be sent to our business WhatsApp numbers
-              </p>
-            </div>
-            
-            <div className="space-y-3 mb-6">
-              <Button
-                onClick={openAllWhatsAppURLs}
-                className="w-full bg-green-500 hover:bg-green-600 text-white"
-              >
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Send to All ({whatsappURLs.length} numbers)
-              </Button>
-              
-              <div className="text-center text-sm text-muted-foreground">or send individually:</div>
-              
-              {whatsappURLs.map(({ phone, url }, index) => (
-                <Button
-                  key={phone}
-                  onClick={() => openWhatsAppURL(url, phone)}
-                  variant="outline"
-                  className="w-full justify-start hover:bg-green-50 hover:border-green-300"
-                >
-                  <MessageCircle className="mr-2 h-4 w-4 text-green-500" />
-                  Business Number {index + 1} (***{phone.slice(-4)})
-                </Button>
-              ))}
-            </div>
-            
-            <Button
-              onClick={() => setShowWhatsAppOptions(false)}
-              variant="ghost"
-              className="w-full"
-            >
-              Close
-            </Button>
-          </Card>
-        </div>
-      )}
-
       <div className="container mx-auto px-4">
         {/* Contact Information Cards */}
         <div className="grid gap-8 lg:grid-cols-3">
@@ -370,10 +291,10 @@ export default function ContactPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 rounded-lg pointer-events-none"></div>
             <div className="relative">
               <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                Send us a message
+                Get in Touch
               </h2>
-              <p className="text-muted-foreground mb-8">
-                We&apos;d love to hear from you. Send us a message and we&apos;ll respond via WhatsApp as soon as possible.
+              <p className="text-muted-foreground mb-6">
+                We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
               </p>
               
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
@@ -455,21 +376,21 @@ export default function ContactPage() {
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      <span className="animate-pulse">Sending to WhatsApp...</span>
+                      <span className="animate-pulse">Sending Message...</span>
                     </>
                   ) : (
                     <>
-                      <MessageCircle className="mr-2 h-5 w-5" />
-                      <span className="group-hover:animate-pulse">Send via WhatsApp</span>
+                      <Send className="mr-2 h-5 w-5" />
+                      <span className="group-hover:animate-pulse">Send Message</span>
                     </>
                   )}
                 </Button>
 
-                {/* WhatsApp Info */}
-                <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
-                  <div className="flex items-center justify-center text-green-700 text-sm">
-                    <MessageCircle className="h-4 w-4 mr-2" />
-                    Your message will be sent directly to our WhatsApp business numbers
+                {/* Simple contact info */}
+                <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="flex items-center justify-center text-blue-700 text-sm">
+                    <Mail className="h-4 w-4 mr-2" />
+                    We'll respond to your message within 24 hours
                   </div>
                 </div>
               </form>
@@ -493,29 +414,32 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Emergency Contact Info with WhatsApp */}
+        {/* Emergency Contact Info */}
         <div className="mt-12 text-center">
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
             <div className="inline-flex items-center space-x-2 bg-primary/10 px-4 py-2 rounded-full">
               <Phone className="h-4 w-4 text-primary" />
               <span className="text-sm text-primary font-medium">
-                For urgent calls: <a href="tel:+919820142424" className="underline hover:no-underline">+91 9820142424</a>
+                For urgent inquiries: <a href="tel:+919820142424" className="underline hover:no-underline">+91 9820142424</a>
               </span>
             </div>
             
-            <div className="inline-flex items-center space-x-2 bg-green-100 px-4 py-2 rounded-full">
-              <MessageCircle className="h-4 w-4 text-green-600" />
-              <span className="text-sm text-green-700 font-medium">
-                WhatsApp: <a 
-                  href="https://wa.me/919820142424" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+            <div className="inline-flex items-center space-x-2 bg-blue-100 px-4 py-2 rounded-full">
+              <Mail className="h-4 w-4 text-blue-600" />
+              <span className="text-sm text-blue-700 font-medium">
+                Email: <a 
+                  href="mailto:madhusudanaquaind@gmail.com" 
                   className="underline hover:no-underline"
                 >
-                  +91 9820142424
+                  madhusudanaqua.ind@gmail.com
                 </a>
               </span>
             </div>
+          </div>
+
+          {/* Simple footer */}
+          <div className="mt-6 text-xs text-muted-foreground">
+            <p>We value your privacy and will never share your information with third parties.</p>
           </div>
         </div>
       </div>
