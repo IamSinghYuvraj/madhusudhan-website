@@ -9,11 +9,13 @@ import WhatsAppChat from "@/components/whatsapp-chat";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Maia Aqua Industries - Water Treatment Solutions",
+  title: "Madhusudan Aqua Industries",
   description:
     "Leading manufacturer of water treatment and purification systems in India",
   icons: {
-    icon: "/madhusudan_icon.png", // Path to the favicon in the public directory
+    icon: [
+      { url: "/favicon.ico" },
+    ]
   },
 };
 
@@ -24,6 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
