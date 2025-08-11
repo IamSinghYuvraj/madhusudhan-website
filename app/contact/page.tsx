@@ -127,7 +127,9 @@ export default function ContactPage() {
       showNotification(notificationType, message);
       
       // Reset form on success
-      if (notificationType !== "error") {
+    // ...existing code...
+      // Reset form on success
+      if (notificationType === "success" || notificationType === "warning") {
         setFormData({
           name: "",
           email: "",
