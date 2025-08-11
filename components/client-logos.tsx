@@ -17,7 +17,6 @@ const clients = [
   { logo: MANTRA },
   { logo: BISLERI },
   { logo: BAILEY },
-  { logo: AQUAFINA },
   { logo: MCD },
   { logo: O2RISE },
   { logo: ROYAL },
