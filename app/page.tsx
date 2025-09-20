@@ -211,11 +211,11 @@ Today, we continue to push boundaries, developing cutting-edge solutions that ad
             <h1 className="text-4xl font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Pure Water,
               <br />
-              <span className="text-accent">Clean Future</span>
+              <span className="text-accent">Perfectly Engineered</span>
             </h1>
             <p className="mt-6 text-lg text-gray-200">
               Leading manufacturer of water treatment and purification systems,
-              serving industries across India with innovative solutions
+              serving industries worldwide with innovative solutions
             </p>
             <div className="mt-8 flex gap-4">
               <Button
@@ -251,19 +251,11 @@ Today, we continue to push boundaries, developing cutting-edge solutions that ad
                 </div>
                 <div className="prose prose-lg mx-auto md:mx-0">
                   <p>
-                    Madhusudan Aqua Industries is a professionally managed
-                    company and it was established in the year 2021. We have
-                    been working as a manufacturer, supplier, exporter and
-                    service provider of various water treatment plants and spare
-                    parts. We offer modern Mineral Water Plant, Mineral Water
-                    Bottling Plant, Water Treatment Plants, R.O Systems, Water
-                    Purifiers, Desalination Plant, Ultra Filtration, Micron
-                    Filtration System, Ozone Generator, etc. Also we offer U.V
-                    Systems, Cartridges, Resins, Spares, Chemicals, Mineral
-                    Water Projects On Turnkey Basis, Waste Water, Stp, Ozone
-                    Treatment Plant, Ion Exchange Technology, Ultraviolet
-                    Treatment Plant and many more.
-                  </p>
+                  Madhusudan Aqua Industries, established in 2021, is a professionally managed company engaged in manufacturing, supplying, exporting, and servicing a wide range of water treatment solutions.
+                 Our offerings include modern Water Treatment Plants, Reverse Osmosis (RO) Units, Demineralized Water Plants, Water Softening Units, Ozonation Systems, Desalination Plants, and complete Mineral Water Projects.
+                 We also provide comprehensive spare parts and equipment for Water Treatment Plants, such as all types of cartridges and filters, membranes (BW, SW, UF, NF), resins, filter media (sand and carbon), pressure gauges and switches, SS fittings, and essential water treatment chemicals including antiscalants, Gramacid, and citric acid.
+
+                 </p>
                   <div className="mt-6 text-center md:text-left">
                     <Link
                       href="/about"

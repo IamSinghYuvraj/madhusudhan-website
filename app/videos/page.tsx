@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { supabase } from "@/lib/supabaseClient";
+
 import { Play, Search, X, ArrowRight, CheckCircle } from "lucide-react";
 import {
   Select,
@@ -58,6 +58,25 @@ const categories: string[] = [
   "Bopp Labeling Machine",
 ];
 
+const mockVideos: Video[] = [
+  {
+    id: "1",
+    title: "Complete Mineral Water Project",
+    thumbnail_url: "/assests/Complete Mineral Water Project.jpg",
+    video_id: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    description: "An overview of a complete mineral water project.",
+    category: "Turnkey Mineral Water Project",
+  },
+  {
+    id: "2",
+    title: "Automatic PET Bottle Blowing Machine",
+    thumbnail_url: "/assests/Automatic PET Bottle Blowing Machine .jpg",
+    video_id: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    description: "Demonstration of an automatic PET bottle blowing machine.",
+    category: "Blowing Machine",
+  },
+];
+
 export default function VideosPage() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -86,23 +105,8 @@ export default function VideosPage() {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch videos
-        const { data: videoData, error: videoError } = await supabase
-          .from("video_cards")
-          .select("*");
-
-        if (videoError) throw videoError;
-        setVideos(videoData as Video[]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    setVideos(mockVideos);
+    setLoading(false);
   }, []);
 
   const filteredVideos = videos.filter(
@@ -116,116 +120,7 @@ export default function VideosPage() {
     window.open(videoId, "_blank");
   };
 
-  const validateForm = () => {
-    const newErrors: { emailAddress?: string; mobileNumber?: string } = {};
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (
-      !inquiryData.emailAddress ||
-      !emailRegex.test(inquiryData.emailAddress)
-    ) {
-      newErrors.emailAddress = "Please enter a valid email address.";
-    }
-
-    // Mobile number validation (10 digits)
-    const mobileRegex = /^\d{10}$/;
-    if (
-      !inquiryData.mobileNumber ||
-      !mobileRegex.test(inquiryData.mobileNumber)
-    ) {
-      newErrors.mobileNumber = "Please enter a valid 10-digit mobile number.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSendInquiry = async () => {
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      // 1. Insert into Supabase
-      const { data, error } = await supabase.from("card_queries").insert([
-        {
-          product_name: inquiryData.productName,
-          buying_requirements: inquiryData.buyingRequirements,
-          email_address: inquiryData.emailAddress,
-          mobile_number: inquiryData.mobileNumber,
-        },
-      ]);
-
-      if (error) throw error;
-
-      // 2. Send email via API route
-      const response = await fetch("/api/sendMessage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: "Video Inquiry", // Since we don't collect name for video inquiries
-          email: inquiryData.emailAddress,
-          phone: inquiryData.mobileNumber,
-          message: `Product: ${inquiryData.productName}\nBuying Requirements: ${inquiryData.buyingRequirements}`,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to send email");
-      }
-
-      // Show success notification
-      setNotification({
-        type: "success",
-        message: "Inquiry sent successfully!",
-        show: true,
-      });
-
-      // Auto-hide notification after 3 seconds
-      setTimeout(() => {
-        setNotification((prev) => ({ ...prev, show: false }));
-      }, 3000);
-
-      // Close dialog and reset form
-      setIsDialogOpen(false);
-      setInquiryData({
-        productName: "",
-        buyingRequirements: "",
-        emailAddress: "",
-        mobileNumber: "",
-      });
-    } catch (error) {
-      console.error("Error sending inquiry:", error);
-
-      // Show error notification
-      setNotification({
-        type: "error",
-        message: "Failed to send inquiry. Please try again.",
-        show: true,
-      });
-
-      // Auto-hide notification after 3 seconds
-      setTimeout(() => {
-        setNotification((prev) => ({ ...prev, show: false }));
-      }, 3000);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const closeDialog = () => {
-    setIsDialogOpen(false);
-    setErrors({});
-  };
-
-  const closeNotification = () => {
-    setNotification((prev) => ({ ...prev, show: false }));
-  };
+  
 
   return (
     <>
@@ -383,20 +278,7 @@ export default function VideosPage() {
                       {video.description}
                     </p>
                   </CardContent>
-                  <div className="pt-0">
-                    <Button
-                      onClick={() => {
-                        setInquiryData({
-                          ...inquiryData,
-                          productName: video.title,
-                        });
-                        setIsDialogOpen(true);
-                      }}
-                      className="w-full bg-primary hover:bg-primary/90 text-white"
-                    >
-                      Send Inquiry
-                    </Button>
-                  </div>
+                  
                 </Card>
               ))}
             </div>
@@ -404,106 +286,7 @@ export default function VideosPage() {
         </div>
       </section>
 
-      {isDialogOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="bg-white p-6 rounded-xl w-11/12 max-w-md shadow-2xl">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-primary">Send Inquiry</h2>
-              <Button
-                onClick={closeDialog}
-                variant="ghost"
-                size="icon"
-                className="rounded-full h-8 w-8 hover:bg-gray-100"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Buying Requirements
-                </label>
-                <textarea
-                  className="w-full p-3 border-2 rounded-lg focus:border-primary focus:ring-primary bg-white"
-                  placeholder="Please describe your requirements in detail..."
-                  rows={4}
-                  value={inquiryData.buyingRequirements}
-                  onChange={(e) =>
-                    setInquiryData({
-                      ...inquiryData,
-                      buyingRequirements: e.target.value,
-                    })
-                  }
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email Address
-                </label>
-                <Input
-                  type="email"
-                  className="w-full p-3 h-12 border-2 rounded-lg focus:border-primary focus:ring-primary bg-white"
-                  placeholder="your@email.com"
-                  value={inquiryData.emailAddress}
-                  onChange={(e) =>
-                    setInquiryData({
-                      ...inquiryData,
-                      emailAddress: e.target.value,
-                    })
-                  }
-                />
-                {errors.emailAddress && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.emailAddress}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Mobile Number
-                </label>
-                <Input
-                  type="tel"
-                  className="w-full p-3 h-12 border-2 rounded-lg focus:border-primary focus:ring-primary bg-white"
-                  placeholder="10-digit mobile number"
-                  value={inquiryData.mobileNumber}
-                  onChange={(e) =>
-                    setInquiryData({
-                      ...inquiryData,
-                      mobileNumber: e.target.value,
-                    })
-                  }
-                />
-                {errors.mobileNumber && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.mobileNumber}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="mt-6 flex justify-end gap-3">
-              <Button
-                onClick={closeDialog}
-                variant="outline"
-                className="border-gray-300"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleSendInquiry}
-                className="bg-primary hover:bg-primary/90 text-white"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Send Inquiry"}
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </>
   );
 }

@@ -12,7 +12,7 @@ import {
   Hammer,
   Warehouse,
 } from "lucide-react";
-import { useState } from "react";
+
 import AnimatedSection from "@/components/animation";
 import ContactUs from "@/components/contactus";
 
@@ -200,11 +200,7 @@ const applications = [
 ];
 
 export default function AboutPage() {
-  const [showMore, setShowMore] = useState(false);
-
-  const toggleReadMore = () => {
-    setShowMore(!showMore);
-  };
+  
 
   return (
     <>
@@ -218,46 +214,21 @@ export default function AboutPage() {
                   Our Story
                 </h2>
                 <div className="mt-4 h-1 w-20 bg-cyan-600 rounded"></div>
-                <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-                  Madhusudan Aqua Industries is a professionally managed company
-                  and it was established in the year 2021. We have been working
-                  as a manufacturer, supplier, exporter and service provider of
-                  various water treatment plants and spare parts. We offer
-                  modern Mineral Water Plant, Mineral Water Bottling Plant,
-                  Water Treatment Plants, R.O Systems, Water Purifiers,
-                  Desalination Plant, Ultra Filtration, Micron Filtration
-                  System, Ozone Generator, etc. Also we offer U.V Systems,
-                  Cartridges, Resins, Spares, Chemicals, Mineral Water Projects
-                  On Turnkey Basis, Waste Water, Stp, Ozone Treatment Plant, Ion
-                  Exchange Technology, Ultraviolet Treatment Plant and many
-                  more.
-                </p>
-                <p className="mt-4 text-lg text-gray-700 leading-relaxed">
-                  Over the years, we have expanded our capabilities and product
-                  range, investing in cutting-edge technology and building a
-                  team of skilled professionals. Today, we serve clients across
-                  various sectors, including pharmaceuticals, textiles, food
-                  processing, and more.
-                </p>
-                {showMore && (
-                  <p className="mt-4 text-lg text-gray-700 leading-relaxed">
-                    The Company was founded on the philosophy to lead product
-                    development through technology and innovation. Little
-                    wonder, the Company saw expansion as it entered areas of
-                    turnkey execution & total system approach by applying its
-                    extensive know-how, innovative product development &
-                    commitment to superior services.
+                                  <p className="mt-6 text-lg text-gray-700 leading-relaxed">
+                  Madhusudan Aqua Industries, established in 2021, is a professionally managed company engaged in manufacturing, supplying, exporting, and servicing a wide range of water treatment solutions.
                   </p>
-                )}
-                <span
-                  className="mt-6 inline-block text-cyan-600 font-semibold cursor-pointer hover:underline relative group"
-                  onClick={toggleReadMore}
-                >
-                  <span className="relative z-10">
-                    {showMore ? "Show Less" : "Read More"}
-                  </span>
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
-                </span>
+                  <p className="mt-4 text-lg text-gray-700 leading-relaxed">
+                  Our offerings include modern Water Treatment Plants, Reverse Osmosis (RO) Units, Demineralized Water Plants, Water Softening Units, Ozonation Systems, Desalination Plants, and complete Mineral Water Projects.
+                  </p>
+                  <p className="mt-4 text-lg text-gray-700 leading-relaxed">
+                  We also provide comprehensive spare parts and equipment for Water Treatment Plants, such as all types of cartridges and filters, membranes (BW, SW, UF, NF), resins, filter media (sand and carbon), pressure gauges and switches, SS fittings, and essential water treatment chemicals including antiscalants, Gramacid, and citric acid.
+                  </p>
+                  <p className="mt-4 text-lg text-gray-700 leading-relaxed">
+                  Over the years, we have strengthened our expertise by adopting cutting-edge technology and building a skilled team of professionals. Today, our solutions serve a wide customer base across diverse industries, including the Pharmaceutical and Food & Beverage Industry.
+                  </p>
+                  <p className="mt-4 text-lg text-gray-700 leading-relaxed">
+                  The company is driven by a philosophy of innovation and excellence, with a strong focus on turnkey project execution and a total system approach, ensuring reliability, efficiency, and customer satisfaction.
+                  </p>
               </div>
             </AnimatedSection>
 

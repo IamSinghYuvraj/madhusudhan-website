@@ -5,11 +5,13 @@ import Image from "next/image";
 import MANTRA from "@/assests/MANTRA.jpg";
 import BISLERI from "@/assests/BISLERI.jpg";
 import BAILEY from "@/assests/BAILEY.jpg";
-import AQUAFINA from "@/assests/AQUAFINA.jpg";
+import HP from "@/assests/Hp-paani-ro.png";
 import MCD from "@/assests/MCD.jpg";
 import O2RISE from "@/assests/O2RISE.jpg";
 import ROYAL from "@/assests/ROYAL.jpg";
 import ACTIVE from "@/assests/ACTIVE.jpg";
+import CLOUD9 from "@/assests/Cloud9.jpeg";
+import MERU from "@/assests/Meru-Spring-Logo-White.png";
 
 import { Card } from "@/components/ui/card";
 
@@ -21,6 +23,9 @@ const clients = [
   { logo: O2RISE },
   { logo: ROYAL },
   { logo: ACTIVE },
+  { logo: HP },
+  { logo: CLOUD9 },
+  { logo: MERU }
 ];
 
 export function ClientLogos() {
@@ -51,7 +56,7 @@ export function ClientLogos() {
       <div className="container">
         <h2 className="text-center text-3xl font-bold">Our Trusted Clients</h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-muted-foreground">
-          We are proud to serve some of India&apos;s largest companies with our water
+          We are proud to serve some of world&apos;s largest companies with our water
           treatment solutions
         </p>
 
@@ -60,7 +65,7 @@ export function ClientLogos() {
             {[...clients, ...clients, ...clients].map((client, index) => (
               <Card
                 key={`${index}`} // Use index as the key since there's no unique identifier
-                className="min-w-[300px] h-[300px] flex-shrink-0 flex flex-col items-center text-center overflow-hidden relative"
+                className="min-w-[200px] h-[200px] flex-shrink-0 flex flex-col items-center text-center overflow-hidden relative"
               >
                 {/* Fullscreen logo */}
                 <div className="absolute inset-0">
@@ -68,7 +73,7 @@ export function ClientLogos() {
                     src={client.logo}
                     alt="Client Logo" // Use a generic alt text since there's no name
                     layout="fill"
-                    objectFit="cover"
+                    objectFit="contain"
                     className="opacity-90"
                   />
                 </div>

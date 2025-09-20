@@ -96,7 +96,7 @@ export default function ProductsPage() {
   // New states for inquiry functionality
   const [inquiryData, setInquiryData] = useState<InquiryData>({
     productName: "",
-    buyingRequirements: "",
+    buyingRequirements: "",a
     emailAddress: "",
     mobileNumber: "",
   });

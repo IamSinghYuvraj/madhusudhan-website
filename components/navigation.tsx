@@ -19,7 +19,7 @@ const navigation = [
   { name: "About", href: "/about" },
   {
     name: "Products",
-    href: "/products",
+    href: "#",
     hasDropdown: true,
     dropdownItems: [
       { name: "Complete Mineral Water Projects", href: "/products/complete-mineral-water-projects" },
@@ -69,7 +69,7 @@ export function Navigation() {
   // Set active item based on current pathname
   React.useEffect(() => {
     const activeItem = navigation.find(item =>
-      item.href === pathname || (item.hasDropdown && pathname.startsWith(item.href))
+      item.href === pathname || (item.hasDropdown && pathname.startsWith("/products"))
     );
     
     if (activeItem) {
@@ -171,8 +171,8 @@ export function Navigation() {
     }
     
     setShowDropdown(true);
-    setHoveredItem('/products');
-    updateCapsulePosition('/products');
+    setHoveredItem('#');
+    updateCapsulePosition('#');
   }, [updateCapsulePosition]);
 
   const handleDropdownMouseLeave = React.useCallback(() => {
@@ -274,16 +274,14 @@ export function Navigation() {
                     >
                       {item.hasDropdown ? (
                         <>
-                          <Link
-                            href={item.href}
+                          <div
                             ref={(el) => (navRefs.current[item.href] = el)}
                             className={cn(
-                              "flex items-center gap-1 px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full relative z-10",
+                              "flex items-center gap-1 px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full relative z-10 cursor-pointer",
                               pathname.startsWith("/products")
                                 ? "text-blue-600"
                                 : "text-gray-700 hover:text-blue-600"
                             )}
-                            onClick={() => handleNavClick(item.href)}
                           >
                             {item.name}
                             <ChevronDown 
@@ -292,7 +290,7 @@ export function Navigation() {
                                 showDropdown && hoveredItem === item.href ? "rotate-180" : ""
                               )}
                             />
-                          </Link>
+                          </div>
                           
                           {showDropdown && hoveredItem === item.href && (
                             <div
@@ -388,15 +386,6 @@ export function Navigation() {
                           
                           {mobileProductsOpen && (
                             <div className="bg-gray-50 border-l-2 border-blue-200 ml-4">
-                              <DropdownMenuItem asChild>
-                                <Link
-                                  href={item.href}
-                                  className="block px-4 py-3 text-sm font-medium text-blue-600 hover:bg-blue-50 transition-colors"
-                                  onClick={closeMobileMenu}
-                                >
-                                  All Products
-                                </Link>
-                              </DropdownMenuItem>
                               {item.dropdownItems?.map((dropdownItem) => (
                                 <DropdownMenuItem key={dropdownItem.href} asChild>
                                   <Link
@@ -451,7 +440,7 @@ export default function HomePage() {
             serving industries across India with innovative solutions.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/products">
+            <Link href="/products/complete-mineral-water-projects">
               <Button className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 text-lg transition-all duration-300 hover:scale-105 rounded-full shadow-lg hover:shadow-xl">
                 Our Products
               </Button>

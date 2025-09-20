@@ -1,16 +1,10 @@
 // app/api/sendMessage/route.ts - Updated with Green API Integration
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
 import greenApiClient from '@/lib/greenApi';
 
 // Required for static export compatibility
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 export async function POST(request: Request) {
   let body: any = {};
@@ -27,7 +21,7 @@ export async function POST(request: Request) {
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'Invalid email format' },
@@ -36,7 +30,7 @@ export async function POST(request: Request) {
     }
 
     // Validate phone number (10 digits)
-    if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+    if (phone.length !== 10 || !/^\\d+$/.test(phone)) {
       return NextResponse.json(
         { error: 'Phone number must be 10 digits' },
         { status: 400 }
@@ -51,32 +45,20 @@ export async function POST(request: Request) {
     ].filter(Boolean); // Remove undefined values
 
     // Format the message for WhatsApp
-    const whatsappMessage = `🔔 *NEW CONTACT FORM QUERY*
-
-👤 *Name:* ${name}
-📧 *Email:* ${email}  
-📱 *Phone:* +91 ${phone}
-
-💬 *Message:*
-${message}
-
-━━━━━━━━━━━━━━━━━━━━━━━━
-📅 *Received:* ${new Date().toLocaleString('en-IN', { 
-  timeZone: 'Asia/Kolkata',
-  dateStyle: 'medium', 
-  timeStyle: 'short'
-})}
+    const whatsappMessage = `🔔 *NEW CONTACT FORM QUERY*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}  \n📱 *Phone:* +91 ${phone}\n\n💬 *Message:*\n${message}\n\n━━━━━━━━━━━━━━━━━━━━━━━━\n📅 *Received:* ${new Date().toLocaleString('en-IN', { 
+      timeZone: 'Asia/Kolkata',
+      dateStyle: 'medium', 
+      timeStyle: 'short'
+    })}
 🌐 *Source:* Website Contact Form
-━━━━━━━━━━━━━━━━━━━━━━━━
-
-_Please respond to the customer promptly._`;
+━━━━━━━━━━━━━━━━━━━━━━━━\n\n_Please respond to the customer promptly._`;
 
     // Check Green API instance state
     const instanceState = await greenApiClient.getStateInstance();
     if (!instanceState.success || instanceState.data?.stateInstance !== 'authorized') {
       console.warn('Green API instance not authorized');
       return NextResponse.json(
-        { 
+        {
           error: 'WhatsApp messaging service is not available. Please try again later or contact us directly.',
           details: 'Instance not authorized'
         },
@@ -93,36 +75,10 @@ _Please respond to the customer promptly._`;
 
     if (!whatsappResult.success) {
       console.error('Failed to send WhatsApp messages:', whatsappResult.error);
-      // Continue to save in database even if WhatsApp fails
     }
 
     // Count successful WhatsApp sends
     const successfulSends = whatsappResult.data?.filter(result => result.success) || [];
-    const failedSends = whatsappResult.data?.filter(result => !result.success) || [];
-
-    // Save to Supabase database
-    const { data: dbData, error: dbError } = await supabase
-      .from('contact_queries')
-      .insert([
-        {
-          name,
-          email,
-          phone,
-          message,
-          whatsapp_status: whatsappResult.success ? 'sent' : 'failed',
-          whatsapp_results: JSON.stringify(whatsappResult.data),
-          whatsapp_success_count: successfulSends.length,
-          whatsapp_total_attempted: businessNumbers.length,
-          status: 'processed',
-          created_at: new Date().toISOString(),
-        }
-      ])
-      .select();
-
-    if (dbError) {
-      console.error('Database error:', dbError);
-      // Continue even if DB save fails
-    }
 
     // Prepare response
     const totalNumbers = businessNumbers.length;
@@ -137,7 +93,7 @@ _Please respond to the customer promptly._`;
       statusMessage = `Your message has been received! We'll get back to you as soon as possible.`;
       responseStatus = 207; // Multi-status
     } else {
-      statusMessage = `Your message has been saved successfully. We'll contact you directly soon.`;
+      statusMessage = `We encountered a technical issue, but your message has been saved. We'll contact you directly soon.`;
       responseStatus = 200; // Still show success to user
     }
 
@@ -145,8 +101,6 @@ _Please respond to the customer promptly._`;
       message: statusMessage,
       success: true, // Always show success to user
       data: {
-        recordId: dbData?.[0]?.id,
-        // Hide internal WhatsApp details from frontend
         totalRecipients: totalNumbers,
         status: successCount > 0 ? 'delivered' : 'received',
       }
@@ -155,25 +109,9 @@ _Please respond to the customer promptly._`;
   } catch (error) {
     console.error('Error processing request:', error);
     
-    // Save error to database
-    try {
-      await supabase.from('contact_queries').insert([{
-        name: body?.name || 'Unknown',
-        email: body?.email || 'Unknown', 
-        phone: body?.phone || 'Unknown',
-        message: body?.message || 'Unknown',
-        status: 'failed',
-        whatsapp_status: 'failed',
-        error_message: error instanceof Error ? error.message : 'Unknown error',
-        created_at: new Date().toISOString(),
-      }]);
-    } catch (dbError) {
-      console.error('Failed to save error to database:', dbError);
-    }
-
     return NextResponse.json(
-      { 
-        error: 'We encountered a technical issue. Your message has been saved and we will contact you directly.',
+      {
+        error: 'We encountered a technical issue. Please try again later or contact us directly.',
         success: false
       },
       { status: 500 }
