@@ -54,7 +54,7 @@ export function Navigation() {
   });
 
   const navContainerRef = React.useRef<HTMLDivElement>(null);
-  const navRefs = React.useRef<{ [key: string]: HTMLAnchorElement | null }>({});
+  const navRefs = React.useRef<{ [key: string]: HTMLElement | null }>({});
   const dropdownTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   const positionTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -64,6 +64,26 @@ export function Navigation() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Set active item based on current pathname
+  const updateCapsulePosition = React.useCallback((href: string) => {
+    const element = navRefs.current[href];
+    const container = navContainerRef.current;
+    
+    if (element && container) {
+      // Use requestAnimationFrame for smooth animation
+      requestAnimationFrame(() => {
+        const elementRect = element.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        setCapsuleStyle({
+          width: elementRect.width + 16,
+          left: elementRect.left - containerRect.left - 8,
+          opacity: 1,
+        });
+      });
+    }
   }, []);
 
   // Set active item based on current pathname
@@ -85,25 +105,6 @@ export function Navigation() {
       }
     }
   }, [pathname, hoveredItem, updateCapsulePosition]);
-
-  const updateCapsulePosition = React.useCallback((href: string) => {
-    const element = navRefs.current[href];
-    const container = navContainerRef.current;
-    
-    if (element && container) {
-      // Use requestAnimationFrame for smooth animation
-      requestAnimationFrame(() => {
-        const elementRect = element.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-        
-        setCapsuleStyle({
-          width: elementRect.width + 16,
-          left: elementRect.left - containerRect.left - 8,
-          opacity: 1,
-        });
-      });
-    }
-  }, []);
 
   const handleMouseEnter = React.useCallback((href: string) => {
     // Clear any pending position updates

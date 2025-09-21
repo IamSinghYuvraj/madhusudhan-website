@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Factory, Droplets, Filter, Wrench, Beaker, Zap, Shield, Package, Cog, FlaskConical } from "lucide-react";
+import { ArrowRight, Factory, Droplets, Filter, Wrench, Beaker, Zap, Shield, Package, Cog, FlaskConical, Award } from "lucide-react";
 import { motion } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
