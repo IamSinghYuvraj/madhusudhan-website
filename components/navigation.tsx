@@ -22,17 +22,17 @@ const navigation = [
     href: "#",
     hasDropdown: true,
     dropdownItems: [
-      { name: "Complete Mineral Water Projects", href: "/products/complete-mineral-water-projects" },
-      { name: "Mineral Water Plants", href: "/products/mineral-water-plants" },
-      { name: "RO Systems", href: "/products/ro-systems" },
-      { name: "Water Softeners", href: "/products/water-softeners" },
-      { name: "DM Plants", href: "/products/dm-plants" },
-      { name: "Filling Machines", href: "/products/filling-machines" },
-      { name: "Ozonation System", href: "/products/ozonation-system" },
-      { name: "Blowing Machine", href: "/products/blowing-machine" },
-      { name: "Batch Coding Machine", href: "/products/batch-coding-machine" },
-      { name: "BOPP Machine", href: "/products/bopp-machine" },
-      { name: "Shrink Wrapping Machine", href: "/products/shrink-wrapping-machine" },
+      { name: "All Products", href: "/products" },
+      { name: "Reverse Osmosis Plant (RO)", href: "/products/reverse-osmosis-plant" },
+      { name: "Demineralized Plant (DM)", href: "/products/demineralized-plant" },
+      { name: "Water Softening Plant", href: "/products/water-softening-plant" },
+      { name: "SS & MS Vessels/Tanks", href: "/products/ss-ms-vessels" },
+      { name: "Complete Mineral Water Project", href: "/products/complete-mineral-water-project" },
+      { name: "Carbonated Beverage Project", href: "/products/carbonated-beverage-project" },
+      { name: "Dosing, Ozonation & UV System", href: "/products/dosing-ozonation-uv-system" },
+      { name: "RFC Machine", href: "/products/rfc-machine" },
+      { name: "RO Antiscalent", href: "/products/ro-antiscalent" },
+      { name: "Spare Parts & Equipments", href: "/products/spare-parts-equipments" },
     ],
   },
   { name: "Videos", href: "/videos" },
@@ -69,7 +69,9 @@ export function Navigation() {
   // Set active item based on current pathname
   React.useEffect(() => {
     const activeItem = navigation.find(item =>
-      item.href === pathname || (item.hasDropdown && pathname.startsWith("/products"))
+      item.href === pathname || 
+      (item.hasDropdown && pathname.startsWith("/products")) ||
+      (item.href === "/about" && pathname === "/about")
     );
     
     if (activeItem) {
@@ -82,7 +84,7 @@ export function Navigation() {
         }, 50);
       }
     }
-  }, [pathname, hoveredItem]);
+  }, [pathname, hoveredItem, updateCapsulePosition]);
 
   const updateCapsulePosition = React.useCallback((href: string) => {
     const element = navRefs.current[href];
