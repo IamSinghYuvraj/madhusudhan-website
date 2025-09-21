@@ -5,8 +5,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Play, Search, X, ArrowRight, CheckCircle } from "lucide-react";
-import {
+import { Play, Search, X, CheckCircle } from "lucide-react";
   Select,
   SelectContent,
   SelectItem,
@@ -14,8 +13,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import VideoHero from "@/assests/video-hero.jpg";
 
 interface Video {
   id: string;
@@ -82,18 +79,6 @@ export default function VideosPage() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [loading, setLoading] = useState<boolean>(true);
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [inquiryData, setInquiryData] = useState<InquiryData>({
-    productName: "",
-    buyingRequirements: "",
-    emailAddress: "",
-    mobileNumber: "",
-  });
-  const [errors, setErrors] = useState<{
-    emailAddress?: string;
-    mobileNumber?: string;
-  }>({});
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [notification, setNotification] = useState<{
     type: "success" | "error";
     message: string;

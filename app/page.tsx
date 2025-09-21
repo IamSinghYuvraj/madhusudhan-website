@@ -115,33 +115,6 @@ const featuredVideos: FeaturedVideo[] = [
 ];
 
 // CountUp Component with TypeScript
-interface CountUpProps {
-  end: number;
-  duration?: number;
-}
-
-const CountUp: React.FC<CountUpProps> = ({ end, duration = 2000 }) => {
-  const [count, setCount] = useState<number>(0);
-
-  useEffect(() => {
-    let startTime: number | null = null;
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * end));
-
-      if (progress < 1) {
-        window.requestAnimationFrame(animate);
-      }
-    };
-
-    window.requestAnimationFrame(animate);
-  }, [end, duration]);
-
-  return <span>{count}</span>;
-};
-
 const Home: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [visible, setVisible] = useState<boolean>(false);
@@ -179,11 +152,7 @@ const Home: React.FC = () => {
     },
   ];
 
-  const ourStory: string = `Founded in 2005, our company began with a simple mission: to provide clean, safe water solutions to communities and industries worldwide. What started as a small team of engineers with a passion for water treatment has grown into a global enterprise serving clients across 45 countries.
-
-Over the years, we've pioneered innovative technologies that have revolutionized the water treatment industry. Our commitment to sustainability and excellence has earned us recognition as industry leaders.
-
-Today, we continue to push boundaries, developing cutting-edge solutions that address the world's most pressing water challenges. Our team of experts works tirelessly to ensure that every project, regardless of size, receives the highest level of attention and care.`;
+  
 
   return (
     <>

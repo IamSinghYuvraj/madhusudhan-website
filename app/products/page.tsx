@@ -19,7 +19,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
-import ProductHero from "@/assests/product-hero.jpg";
+
 import {
   Select,
   SelectContent,

@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import Image from "next/image";
 import Logo from "@/assests/madhu.png";
 
