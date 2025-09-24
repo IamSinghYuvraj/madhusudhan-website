@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Droplets, Beaker, Award, Download, FileText } from "lucide-react";
-import { motion } from "framer-motion";
+import { Shield, Droplets, Beaker, Award, FileText, ZoomIn, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
@@ -46,22 +47,33 @@ const specifications = [
   { label: "Standards", value: "NSF, FDA approved" }
 ];
 
-const productImages = [Antiscalent1, Antiscalent2, Antiscalent3, Antiscalent4];
+const productMedia = [
+  { type: "image", src: Antiscalent1, alt: "RO Antiscalent Chemical" },
+  { type: "image", src: Antiscalent2, alt: "Antiscalent Packaging" },
+  { type: "image", src: Antiscalent3, alt: "Antiscalent Application" },
+  { type: "image", src: Antiscalent4, alt: "Antiscalent Storage" }
+];
 
 export default function ROAntiscalentPage() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     setIsInView(true);
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
   }, []);
 
+  const nextMedia = () => {
+    setCurrentMediaIndex((prev) => (prev + 1) % productMedia.length);
+  };
+
+  const prevMedia = () => {
+    setCurrentMediaIndex((prev) => (prev - 1 + productMedia.length) % productMedia.length);
+  };
+
+  const currentMedia = productMedia[currentMediaIndex];
+
   const handleDownloadPDF = () => {
-    // Create a link to download the PDF
     const link = document.createElement('a');
     link.href = '/assests/Antiscalent.pdf';
     link.download = 'Antiscalent-Technical-Datasheet.pdf';
@@ -89,15 +101,11 @@ export default function ROAntiscalentPage() {
               <span className="block font-bold text-pink-300">Antiscalent</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Premium antiscalent chemicals for RO membrane protection, preventing 
-              scale formation and extending system life with superior performance.
+              Premium antiscalent chemicals for RO membrane protection, preventing scale formation and extending system life with superior performance.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button 
-                size="lg" 
-                className="bg-white text-pink-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-full shadow-xl"
-              >
-                Get Quote
+              <Button asChild size="lg" className="bg-white text-pink-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-full shadow-xl">
+                <Link href="/contact">Get Quote</Link>
               </Button>
               <Button 
                 size="lg" 
@@ -111,26 +119,52 @@ export default function ROAntiscalentPage() {
             </div>
           </motion.div>
 
+          {/* Enhanced Media Gallery */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : 50 }}
             transition={{ duration: 1, delay: 0.5 }}
             className="relative"
           >
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl bg-black">
               <Image
-                src={productImages[currentImageIndex]}
-                alt={`RO Antiscalent ${currentImageIndex + 1}`}
+                src={currentMedia.src}
+                alt={currentMedia.alt}
                 fill
                 className="object-cover"
               />
+              
+              {/* Navigation Controls */}
+              <button
+                onClick={prevMedia}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button
+                onClick={nextMedia}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Zoom Button */}
+              <button
+                onClick={() => setIsZoomOpen(true)}
+                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <ZoomIn className="w-5 h-5" />
+              </button>
+
+              {/* Media Indicators */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                {productImages.map((_, index) => (
+                {productMedia.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentImageIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentImageIndex ? "bg-white" : "bg-white/40"
+                    onClick={() => setCurrentMediaIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentMediaIndex ? "bg-white" : "bg-white/40"
                     }`}
                   />
                 ))}
@@ -139,6 +173,40 @@ export default function ROAntiscalentPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Zoom Modal */}
+      <AnimatePresence>
+        {isZoomOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            onClick={() => setIsZoomOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              className="relative max-w-7xl max-h-[90vh] w-full h-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={currentMedia.src}
+                alt={currentMedia.alt}
+                fill
+                className="object-contain"
+              />
+              <button
+                onClick={() => setIsZoomOpen(false)}
+                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Features Section */}
       <section className="py-24 bg-white">
