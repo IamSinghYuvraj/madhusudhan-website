@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -48,7 +48,22 @@ const specifications = [
   { capacity: "10,000 LPH", recoveryRate: "70%", tdsReduction: "95-98%", powerRequirement: "15 HP", outputQuality: "<50 ppm" }
 ];
 
-const productMedia = [
+interface ImageMedia {
+  type: "image";
+  src: StaticImageData;
+  alt: string;
+}
+
+interface VideoMedia {
+  type: "video";
+  src: string;
+  alt: string;
+  poster: StaticImageData;
+}
+
+type Media = ImageMedia | VideoMedia;
+
+const productMedia: Media[] = [
   { type: "image", src: ROPlant1, alt: "Industrial RO Plant" },
   { type: "image", src: ROPlant2, alt: "Commercial RO Plant" },
   { type: "image", src: ROPlant3, alt: "FRP RO Plant" },
@@ -123,7 +138,7 @@ export default function ReverseOsmosisPlantPage() {
                 <video
                   className="w-full h-full object-cover"
                   controls
-                  poster={currentMedia.poster?.src}
+                  poster={currentMedia.poster.src}
                 >
                   <source src={currentMedia.src} type="video/mp4" />
                   Your browser does not support the video tag.

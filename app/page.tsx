@@ -22,9 +22,13 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { ClientLogos } from "@/components/client-logos";
-import GlobalPresence from "@/components/globalpresence";
+import dynamic from "next/dynamic";
 import ContactUs from "@/components/contactus";
 import AnimatedSectionPage from "@/components/animation";
+
+const GlobalPresence = dynamic(() => import("@/components/globalpresence"), {
+  ssr: false,
+});
 
 // Import images from the assets folder
 import Machine1 from "@/assests/Home-machine1.jpg";

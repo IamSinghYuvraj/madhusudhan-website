@@ -110,15 +110,15 @@ export default function ContactPage() {
       const result = await submitContactForm(formData);
       
       let notificationType: "success" | "warning" | "error" = "success";
-      let message = "Thank you for your message! We'll get back to you soon.";
+      let message = "Thank you for your message! We&apos;ll get back to you soon.";
 
       // Handle different response scenarios
       if (result && typeof result === "object") {
         if ("success" in result) {
           if (result.success) {
-            message = "Your query has been sent successfully! We'll contact you shortly.";
+            message = "Your query has been sent successfully! We&apos;ll contact you shortly.";
           } else {
-            message = "Message received! We'll get back to you as soon as possible.";
+            message = "Message received! We&apos;ll get back to you as soon as possible.";
             notificationType = "warning";
           }
         }
@@ -392,7 +392,7 @@ export default function ContactPage() {
                 <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-center justify-center text-blue-700 text-sm">
                     <Mail className="h-4 w-4 mr-2" />
-                    We'll respond to your message within 24 hours
+                    We&apos;ll respond to your message within 24 hours
                   </div>
                 </div>
               </form>

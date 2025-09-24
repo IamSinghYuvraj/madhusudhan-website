@@ -14,6 +14,7 @@ import MineralWaterProject1 from "@/assests/Complete Mineral Water Project.jpg";
 import MineralWaterProject2 from "@/assests/Mineral-Water-Plants.jpg";
 import MineralWaterProject3 from "@/assests/Packaged-Drinking-Water-Plant.jpg";
 import ProjectDiagram from "@/assests/COMPLETE PROJECT FLOW DIAGRAM.jpg";
+import { StaticImageData } from "next/image";
 
 const features = [
   {
@@ -38,7 +39,22 @@ const features = [
   }
 ];
 
-const productMedia = [
+interface ImageMedia {
+  type: "image";
+  src: StaticImageData;
+  alt: string;
+}
+
+interface VideoMedia {
+  type: "video";
+  src: string;
+  alt: string;
+  poster: StaticImageData;
+}
+
+type Media = ImageMedia | VideoMedia;
+
+const productMedia: Media[] = [
   { type: "image", src: MineralWaterProject1, alt: "Complete Mineral Water Project" },
   { type: "image", src: MineralWaterProject2, alt: "Mineral Water Plants" },
   { type: "image", src: MineralWaterProject3, alt: "Packaged Drinking Water Plant" },
@@ -112,7 +128,7 @@ export default function CompleteMineralWaterProjectPage() {
                 <video
                   className="w-full h-full object-cover"
                   controls
-                  poster={currentMedia.poster?.src}
+                  poster={currentMedia.poster.src}
                 >
                   <source src={currentMedia.src} type="video/mp4" />
                   Your browser does not support the video tag.
