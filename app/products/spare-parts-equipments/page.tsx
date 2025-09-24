@@ -1,55 +1,55 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Wrench, Package, Settings, Award, FileText, ZoomIn, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import ContactUs from "@/components/contactus";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Wrench, Package, Settings, Award, FileText, ZoomIn, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import ContactUs from '@/components/contactus';
 
 // Import product images
-import SpareParts1 from "@/assests/Water-Treatment-System.jpg";
-import SpareParts2 from "@/assests/Commercial-Water-Treatment-Plant.jpg";
-import SpareParts3 from "@/assests/Sand-Water-Filter.jpg";
+import SpareParts1 from '@/assests/Water-Treatment-System.jpg';
+import SpareParts2 from '@/assests/Commercial-Water-Treatment-Plant.jpg';
+import SpareParts3 from '@/assests/Sand-Water-Filter.jpg';
 
 const features = [
   {
     icon: <Wrench className="w-6 h-6" />,
-    title: "Complete Range",
-    description: "Comprehensive spare parts for all water treatment systems"
+    title: 'Complete Range',
+    description: 'Comprehensive spare parts for all water treatment systems',
   },
   {
     icon: <Package className="w-6 h-6" />,
-    title: "Quality Components",
-    description: "Premium quality parts from trusted manufacturers"
+    title: 'Quality Components',
+    description: 'Premium quality parts from trusted manufacturers',
   },
   {
     icon: <Settings className="w-6 h-6" />,
-    title: "Easy Installation",
-    description: "Designed for quick replacement and maintenance"
+    title: 'Easy Installation',
+    description: 'Designed for quick replacement and maintenance',
   },
   {
     icon: <Award className="w-6 h-6" />,
-    title: "Reliable Supply",
-    description: "Consistent availability with fast delivery"
-  }
+    title: 'Reliable Supply',
+    description: 'Consistent availability with fast delivery',
+  },
 ];
 
 const specifications = [
-  { label: "Cartridge Filters", value: "All micron ratings available" },
-  { label: "RO Membranes", value: "BW, SW, UF, NF types" },
-  { label: "Ion Exchange Resins", value: "Cation, Anion, Mixed bed" },
-  { label: "Filter Media", value: "Sand, Carbon, Anthracite" },
-  { label: "Pressure Components", value: "Gauges, switches, valves" },
-  { label: "Fittings", value: "SS 304/316 grade fittings" }
+  { label: 'Cartridge Filters', value: 'All micron ratings available' },
+  { label: 'RO Membranes', value: 'BW, SW, UF, NF types' },
+  { label: 'Ion Exchange Resins', value: 'Cation, Anion, Mixed bed' },
+  { label: 'Filter Media', value: 'Sand, Carbon, Anthracite' },
+  { label: 'Pressure Components', value: 'Gauges, switches, valves' },
+  { label: 'Fittings', value: 'SS 304/316 grade fittings' },
 ];
 
 const productMedia = [
-  { type: "image", src: SpareParts1, alt: "Water Treatment System Components" },
-  { type: "image", src: SpareParts2, alt: "Commercial Water Treatment Parts" },
-  { type: "image", src: SpareParts3, alt: "Sand Water Filter Components" }
+  { type: 'image', src: SpareParts1, alt: 'Water Treatment System Components' },
+  { type: 'image', src: SpareParts2, alt: 'Commercial Water Treatment Parts' },
+  { type: 'image', src: SpareParts3, alt: 'Sand Water Filter Components' },
 ];
 
 export default function SparePartsEquipmentsPage() {
@@ -71,15 +71,6 @@ export default function SparePartsEquipmentsPage() {
 
   const currentMedia = productMedia[currentMediaIndex];
 
-  const handleDownloadPDF = () => {
-    const link = document.createElement('a');
-    link.href = '/assests/MAI Spare parts equipments.pdf';
-    link.download = 'MAI-Spare-Parts-Equipments-Catalog.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-purple-50">
       {/* Hero Section */}
@@ -87,7 +78,7 @@ export default function SparePartsEquipmentsPage() {
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-white/20 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-purple-400/30 to-transparent rounded-full blur-3xl"></div>
-        
+
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -99,20 +90,11 @@ export default function SparePartsEquipmentsPage() {
               <span className="block font-bold text-violet-300">Equipments (WTP)</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Comprehensive spare parts and equipment for water treatment plants including filters, membranes, resins, and essential components for optimal system performance.
+              We supply a wide range of spare parts and equipment for water treatment plants, ensuring reliable operation and easy maintenance.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" className="bg-white text-violet-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-full shadow-xl">
                 <Link href="/contact">Get Quote</Link>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full"
-                onClick={handleDownloadPDF}
-              >
-                <FileText className="w-5 h-5 mr-2" />
-                Parts Catalog
               </Button>
             </div>
           </motion.div>
@@ -125,13 +107,8 @@ export default function SparePartsEquipmentsPage() {
             className="relative"
           >
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl bg-black">
-              <Image
-                src={currentMedia.src}
-                alt={currentMedia.alt}
-                fill
-                className="object-cover"
-              />
-              
+              <Image src={currentMedia.src} alt={currentMedia.alt} fill className="object-cover" />
+
               {/* Navigation Controls */}
               <button
                 onClick={prevMedia}
@@ -139,7 +116,7 @@ export default function SparePartsEquipmentsPage() {
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              
+
               <button
                 onClick={nextMedia}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
@@ -162,7 +139,7 @@ export default function SparePartsEquipmentsPage() {
                     key={index}
                     onClick={() => setCurrentMediaIndex(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentMediaIndex ? "bg-white" : "bg-white/40"
+                      index === currentMediaIndex ? 'bg-white' : 'bg-white/40'
                     }`}
                   />
                 ))}
@@ -189,12 +166,7 @@ export default function SparePartsEquipmentsPage() {
               className="relative max-w-7xl max-h-[90vh] w-full h-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
-                src={currentMedia.src}
-                alt={currentMedia.alt}
-                fill
-                className="object-contain"
-              />
+              <Image src={currentMedia.src} alt={currentMedia.alt} fill className="object-contain" />
               <button
                 onClick={() => setIsZoomOpen(false)}
                 className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
@@ -215,9 +187,7 @@ export default function SparePartsEquipmentsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Complete Parts & Equipment Range
-            </h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Complete Parts & Equipment Range</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Everything you need to maintain and optimize your water treatment systems
             </p>
@@ -236,21 +206,111 @@ export default function SparePartsEquipmentsPage() {
                 <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white to-violet-50">
                   <CardContent className="p-8 text-center">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <div className="text-white">
-                        {feature.icon}
-                      </div>
+                      <div className="text-white">{feature.icon}</div>
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Available Parts Section */}
+      <section className="py-24 bg-gradient-to-br from-violet-50 to-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Available Parts</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <ul className="space-y-3">
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Antiscalant
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Pressure Gauges & Switches
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Dosing Pump Sets
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Rotameters (all capacities)
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  SS Adapters with TC (all sizes)
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  NRV (SS)
+                </li>
+              </ul>
+              <ul className="space-y-3">
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Spun Cartridges (all sizes), Jumbo Spun, Special Jumbo XL Threaded, Pleated DOE & Code 7 Cartridges
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Bag Filters (all sizes)
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Valves: Air Release, Multiport, Ball, Butterfly, Sampling, Vent, Diaphragm
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Membranes (all sizes)
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Floaty, Pressure Tubes, MF Housings
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  UV Systems and Spare Parts
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Applications Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Applications</h2>
+            <ul className="space-y-3">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                RO, DM, Softener, and Mineral Water Plants
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                Beverage & process industries
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                OEM supply & plant maintenance
+              </li>
+            </ul>
+          </motion.div>
         </div>
       </section>
 
@@ -263,14 +323,11 @@ export default function SparePartsEquipmentsPage() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Available Components
-              </h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Available Components</h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Comprehensive inventory of high-quality spare parts and equipment 
-                for all types of water treatment systems.
+                Comprehensive inventory of high-quality spare parts and equipment for all types of water treatment systems.
               </p>
-              
+
               <div className="space-y-4">
                 {specifications.map((spec, index) => (
                   <motion.div
@@ -292,31 +349,16 @@ export default function SparePartsEquipmentsPage() {
                 transition={{ duration: 0.6, delay: 0.8 }}
                 className="mt-8"
               >
-                <Button 
-                  onClick={handleDownloadPDF}
+                <Button
+                  asChild
                   className="bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white px-6 py-3 rounded-full shadow-lg"
                 >
-                  <FileText className="w-5 h-5 mr-2" />
-                  Download Complete Catalog
+                  <a href="/pdf/spare-parts-equipments.pdf" download="MAI-Spare-Parts-Equipments.pdf">
+                    <FileText className="w-5 h-5 mr-2" />
+                    Download Complete Catalog
+                  </a>
                 </Button>
               </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src={SpareParts2}
-                  alt="Spare Parts Technical View"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-              </div>
             </motion.div>
           </div>
         </div>

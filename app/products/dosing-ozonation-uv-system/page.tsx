@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Zap, Shield, Leaf, Clock, Download } from "lucide-react";
-import { motion } from "framer-motion";
+import { Zap, Shield, Leaf, Clock, Download, ChevronLeft, ChevronRight, ZoomIn, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
@@ -49,6 +49,7 @@ const productImages = [DosingSystem1, UVSystem, OzonationSystem];
 
 export default function DosingOzonationUVSystemPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
@@ -78,8 +79,7 @@ export default function DosingOzonationUVSystemPage() {
               <span className="block font-bold text-yellow-300">& UV System</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Advanced water treatment systems combining chemical dosing, ozonation, 
-              and UV disinfection for comprehensive water purification.
+              These systems form an integral part of advanced water treatment plants, ensuring disinfection, oxidation, and precise chemical dosing.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button 
@@ -88,14 +88,7 @@ export default function DosingOzonationUVSystemPage() {
               >
                 Get Quote
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                Technical Guide
-              </Button>
+              
             </div>
           </motion.div>
 
@@ -105,22 +98,48 @@ export default function DosingOzonationUVSystemPage() {
             transition={{ duration: 1, delay: 0.5 }}
             className="relative"
           >
-            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl bg-black">
               <Image
                 src={productImages[currentImageIndex]}
                 alt={`Dosing/Ozonation/UV System ${currentImageIndex + 1}`}
                 fill
                 className="object-cover"
               />
+              
+              {/* Navigation Controls */}
+              <button
+                onClick={() => setCurrentImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length)}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button
+                onClick={() => setCurrentImageIndex((prev) => (prev + 1) % productImages.length)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Zoom Button */}
+              <button
+                onClick={() => setIsZoomOpen(true)}
+                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <ZoomIn className="w-5 h-5" />
+              </button>
+
+              {/* Media Indicators */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
                 {productImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
                       index === currentImageIndex ? "bg-white" : "bg-white/40"
                     }`}
-                  />
+                  >
+                  </button>
                 ))}
               </div>
             </div>
@@ -176,6 +195,107 @@ export default function DosingOzonationUVSystemPage() {
         </div>
       </section>
 
+      {/* Dosing Systems Section */}
+      <section className="py-24 bg-gradient-to-br from-yellow-50 to-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Dosing Systems</h2>
+            <ul className="space-y-3 mb-8">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                Skid-mounted chemical dosing packages
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                Diaphragm dosing pumps
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                Capacity: 0.1 LPH – 500 LPH
+              </li>
+            </ul>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">Applications:</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                Antiscalant, chlorine, coagulants, pH correction
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Ozonation Systems Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Ozonation Systems</h2>
+            <ul className="space-y-3 mb-8">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
+                On-site ozone generation for powerful disinfection
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
+                SS/FRP contact tanks with diffusers
+              </li>
+            </ul>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">Applications:</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
+                Packaged drinking water, swimming pools, food & beverage
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* UV Systems Section */}
+      <section className="py-24 bg-gradient-to-br from-yellow-50 to-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">UV Systems</h2>
+            <ul className="space-y-3 mb-8">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                High-intensity UV disinfection chambers
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                Stainless steel construction
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                Flow range: 100 LPH – 100,000 LPH
+              </li>
+            </ul>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">Applications:</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                Final disinfection in RO, DM, mineral water & beverage projects
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Specifications Section */}
       <section className="py-24 bg-gradient-to-br from-yellow-50 to-white">
         <div className="container mx-auto px-6">
@@ -228,6 +348,40 @@ export default function DosingOzonationUVSystemPage() {
           </div>
         </div>
       </section>
+
+      {/* Zoom Modal */}
+      <AnimatePresence>
+        {isZoomOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            onClick={() => setIsZoomOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              className="relative max-w-7xl max-h-[90vh] w-full h-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={productImages[currentImageIndex]}
+                alt={`Dosing/Ozonation/UV System ${currentImageIndex + 1}`}
+                fill
+                className="object-contain"
+              />
+              <button
+                onClick={() => setIsZoomOpen(false)}
+                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <ContactUs />
     </div>

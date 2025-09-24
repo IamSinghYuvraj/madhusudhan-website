@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Factory, Shield, Wrench, Award, Download } from "lucide-react";
-import { motion } from "framer-motion";
+import { Factory, Shield, Wrench, Award, Download, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import ContactUs from "@/components/contactus";
 
 // Import product images
@@ -37,18 +37,17 @@ const features = [
 ];
 
 const specifications = [
-  { label: "Material", value: "SS 304/316, MS with coating" },
-  { label: "Capacity", value: "100L to 50,000L" },
-  { label: "Pressure Rating", value: "Up to 16 kg/cm²" },
-  { label: "Temperature", value: "Up to 80°C" },
-  { label: "Finish", value: "Mirror/Matt finish" },
-  { label: "Standards", value: "ASME, IS 2825" }
+  { label: "Capacity", value: "100 liters to 100,000 liters" },
+  { label: "Pressure", value: "Atmospheric / High-pressure options" },
+  { label: "Finish", value: "Mirror / Matte / Epoxy-coated" },
+  { label: "Accessories", value: "Manhole, Nozzles, Level indicators, Vent filters" }
 ];
 
 const productImages = [SSVessel1, SSVessel2, SSVessel3];
 
 export default function SSMSVesselsPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
@@ -78,8 +77,7 @@ export default function SSMSVesselsPage() {
               <span className="block font-bold text-slate-300">Vessels/Tanks</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Specially fabricated stainless steel and mild steel vessels designed 
-              for various industrial applications with superior quality and durability.
+              We manufacture customized Stainless Steel (SS) and Mild Steel (MS) vessels/tanks for various industrial water treatment and process applications. Designed with durability, hygiene, and efficiency in mind, these tanks can be fabricated in different capacities and configurations.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button 
@@ -88,14 +86,7 @@ export default function SSMSVesselsPage() {
               >
                 Get Quote
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                Brochure
-              </Button>
+              
             </div>
           </motion.div>
 
@@ -176,6 +167,46 @@ export default function SSMSVesselsPage() {
         </div>
       </section>
 
+      {/* Applications Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Applications</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <ul className="space-y-3">
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Raw water storage
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Process & chemical storage
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Treated water tanks
+                </li>
+              </ul>
+              <ul className="space-y-3">
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Beverage & food industries
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <div className="w-2 h-2 bg-gray-500 rounded-full mr-3"></div>
+                  Pharmaceutical industries
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Specifications Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-6">
@@ -228,6 +259,40 @@ export default function SSMSVesselsPage() {
           </div>
         </div>
       </section>
+
+      {/* Zoom Modal */}
+      <AnimatePresence>
+        {isZoomOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            onClick={() => setIsZoomOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              className="relative max-w-7xl max-h-[90vh] w-full h-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={productImages[currentImageIndex]}
+                alt={`SS/MS Vessel ${currentImageIndex + 1}`}
+                fill
+                className="object-contain"
+              />
+              <button
+                onClick={() => setIsZoomOpen(false)}
+                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <ContactUs />
     </div>

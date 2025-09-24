@@ -16,33 +16,34 @@ import RFCMachine3 from "@/assests/Semi-Auto-Jar-Rinsing-Filling-Capping-Machine
 const features = [
   {
     icon: <Cog className="w-6 h-6" />,
-    title: "3-in-1 Operation",
+    title: "SS construction with food-grade contact parts",
     description: "Rinsing, filling, and capping in one integrated system"
   },
   {
     icon: <Zap className="w-6 h-6" />,
-    title: "High Speed",
+    title: "PLC-controlled automation",
     description: "Up to 12,000 bottles per hour production capacity"
   },
   {
     icon: <Shield className="w-6 h-6" />,
-    title: "Hygienic Design",
+    title: "No-bottle-no-fill technology",
     description: "Food-grade materials with easy cleaning systems"
   },
   {
     icon: <Clock className="w-6 h-6" />,
-    title: "Reliable Operation",
+    title: "High-speed rotary filling system",
+    description: "Minimal downtime with robust construction"
+  },
+  {
+    icon: <Clock className="w-6 h-6" />,
+    title: "Easy changeover for different bottle sizes",
     description: "Minimal downtime with robust construction"
   }
 ];
 
 const specifications = [
-  { label: "Capacity", value: "1,200 - 12,000 BPH" },
-  { label: "Bottle Size", value: "200ml to 2000ml" },
-  { label: "Filling Accuracy", value: "±1%" },
-  { label: "Power Supply", value: "380V, 50Hz, 3 Phase" },
-  { label: "Air Pressure", value: "6-8 kg/cm²" },
-  { label: "Material", value: "SS 304/316 Food Grade" }
+  { label: "Capacity Range", value: "24 BPM (Bottles per minute) to 300 BPM" },
+  { label: "Bottle Size", value: "Suitable for 200 ml – 2 L bottles" }
 ];
 
 const productImages = [RFCMachine1, RFCMachine2, RFCMachine3];
@@ -78,8 +79,7 @@ export default function RFCMachinePage() {
               <span className="block font-bold text-green-300">(Rinsing Filling Capping)</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              High-speed RFC machines for efficient bottle processing with integrated 
-              rinsing, filling, and capping operations in a single system.
+              Automatic Rinsing, Filling, and Capping (RFC) machines designed for packaged drinking water and beverages. Ensures hygienic, high-speed bottling operations.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button 
@@ -176,45 +176,35 @@ export default function RFCMachinePage() {
         </div>
       </section>
 
-      {/* Video Section */}
+      {/* Applications Section */}
       <section className="py-24 bg-gradient-to-br from-green-50 to-white">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              RFC Machine Operation
-            </h2>
-            <p className="text-xl text-gray-600">
-              Watch our RFC machine in action with complete operation demonstration
-            </p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Applications</h2>
+            <ul className="space-y-3">
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                Packaged drinking water (PET/Glass bottles)
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                Carbonated beverages
+              </li>
+              <li className="flex items-center text-gray-700">
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                Flavored & functional drinks
+              </li>
+            </ul>
           </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            <Card className="overflow-hidden shadow-2xl">
-              <div className="relative aspect-video bg-black">
-                <video
-                  className="w-full h-full"
-                  controls
-                  poster={RFCMachine1.src}
-                >
-                  <source src="/assests/RFC -FIlling machine.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-2">RFC Machine Operation Guide</h3>
-                <p className="text-gray-600">
-                  Complete demonstration of RFC machine operation, setup, and maintenance procedures.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
+
+      
 
       {/* Specifications Section */}
       <section className="py-24 bg-white">

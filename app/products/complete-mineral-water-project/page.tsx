@@ -45,20 +45,12 @@ interface ImageMedia {
   alt: string;
 }
 
-interface VideoMedia {
-  type: "video";
-  src: string;
-  alt: string;
-  poster: StaticImageData;
-}
-
-type Media = ImageMedia | VideoMedia;
+type Media = ImageMedia;
 
 const productMedia: Media[] = [
   { type: "image", src: MineralWaterProject1, alt: "Complete Mineral Water Project" },
   { type: "image", src: MineralWaterProject2, alt: "Mineral Water Plants" },
   { type: "image", src: MineralWaterProject3, alt: "Packaged Drinking Water Plant" },
-  { type: "video", src: "/assests/Complete Project.mp4", poster: ProjectDiagram, alt: "Complete Project Setup Video" },
   { type: "image", src: ProjectDiagram, alt: "Complete Project Flow Diagram" }
 ];
 
@@ -117,23 +109,12 @@ export default function CompleteMineralWaterProjectPage() {
             className="relative"
           >
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl bg-black">
-              {currentMedia.type === "image" ? (
-                <Image
-                  src={currentMedia.src}
-                  alt={currentMedia.alt}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  poster={currentMedia.poster.src}
-                >
-                  <source src={currentMedia.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              )}
+              <Image
+                src={currentMedia.src}
+                alt={currentMedia.alt}
+                fill
+                className="object-cover"
+              />
               
               {/* Navigation Controls */}
               <button
@@ -150,15 +131,13 @@ export default function CompleteMineralWaterProjectPage() {
                 <ChevronRight className="w-6 h-6" />
               </button>
 
-              {/* Zoom Button (only for images) */}
-              {currentMedia.type === "image" && (
-                <button
-                  onClick={() => setIsZoomOpen(true)}
-                  className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
-                >
-                  <ZoomIn className="w-5 h-5" />
-                </button>
-              )}
+              {/* Zoom Button */}
+              <button
+                onClick={() => setIsZoomOpen(true)}
+                className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300"
+              >
+                <ZoomIn className="w-5 h-5" />
+              </button>
 
               {/* Media Indicators */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
@@ -170,9 +149,9 @@ export default function CompleteMineralWaterProjectPage() {
                       index === currentMediaIndex ? "bg-white" : "bg-white/40"
                     }`}
                   >
-                    {media.type === "video" && (
+                    {/* {media.type === "video" && (
                       <Play className="w-2 h-2 text-black absolute top-0.5 left-0.5" />
-                    )}
+                    )} */}
                   </button>
                 ))}
               </div>
@@ -183,7 +162,7 @@ export default function CompleteMineralWaterProjectPage() {
 
       {/* Zoom Modal */}
       <AnimatePresence>
-        {isZoomOpen && currentMedia.type === "image" && (
+        {isZoomOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
