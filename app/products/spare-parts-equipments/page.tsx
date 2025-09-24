@@ -71,6 +71,15 @@ export default function SparePartsEquipmentsPage() {
 
   const currentMedia = productMedia[currentMediaIndex];
 
+  const handleDownloadPDF = () => {
+    const link = document.createElement('a');
+    link.href = SparePartsPDF.src;
+    link.download = 'MAI-Spare-Parts-Equipments.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-purple-50">
       {/* Hero Section */}
@@ -350,13 +359,11 @@ export default function SparePartsEquipmentsPage() {
                 className="mt-8"
               >
                 <Button
-                  asChild
+                  onClick={handleDownloadPDF}
                   className="bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white px-6 py-3 rounded-full shadow-lg"
                 >
-                  <a href="/pdf/spare-parts-equipments.pdf" download="MAI-Spare-Parts-Equipments.pdf">
-                    <FileText className="w-5 h-5 mr-2" />
-                    Download Complete Catalog
-                  </a>
+                  <FileText className="w-5 h-5 mr-2" />
+                  Download Complete Catalog
                 </Button>
               </motion.div>
             </motion.div>
