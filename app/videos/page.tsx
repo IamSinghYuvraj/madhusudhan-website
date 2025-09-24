@@ -7,12 +7,18 @@ import { Play, Monitor, Youtube, X, Pause, Volume2, VolumeX } from "lucide-react
 import { motion, AnimatePresence } from "framer-motion";
 
 // Import video thumbnails
-import CompleteProject from "@/assests/Complete Mineral Water Project.jpg";
-import BOPPMachine from "@/assests/BOPP Machine.jpg";
+import CompleteProject from "@/assests/COMPLETE PROJECT FLOW DIAGRAM.jpg";
+import BlowingMachine from "@/assests/Blowing-Machine.jpg";
 import FillingMachine from "@/assests/Filling Machine Operation.jpg";
-import ROVideo from "@/assests/Ro-img1.jpg";
-import DMPlant from "@/assests/DM .jpg";
-import WaterSoftener from "@/assests/Water-Softening-Plant.jpg";
+import ShrinkWrappingMachine from "@/assests/Automatic Shrink Wrapping Machine.jpg";
+import BOPPMachine from "@/assests/BOPP Machine.jpg";
+import ReverseOsmosis from "@/assests/Ro-img2.jpg";
+import AutomicRinsingFillingandCapingmachines from "@/assests/Automatic Rinsing, Filling, and Capping Machine.jpg";
+import Rfcfillingmachine from "@/assests/Filling Machine Operation.jpg";
+import SemiAutomaticShrinkWrappingMachine from "@/assests/Semi Automatic Shrink Wrapping .jpg";
+import AutomaticPetBottleblowingmachine from "@/assests/Blowing Machine Safety.jpg";
+import SemiAutomaticPetBottleblowingmachine from "@/assests/Semi Automatic Bottle Blowing Machine .jpg";
+import GlassBottleFillingandcappingMachine from "@/assests/Glass Bottle Filling and Capping Machine.jpg";
 
 interface Video {
   id: string;
@@ -27,51 +33,100 @@ interface Video {
 const videos: Video[] = [
   {
     id: "1",
-    title: "Complete Mineral Water Project Setup",
+    title: "Complete Mineral Water/packaged Drinking Projects",
     description: "Comprehensive guide to setting up a complete mineral water production facility",
     thumbnail: CompleteProject,
     type: "youtube",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    url: "https://youtu.be/UOJRNX0Xmxs?si=hUWBSc9gc-9NwbcD"
   },
   {
     id: "2", 
-    title: "BOPP Machine Operation",
-    description: "Learn how to operate and maintain BOPP labeling machines efficiently",
-    thumbnail: BOPPMachine,
-    type: "local",
-    videoSrc: "/assests/Complete Project.mp4"
+    title: "Blowing Machine",
+    description: "Learn how to operate and maintain Blowing machines efficiently",
+    thumbnail: BlowingMachine,
+    type: "youtube",
+    url: "https://youtu.be/cK0qKvXtqUM?si=xPzu0OFQIC_MJafO"
   },
   {
     id: "3",
-    title: "Filling Machine Operation Guide",
+    title: "Filling Machine",
     description: "Step-by-step guide for operating filling machines safely and efficiently",
     thumbnail: FillingMachine,
     type: "youtube", 
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    url: "https://youtu.be/Nt7xhoBdidI?si=oxNVd0ALupoqvfp0"
   },
   {
     id: "4",
-    title: "RO Plant Installation Process",
-    description: "Complete installation and commissioning process for RO plants",
-    thumbnail: ROVideo,
-    type: "local",
-    videoSrc: "/assests/Ro-video.mp4"
+    title: "Shrink Wrapping Machine",
+    description: "Complete installation and commissioning process for Shrink Wrapping Machine",
+    thumbnail: ShrinkWrappingMachine,
+    type: "youtube",
+    url: "https://youtu.be/BVsOviXWpto?si=rWPWQKdb-nU43zBb"
   },
   {
     id: "5",
-    title: "DM Plant Maintenance",
-    description: "Essential maintenance procedures for demineralization plants",
-    thumbnail: DMPlant,
+    title: "BOPP Machine",
+    description: "Essential maintenance procedures for BOPP Machine",
+    thumbnail: BOPPMachine,
     type: "youtube",
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    url: "https://youtu.be/8_EiTB6RWgg?si=RE7n3eirpKqJq7XB"
   },
   {
     id: "6",
-    title: "Water Softener Setup",
-    description: "Installation and setup guide for water softening systems",
-    thumbnail: WaterSoftener,
-    type: "local", 
-    videoSrc: "/assests/RFC -FIlling machine.mp4"
+    title: "Reverse osmosis",
+    description: "Installation and setup guide for Reverse osmosis",
+    thumbnail: ReverseOsmosis,
+    type: "youtube", 
+    url: "https://youtube.com/shorts/lEka8o2ysXE?si=KIgD8bdd1AQ8P38v"
+  },
+  {
+    id: "7",
+    title: "Automic Rinsing Filling and Caping machines",
+    description: "Installation and setup guide for Automic Rinsing Filling and Caping machines",
+    thumbnail: AutomicRinsingFillingandCapingmachines,
+    type: "youtube", 
+    url: "https://youtube.com/shorts/EdnMkrgfWIw?si=Yh5V8_kcJhNGW1-v"
+  },
+  {
+    id: "8",
+    title: "Rfc filling machine",
+    description: "Installation and setup guide for Rfc filling machine",
+    thumbnail: Rfcfillingmachine,
+    type: "youtube", 
+    url: "https://youtube.com/shorts/dCMYP6NjLwA?si=f7cmimnjy8EpGslp"
+  },
+ 
+  {
+    id: "9",
+    title: "Automatic Pet Bottle blowing machine",
+    description: "Installation and setup guide for Automatic Pet Bottle blowing machine",
+    thumbnail: AutomaticPetBottleblowingmachine,
+    type: "youtube", 
+    url: "https://youtube.com/shorts/J30c-WKndwQ?si=Q5_-xU9LbQ7WSRs6"
+  },
+  {
+    id: "10",
+    title: "Semi Automatic Pet Bottle blowing machine",
+    description: "Installation and setup guide for Semi Automatic Pet Bottle blowing machine",
+    thumbnail: SemiAutomaticPetBottleblowingmachine,
+    type: "youtube", 
+    url: "https://youtube.com/shorts/PS-JoQ8ZIu8?si=JsXGMM_WDum6fTbl"
+  },
+  {
+    id: "11",
+    title: "Automatic Shrink Wrapping Machine",
+    description: "Installation and setup guide for Automatic Shrink Wrapping Machine",
+    thumbnail: ShrinkWrappingMachine,
+    type: "youtube", 
+    url: "https://youtube.com/shorts/-Op7OLsNni8?si=MP_CQgWelid-pect"
+  },
+  {
+    id: "12",
+    title: "Glass Bottle Filling and capping Machine",
+    description: "Installation and setup guide for Glass Bottle Filling and capping Machine",
+    thumbnail: GlassBottleFillingandcappingMachine,
+    type: "youtube", 
+    url: "https://youtube.com/shorts/0GwRKmlieXY?si=s6CF3AmtOz1wj6Gr"
   }
 ];
 
@@ -130,10 +185,7 @@ export default function VideosPage() {
                 <Youtube className="w-4 h-4 text-red-400" />
                 YouTube Demos
               </div>
-              <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
-                <Monitor className="w-4 h-4 text-blue-400" />
-                Interactive Videos
-              </div>
+              
             </div>
           </motion.div>
         </div>

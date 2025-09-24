@@ -1,4 +1,4 @@
-import withBundleAnalyzer from '@next/bundle-analyzer';
+// import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -7,4 +7,4 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default nextConfig;
