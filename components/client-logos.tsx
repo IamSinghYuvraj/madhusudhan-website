@@ -5,7 +5,7 @@ import Image from "next/image";
 import MANTRA from "@/assests/MANTRA.jpg";
 import BISLERI from "@/assests/BISLERI.jpg";
 import BAILEY from "@/assests/BAILEY.jpg";
-import HP from "@/assests/Hp-paani-ro.png";
+import HP from "@/assests/HP-RO.png";
 import MCD from "@/assests/MCD.jpg";
 import O2RISE from "@/assests/O2RISE.jpg";
 import ROYAL from "@/assests/ROYAL.jpg";
