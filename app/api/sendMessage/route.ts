@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     }
 
     // Validate email format
-    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'Invalid email format' },
@@ -39,9 +39,9 @@ export async function POST(request: Request) {
 
     // Business WhatsApp numbers (these should be registered with your Green API instance)
     const businessNumbers = [
-      process.env.BUSINESS_WHATSAPP_1!, // e.g., "9820142424"
-      process.env.BUSINESS_WHATSAPP_2!, // e.g., "9876543210"
-      process.env.BUSINESS_WHATSAPP_3!, // e.g., "9123456789"
+      process.env.BUSINESS_WHATSAPP_1!, 
+      process.env.BUSINESS_WHATSAPP_2!, 
+      process.env.BUSINESS_WHATSAPP_3!, 
     ].filter(Boolean); // Remove undefined values
 
     // Format the message for WhatsApp
