@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     }
 
     // Validate phone number (10 digits)
-    if (phone.length !== 10 || !/^\\d+$/.test(phone)) {
+    if (phone.length !== 10 || !/^\d+$/.test(phone)) {
       return NextResponse.json(
         { error: 'Phone number must be 10 digits' },
         { status: 400 }
